@@ -1,15 +1,15 @@
 package ru.moskalev.demo.service.threadservice;
 
 import org.springframework.stereotype.Service;
-import ru.moskalev.demo.service.BankAccountService;
+import ru.moskalev.demo.service.ProfilingExampleService;
 
 @Service
 public class TransferWaitingStateService {
 
-    private final BankAccountService bankAccountService;
+    private final ProfilingExampleService profilingExampleService;
 
-    public TransferWaitingStateService(BankAccountService bankAccountService) {
-        this.bankAccountService = bankAccountService;
+    public TransferWaitingStateService(ProfilingExampleService profilingExampleService) {
+        this.profilingExampleService = profilingExampleService;
     }
 
     public String processWaiting() {
@@ -19,7 +19,7 @@ public class TransferWaitingStateService {
         Thread waitingThread = new Thread(() -> {
             try {
                 System.out.println("[" + Thread.currentThread().getName() + "] Стартовал.");
-                bankAccountService.transferWithWait("ACC005", "ACC006", monitor, 20.0, true); // shouldWait = true
+                profilingExampleService.transferWithWait("ACC005", "ACC006", monitor, 20.0, true); // shouldWait = true
             } catch (Exception e) {
                 System.err.println("Ошибка в thread1: " + e.getMessage());
             }
@@ -31,7 +31,7 @@ public class TransferWaitingStateService {
                 // Даём waitingThread время начать и войти в wait()
                 System.out.println("[" + Thread.currentThread().getName() + "] Стартовал.");
                 Thread.sleep(3000);
-                bankAccountService.transferWithWait("ACC007", "ACC005", monitor, 30.0, false); // shouldWait = false → вызовет notify()
+                profilingExampleService.transferWithWait("ACC007", "ACC005", monitor, 30.0, false); // shouldWait = false → вызовет notify()
             } catch (Exception e) {
                 System.err.println("Ошибка в thread2: " + e.getMessage());
             }

@@ -1,7 +1,7 @@
 package ru.moskalev.demo.service.threadservice;
 
 import org.springframework.stereotype.Service;
-import ru.moskalev.demo.service.BankAccountService;
+import ru.moskalev.demo.service.ProfilingExampleService;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -9,10 +9,10 @@ import java.util.concurrent.locks.ReentrantLock;
 @Service
 public class TrasnferBlockedStateService {
 
-    private final BankAccountService bankAccountService;
+    private final ProfilingExampleService profilingExampleService;
 
-    public TrasnferBlockedStateService(BankAccountService bankAccountService) {
-        this.bankAccountService = bankAccountService;
+    public TrasnferBlockedStateService(ProfilingExampleService profilingExampleService) {
+        this.profilingExampleService = profilingExampleService;
     }
 
     public String processBlocked() {
@@ -21,7 +21,7 @@ public class TrasnferBlockedStateService {
         Thread threadBlocker = new Thread(() -> {
             try {
                 System.out.println("[" + Thread.currentThread().getName() + "] Стартовал.");
-                bankAccountService.transferWithBlock("ACC002", "ACC003", monitor, 20.0);
+                profilingExampleService.transferWithBlock("ACC002", "ACC003", monitor, 20.0);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 throw new RuntimeException(e);
@@ -32,7 +32,7 @@ public class TrasnferBlockedStateService {
         Thread threadBlockee = new Thread(() -> {
             try {
                 System.out.println("[" + Thread.currentThread().getName() + "] Стартовал.");
-                bankAccountService.transferWithBlock("ACC002", "ACC003", monitor, 20.0);
+                profilingExampleService.transferWithBlock("ACC002", "ACC003", monitor, 20.0);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 throw new RuntimeException(e);
@@ -53,7 +53,7 @@ public class TrasnferBlockedStateService {
         Thread threadParkHolder = new Thread(() -> {
             try {
                 System.out.println("[" + Thread.currentThread().getName() + "] Стартовал.");
-                bankAccountService.transferWithPark("ACC002", "ACC003", lock, 20.0);
+                profilingExampleService.transferWithPark("ACC002", "ACC003", lock, 20.0);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 throw new RuntimeException(e);
@@ -66,7 +66,7 @@ public class TrasnferBlockedStateService {
             try {
                 System.out.println("[" + Thread.currentThread().getName() + "] Стартовал.");
                 Thread.sleep(5000);
-                bankAccountService.transferWithPark("ACC002", "ACC003", lock, 20.0);
+                profilingExampleService.transferWithPark("ACC002", "ACC003", lock, 20.0);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 throw new RuntimeException(e);
