@@ -32,7 +32,7 @@ public class StreamTransferService implements ApplicationRunner {
         long start = System.nanoTime();
 
         operations.stream()
-                .forEach(op -> bankAccountService.transferForStream(op.from(), op.to(), op.amount()));
+                .forEach(op -> bankAccountService.transferWithDoubleSync(op.from(), op.to(), op.amount()));
 
         return evaluateExecutionTime(start);
     }
@@ -40,7 +40,7 @@ public class StreamTransferService implements ApplicationRunner {
     public String startParallelStream() {
         long start = System.nanoTime();
         operations.parallelStream()
-                .forEach(op -> bankAccountService.transferForStream(op.from(), op.to(), op.amount()));
+                .forEach(op -> bankAccountService.transferWithDoubleSync(op.from(), op.to(), op.amount()));
 
         return evaluateExecutionTime(start);
     }
@@ -50,7 +50,7 @@ public class StreamTransferService implements ApplicationRunner {
         long start = System.nanoTime();
 
         operations.parallelStream()
-                .forEach(op -> bankAccountService.transferForStreamBlockOneMonitor(op.from(), op.to(), op.amount()));
+                .forEach(op -> bankAccountService.transferBlockOneMonitor(op.from(), op.to(), op.amount()));
 
         return evaluateExecutionTime(start);
     }
@@ -62,7 +62,7 @@ public class StreamTransferService implements ApplicationRunner {
 
         customPool.submit(() ->
                 operations.parallelStream()
-                        .forEach(op -> bankAccountService.transferForStream(op.from(), op.to(), op.amount()))
+                        .forEach(op -> bankAccountService.transferWithDoubleSync(op.from(), op.to(), op.amount()))
         ).join();
 
         customPool.shutdown();
