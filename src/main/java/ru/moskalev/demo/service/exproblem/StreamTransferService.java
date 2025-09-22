@@ -1,8 +1,10 @@
-package ru.moskalev.demo.service;
+package ru.moskalev.demo.service.exproblem;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
+import ru.moskalev.demo.service.BankAccountService;
+import ru.moskalev.demo.data.TransferGeneratorService;
 
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;

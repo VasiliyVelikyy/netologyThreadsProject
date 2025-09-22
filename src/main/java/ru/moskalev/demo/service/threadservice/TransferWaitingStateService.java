@@ -1,7 +1,7 @@
 package ru.moskalev.demo.service.threadservice;
 
 import org.springframework.stereotype.Service;
-import ru.moskalev.demo.service.ProfilingExampleService;
+import ru.moskalev.demo.service.exproblem.ProfilingExampleService;
 
 @Service
 public class TransferWaitingStateService {
@@ -39,8 +39,6 @@ public class TransferWaitingStateService {
 
         Thread observer = new Thread(() -> {
             try {
-
-
                 while (true) {
                     Thread.State state = waitingThread.getState();
                     System.out.println("Наблюдатель, состояние потока " + waitingThread.getName() + "= " + state);

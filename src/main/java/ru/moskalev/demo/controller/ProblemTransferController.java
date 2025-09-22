@@ -2,7 +2,7 @@ package ru.moskalev.demo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.moskalev.demo.service.TransferProblemService;
+import ru.moskalev.demo.service.exproblem.TransferProblemService;
 
 @RestController
 public class ProblemTransferController {

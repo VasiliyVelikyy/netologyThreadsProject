@@ -1,4 +1,4 @@
-package ru.moskalev.demo.service;
+package ru.moskalev.demo.service.exproblem;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;

@@ -22,3 +22,9 @@ http://localhost:8080/race-condition/sync
 http://localhost:8080/transfer-deadlock
 http://localhost:8080/transfer-livelock
 http://localhost:8080/transfer-starvation
+
+
+http://localhost:8080/process-withdrawal-large
+http://localhost:8080/process-sms-notification
+http://localhost:8080/process-semaphore-withdrawal
+http://localhost:8080/process-withdraw-deposit-process
