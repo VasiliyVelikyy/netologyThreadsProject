@@ -1,4 +1,4 @@
-package ru.moskalev.demo.service;
+package ru.moskalev.demo.data;
 
 
 import org.springframework.stereotype.Service;

@@ -5,20 +5,20 @@ import org.springframework.stereotype.Service;
 import ru.moskalev.demo.domain.BankAccount;
 import ru.moskalev.demo.repository.BankAccountRepository;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Service
 public class BankAccountService {
 
     private final BankAccountRepository repository;
 
+    private final Lock reentrantLock = new ReentrantLock();
+
     public BankAccountService(BankAccountRepository repository) {
         this.repository = repository;
     }
-
-    Object monitor = new Object();
-
 
     // Получить счёт по номеру
     public BankAccount getAccount(String accountNumber) {
@@ -60,7 +60,8 @@ public class BankAccountService {
     }
 
     public void transferBlockOneMonitor(String from, String to, double amount) {
-        synchronized (monitor) {
+        reentrantLock.lock();
+        try {
 
             BankAccount fromAcc = getAccount(from);
             BankAccount toAcc = getAccount(to);
@@ -76,6 +77,8 @@ public class BankAccountService {
             repository.save(toAcc);
 
             System.out.println(Thread.currentThread().getName() + ": Перевод " + amount + " с " + from + " на " + to + " выполнен.");
+        } finally {
+            reentrantLock.unlock();
         }
     }
 
@@ -114,6 +117,8 @@ public class BankAccountService {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.err.println(e.getMessage());
             }
             System.out.println(Thread.currentThread().getName() + " пытается захватить " + to);
 

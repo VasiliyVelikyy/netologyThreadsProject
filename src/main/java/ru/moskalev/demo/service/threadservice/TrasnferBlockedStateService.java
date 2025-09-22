@@ -1,7 +1,7 @@
 package ru.moskalev.demo.service.threadservice;
 
 import org.springframework.stereotype.Service;
-import ru.moskalev.demo.service.ProfilingExampleService;
+import ru.moskalev.demo.service.exproblem.ProfilingExampleService;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

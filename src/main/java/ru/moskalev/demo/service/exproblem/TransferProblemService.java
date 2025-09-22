@@ -1,7 +1,8 @@
-package ru.moskalev.demo.service;
+package ru.moskalev.demo.service.exproblem;
 
 import org.springframework.stereotype.Service;
 import ru.moskalev.demo.repository.BankAccountRepository;
+import ru.moskalev.demo.service.BankAccountService;
 
 
 @Service
@@ -99,7 +100,7 @@ public class TransferProblemService {
                 //bankAccountService.transferDeadLock("ACC001", "ACC002", 50);
                 bankAccountService.transferWithDoubleSync("ACC001", "ACC002", 50);
             } catch (Exception e) {
-                e.printStackTrace();
+                System.err.println(e.getMessage());
             }
         });
 
@@ -109,7 +110,7 @@ public class TransferProblemService {
                 // bankAccountService.transferDeadLock("ACC002", "ACC001", 50);
                 bankAccountService.transferWithDoubleSync("ACC001", "ACC002", 50);
             } catch (Exception e) {
-                e.printStackTrace();
+                System.err.println(e.getMessage());
             }
         });
 
