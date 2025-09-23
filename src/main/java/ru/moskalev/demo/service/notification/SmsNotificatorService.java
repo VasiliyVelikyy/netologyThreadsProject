@@ -1,4 +1,4 @@
-package ru.moskalev.demo.service;
+package ru.moskalev.demo.service.notification;
 
 import org.springframework.stereotype.Service;
 
@@ -29,5 +29,14 @@ public class SmsNotificatorService {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+    }
+
+
+    public void trySendSms(long newBalance, long lastBalanceKnow) {
+        System.out.println("Баланс изменился newBalance= " + newBalance + " lastBalanceKnow= " + lastBalanceKnow);
+    }
+
+    public void trySendSms(long newBalance) {
+        System.out.println("Баланс изменился newBalance= " + newBalance);
     }
 }

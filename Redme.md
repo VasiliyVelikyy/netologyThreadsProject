@@ -12,10 +12,14 @@ http://localhost:8080/process-blocked
 
 http://localhost:8080/process-park
 
+### Сравнение производительности стримов и параллельных стримов
+
 http://localhost:8080/start-stream
 http://localhost:8080/start-parallel-stream
 http://localhost:8080/start-parallel-stream/block
 http://localhost:8080/start-fork-join-parallel-stream
+
+### Примеры проблем многопоточности
 
 http://localhost:8080/race-condition
 http://localhost:8080/race-condition/sync
@@ -23,8 +27,20 @@ http://localhost:8080/transfer-deadlock
 http://localhost:8080/transfer-livelock
 http://localhost:8080/transfer-starvation
 
+### Примеры Semaphore и lock
 
-http://localhost:8080/process-withdrawal-large
+http://localhost:8080/process-withdrawal
 http://localhost:8080/process-sms-notification
 http://localhost:8080/process-semaphore-withdrawal
 http://localhost:8080/process-withdraw-deposit-process
+
+### Примеры Volatile
+
+http://localhost:8080/write-and-read-volatile
+http://localhost:8080/volatile-race-condition
+
+### Примеры Atomic
+
+http://localhost:8080/atomic-examples
+http://localhost:8080/test-speed-sync-atomic
+http://localhost:8080/atomic-reference

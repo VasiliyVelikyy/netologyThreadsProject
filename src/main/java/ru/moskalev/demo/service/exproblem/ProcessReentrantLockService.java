@@ -1,6 +1,8 @@
-package ru.moskalev.demo.service;
+package ru.moskalev.demo.service.exproblem;
 
 import org.springframework.stereotype.Service;
+import ru.moskalev.demo.service.CashWithdrawalService;
+import ru.moskalev.demo.service.notification.SmsNotificatorService;
 
 @Service
 public class ProcessReentrantLockService {
