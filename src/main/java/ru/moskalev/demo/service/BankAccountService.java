@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import ru.moskalev.demo.domain.BankAccount;
 import ru.moskalev.demo.repository.BankAccountRepository;
+import ru.moskalev.demo.service.notification.BalanceNotificationWithVolatileService;
 
 import java.util.Optional;
 import java.util.concurrent.locks.Lock;
@@ -13,11 +14,13 @@ import java.util.concurrent.locks.ReentrantLock;
 public class BankAccountService {
 
     private final BankAccountRepository repository;
+    private final BalanceNotificationWithVolatileService balanceNotificationWithVolatileService;
 
     private final Lock reentrantLock = new ReentrantLock();
 
-    public BankAccountService(BankAccountRepository repository) {
+    public BankAccountService(BankAccountRepository repository, BalanceNotificationWithVolatileService balanceNotificationWithVolatileService) {
         this.repository = repository;
+        this.balanceNotificationWithVolatileService = balanceNotificationWithVolatileService;
     }
 
     // Получить счёт по номеру
@@ -137,6 +140,15 @@ public class BankAccountService {
                 System.out.println(Thread.currentThread().getName() + ": Перевод " + amount + " с " + from + " на " + to + " выполнен.");
             }
         }
+    }
+
+    public void depositWithNotification(String accNum, int amount) {
+        BankAccount acc = repository.getAccount(accNum);
+        var newBalance = acc.getBalance() + amount;
+        acc.setBalance(newBalance);
+        System.out.println(Thread.currentThread().getName() + " Баланс обновлен " + newBalance);
+        repository.save(acc);
+        balanceNotificationWithVolatileService.onBalanceChanged(Math.round(newBalance), "someNumber");
     }
 }
 
