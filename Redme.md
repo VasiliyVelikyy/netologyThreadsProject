@@ -33,6 +33,7 @@ http://localhost:8080/process-withdrawal
 http://localhost:8080/process-sms-notification
 http://localhost:8080/process-semaphore-withdrawal
 http://localhost:8080/process-withdraw-deposit-process
+http://localhost:8080/process-downgrade
 
 ### Примеры Volatile
 

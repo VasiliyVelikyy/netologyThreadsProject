@@ -1,6 +1,7 @@
 package ru.moskalev.demo.service.exproblem;
 
 import org.springframework.stereotype.Service;
+import ru.moskalev.demo.service.BankAccountService;
 import ru.moskalev.demo.service.CashWithdrawalService;
 import ru.moskalev.demo.service.notification.SmsNotificatorService;
 
@@ -9,11 +10,13 @@ public class ProcessReentrantLockService {
     private final CashWithdrawalService cashWithdrawalService;
     private final SmsNotificatorService smsNotificatorService;
     private final WithdrawalVerificationService withdrawalVerificationService;
+    private final BankAccountService bankAccountService;
 
-    public ProcessReentrantLockService(CashWithdrawalService cashWithdrawalService, SmsNotificatorService smsNotificatorService, WithdrawalVerificationService withdrawalVerificationService) {
+    public ProcessReentrantLockService(CashWithdrawalService cashWithdrawalService, SmsNotificatorService smsNotificatorService, WithdrawalVerificationService withdrawalVerificationService, BankAccountService bankAccountService) {
         this.cashWithdrawalService = cashWithdrawalService;
         this.smsNotificatorService = smsNotificatorService;
         this.withdrawalVerificationService = withdrawalVerificationService;
+        this.bankAccountService = bankAccountService;
     }
 
     public String processSemaphoreWithdrawal() throws InterruptedException {
@@ -136,5 +139,84 @@ public class ProcessReentrantLockService {
         var message = "Все 8 заявок успешно обработаны";
         System.out.println(message);
         return message;
+    }
+
+    public String processWithdrawalDeposit() throws InterruptedException {
+        Thread writer1 = new Thread(() -> bankAccountService.deposit("ACC001", 500), "Popolnenie-1");
+        Thread writer2 = new Thread(() -> bankAccountService.withdraw("ACC001", 200), "Popolnenie-2");
+        Thread writer3 = new Thread(() -> bankAccountService.deposit("ACC001", 300), "Popolnenie-2");
+
+        Thread[] readers = new Thread[5];
+
+        for (int i = 0; i < 5; i++) {
+            readers[i] = new Thread(() -> bankAccountService.printBalance("ACC001"), "Поток чтение-" + i);
+            readers[i].start();
+        }
+
+        writer1.start();
+        Thread.sleep(600);
+        writer2.start();
+        writer3.start();
+
+        writer1.join();
+        writer2.join();
+        writer3.join();
+
+        for (Thread reader : readers) {
+            reader.join();
+        }
+
+        System.out.println("operation is done");
+        return "ok";
+    }
+
+    public String processDowngrade() throws InterruptedException {
+
+        Thread writerWithDowngrade = new Thread(() -> {
+            bankAccountService.depositWithDowngrade("ACC001", 500);
+        }, "Пополнение+Downgrade");
+
+
+        Thread writerNormal = new Thread(() -> {
+            bankAccountService.withdraw("ACC001", 300);
+        }, "Списание-обычное");
+
+
+        Thread writerDep = new Thread(() -> {
+            bankAccountService.deposit("ACC001", 300);
+        }, "Списание-обычное");
+
+        //  Читатели — должны запуститься параллельно во время read-фазы downgrade
+        Thread[] readers = new Thread[3];
+        for (int i = 0; i < 3; i++) {
+            final int id = i + 1;
+            readers[i] = new Thread(() -> {
+                bankAccountService.printBalance("ACC001");
+            }, "Чтение-" + id);
+        }
+
+        // Запускаем всё почти одновременно:
+        writerWithDowngrade.start();
+        Thread.sleep(10); // даём ему немного форы, чтобы он начал downgrade
+
+        for (Thread reader : readers) {
+            reader.start();
+        }
+
+        Thread.sleep(1000); // ждём, пока читатели начнутся
+
+        writerNormal.start(); // этот должен заблокироваться до конца read-фазы downgrade
+        writerDep.start();
+
+        // Ждём завершения всех
+        writerWithDowngrade.join();
+        for (Thread reader : readers) {
+            reader.join();
+        }
+        writerNormal.join();
+
+        System.out.println("=".repeat(80));
+        return "ok";
+
     }
 }

@@ -31,4 +31,9 @@ public class ProblemTransferController {
     public String processLivelock() throws InterruptedException {
         return transferProblemService.transferLivelockWithMaxAttempt();
     }
+
+    @GetMapping("/transfer-starvation")
+    public String processStarvation() throws InterruptedException {
+        return transferProblemService.transferStarvation();
+    }
 }

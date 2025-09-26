@@ -17,4 +17,9 @@ public class AtomicExampleController {
         return processAtomicExampleService.processAtomic();
     }
 
+    @GetMapping("/atomic-reference")
+    public String processAtomicReference() throws InterruptedException {
+        return processAtomicExampleService.processAtomicReference();
+    }
+
 }
