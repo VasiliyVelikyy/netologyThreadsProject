@@ -21,4 +21,14 @@ public class WithdrawalController {
     public String processSemaphoreWithdrawal() throws InterruptedException {
         return processReentrantLockService.processSemaphoreWithdrawal();
     }
+
+    @GetMapping("process-withdraw-deposit-process")
+    public String processWithdrawalDeposit() throws InterruptedException {
+        return processReentrantLockService.processWithdrawalDeposit();
+    }
+
+    @GetMapping("/process-downgrade")
+    public String processDowngrade() throws InterruptedException {
+        return processReentrantLockService.processDowngrade();
+    }
 }

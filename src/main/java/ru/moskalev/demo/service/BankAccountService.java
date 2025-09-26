@@ -8,7 +8,9 @@ import ru.moskalev.demo.service.notification.BalanceNotificationWithVolatileServ
 
 import java.util.Optional;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @Service
 public class BankAccountService {
@@ -17,6 +19,7 @@ public class BankAccountService {
     private final BalanceNotificationWithVolatileService balanceNotificationWithVolatileService;
 
     private final Lock reentrantLock = new ReentrantLock();
+    private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
     public BankAccountService(BankAccountRepository repository, BalanceNotificationWithVolatileService balanceNotificationWithVolatileService) {
         this.repository = repository;
@@ -41,8 +44,6 @@ public class BankAccountService {
         String second = from.compareTo(to) < 0 ? to : from;
 
         synchronized (first.intern()) { //кладем в пулл строк
-
-
             synchronized (second.intern()) {
                 BankAccount fromAcc = getAccount(from);
                 BankAccount toAcc = getAccount(to);
@@ -149,6 +150,91 @@ public class BankAccountService {
         System.out.println(Thread.currentThread().getName() + " Баланс обновлен " + newBalance);
         repository.save(acc);
         balanceNotificationWithVolatileService.onBalanceChanged(Math.round(newBalance), "someNumber");
+    }
+
+    public void deposit(String accNum, int amount) {
+        readWriteLock.writeLock().lock();
+        BankAccount acc = repository.getAccount(accNum);
+        try {
+            System.out.println(Thread.currentThread().getName() + " захватил writeLock для пополнения" + amount);
+            acc.setBalance(acc.getBalance() + amount);
+            System.out.println(Thread.currentThread().getName() + " баланс обновлен" + acc.getBalance());
+            repository.save(acc);
+            Thread.sleep(800);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            readWriteLock.writeLock().unlock();
+            System.out.println(Thread.currentThread().getName() + " освободил writeLock для пополнения" + amount);
+        }
+    }
+
+    public void withdraw(String accNum, int amount) {
+        readWriteLock.writeLock().lock();
+        BankAccount acc = repository.getAccount(accNum);
+        try {
+            System.out.println(Thread.currentThread().getName() + " захватил writeLock для снятия" + amount);
+            acc.setBalance(acc.getBalance() - amount);
+            System.out.println(Thread.currentThread().getName() + " баланс обновлен" + acc.getBalance());
+            repository.save(acc);
+            Thread.sleep(800);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            readWriteLock.writeLock().unlock();
+            System.out.println(Thread.currentThread().getName() + " освободил writeLock для пополнения" + amount);
+        }
+
+    }
+
+    public void printBalance(String accNum) {
+        readWriteLock.readLock().lock();
+        BankAccount acc = repository.getAccount(accNum);
+        try {
+            System.out.println(Thread.currentThread().getName() + " захватил readLock баланс" + acc.getBalance());
+            Thread.sleep(10000);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            readWriteLock.readLock().unlock();
+            System.out.println(Thread.currentThread().getName() + " освободил readLock для пополнения");
+        }
+
+    }
+
+    public double depositWithDowngrade(String accNum, double amount) {
+        readWriteLock.writeLock().lock();
+        try {
+            System.out.println(Thread.currentThread().getName() + " ➤ Захватил WRITE-LOCK для пополнения на " + amount);
+
+            BankAccount acc = repository.getAccount(accNum);
+            acc.setBalance(acc.getBalance() + amount);
+            repository.save(acc);
+
+            System.out.println(Thread.currentThread().getName() + " ➤ Баланс обновлён: " + acc.getBalance());
+
+            readWriteLock.readLock().lock();
+            try {
+
+                readWriteLock.writeLock().unlock(); // write снят, но read остаётся!
+                System.out.println(Thread.currentThread().getName() + " ➤ WRITE-LOCK снят, остался READ-LOCK");
+
+                Thread.sleep(2000);
+                double currentBalance = acc.getBalance();
+
+                System.out.println(Thread.currentThread().getName() + " ➤ После downgrade, баланс для отчёта: " + currentBalance);
+                return currentBalance;
+
+            } finally {
+
+                readWriteLock.readLock().unlock();
+                System.out.println(Thread.currentThread().getName() + " ➤ READ-LOCK освобождён");
+            }
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return -1;
+        }
     }
 }
 

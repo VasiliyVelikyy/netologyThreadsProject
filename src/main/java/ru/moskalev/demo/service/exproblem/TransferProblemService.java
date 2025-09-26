@@ -259,4 +259,47 @@ public class TransferProblemService {
 
         return "Трансфер завершен.";
     }
+
+    public String transferStarvation() throws InterruptedException {
+
+        Object accountLock = new Object();
+
+        Thread advertistingBanner = new Thread(() -> {
+            System.out.println("advertistingBanner strart");
+            while (true) {
+                synchronized (accountLock) {
+                    System.out.println("Пытаюсь отправить рекламный баннер клиенту");
+                    try {
+                        Thread.sleep(5);
+                    } catch (InterruptedException e) {
+                        break;
+                    }
+                }
+            }
+        }, "Client-advertistingBanner");
+
+        Thread transferClient = new Thread(() -> {
+            System.out.println("Client2 запущен");
+            while (true) {
+                synchronized (accountLock) {
+                    System.out.println("Client2 пытаюсь сделать перевод");
+                    bankAccountService.transfer("ACC001", "ACC002", 1);
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        break;
+                    }
+                }
+            }
+        }, "Client-transferClient");
+
+        advertistingBanner.start();
+        transferClient.start();
+
+        advertistingBanner.join();
+        transferClient.join();
+
+        Thread.sleep(3000);
+        return "ok";
+    }
 }
