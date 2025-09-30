@@ -9,7 +9,7 @@ import ru.moskalev.demo.data.TransferGeneratorService;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 
-import static ru.moskalev.demo.Constants.TRANSFER_COUNT;
+import static ru.moskalev.demo.Constants.ACCOUNT_COUNT;
 import static ru.moskalev.demo.utils.TimeUtils.evaluateExecutionTime;
 
 @Service
@@ -27,7 +27,7 @@ public class StreamTransferService implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        operations = transferGeneratorService.generateTransfers(TRANSFER_COUNT);
+        operations = transferGeneratorService.generateTransfers(ACCOUNT_COUNT);
     }
 
     public String startStream() {
