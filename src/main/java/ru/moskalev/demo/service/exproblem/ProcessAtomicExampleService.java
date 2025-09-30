@@ -1,4 +1,4 @@
-package ru.moskalev.demo.service;
+package ru.moskalev.demo.service.exproblem;
 
 import org.springframework.stereotype.Service;
 import ru.moskalev.demo.repository.BankAccountRepository;
