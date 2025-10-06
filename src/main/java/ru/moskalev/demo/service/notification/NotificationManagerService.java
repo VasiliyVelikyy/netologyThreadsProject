@@ -18,13 +18,13 @@ import static ru.moskalev.demo.Constants.BALANCE_THRESHOLD;
 
 
 @Service
-public class AsyncNotificationService {
-    private static final Logger log = LoggerFactory.getLogger(AsyncNotificationService.class);
+public class NotificationManagerService {
+    private static final Logger log = LoggerFactory.getLogger(NotificationManagerService.class);
     private final BankAccountRepository bankAccountRepository;
 
     private final ExecutorService executorService;
 
-    public AsyncNotificationService(BankAccountRepository bankAccountRepository) {
+    public NotificationManagerService(BankAccountRepository bankAccountRepository) {
         this.bankAccountRepository = bankAccountRepository;
         executorService = createExecutor();
     }

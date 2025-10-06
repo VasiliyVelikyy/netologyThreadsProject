@@ -19,4 +19,16 @@ public class ClientAggregationController {
         List<ClientFullInfo> result = aggregationService.getFullClientInfoAsync();
         return ResponseEntity.ok(result);
     }
+
+    @GetMapping("/api/clients-invoke-by-timeout")
+    public ResponseEntity<List<ClientFullInfo>> getClientsFullWithInvokeByTimeout() throws InterruptedException {
+        List<ClientFullInfo> result = aggregationService.getFullClientInfoAsyncWithTimeout();
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/api/clients-full-cancel")
+    public ResponseEntity<List<ClientFullInfo>> getClientsFullWithWithCancelTask() {
+        List<ClientFullInfo> result = aggregationService.getFullClientInfoAsyncWithCancel();
+        return ResponseEntity.ok(result);
+    }
 }

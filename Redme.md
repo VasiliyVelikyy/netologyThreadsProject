@@ -45,3 +45,9 @@ http://localhost:8080/volatile-race-condition
 http://localhost:8080/atomic-examples
 http://localhost:8080/test-speed-sync-atomic
 http://localhost:8080/atomic-reference
+
+
+### Полная инфа клиента
+http://localhost:8080/api/clients-full
+http://localhost:8080/api/clients-invoke-by-timeout
+http://localhost:8080/api/clients-full-cancel
