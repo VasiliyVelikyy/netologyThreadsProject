@@ -6,18 +6,25 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Queue;
+import java.util.Set;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 @Service
 @Slf4j
 public class SmsNotificatorService {
-    private final Map<String, ReentrantLock> clientLock = new ConcurrentHashMap<>();
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
+    private final ScheduledExecutorService scheduler = createSchedulerExecutor();
+
     private final Map<String, Queue<String>> pendingSmsMap = new ConcurrentHashMap<>();
+    private final Map<String, ReentrantLock> clientLock = new ConcurrentHashMap<>();
+    private final Set<String> scheduledNumbers = ConcurrentHashMap.newKeySet();
+
 
     private static final long RETRY_DELAY_SECONDS = 2;
     private static final long LOCK_TIMEOUT_MS = 500;
+
+    private volatile long simulatedSendDelayMs = 0;
 
 
     public void trySendSms(String phoneNumber, String message) {
@@ -31,12 +38,16 @@ public class SmsNotificatorService {
             lockAcquired = smsLock.tryLock(LOCK_TIMEOUT_MS, TimeUnit.MILLISECONDS);
             if (lockAcquired) {
                 sendSmsNow(phoneNumber, message);
-                scheduledPendingSmsIfAny(phoneNumber);
+                drainPendingQueue(phoneNumber);
             } else {
-                pendingSmsMap.computeIfAbsent(phoneNumber, k -> new ConcurrentLinkedQueue<>()).add(message);
-                log.info("[SMS] Отложено message {} для номера {}", message, phoneNumber);
+                addInQueue(phoneNumber, message);
 
-                scheduler.schedule(() -> processPendingSms(phoneNumber), RETRY_DELAY_SECONDS, TimeUnit.SECONDS);
+                if (scheduledNumbers.add(phoneNumber)) {
+                    scheduler.schedule(() -> {
+                        scheduledNumbers.remove(phoneNumber);
+                        processPendingSms(phoneNumber);
+                    }, RETRY_DELAY_SECONDS, TimeUnit.SECONDS);
+                }
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -48,25 +59,77 @@ public class SmsNotificatorService {
         }
     }
 
+    private void addInQueue(String phoneNumber, String message) {
+        ReentrantLock lock = clientLock.computeIfAbsent(phoneNumber, k -> new ReentrantLock());
+        lock.lock();
+        try {
+            Queue<String> queue = pendingSmsMap.computeIfAbsent(phoneNumber, k -> new ConcurrentLinkedQueue<>());
+            if (!queue.contains(message)) {
+                queue.add(message);
+                log.info("[SMS] Отложено message {} для номера {}", message, phoneNumber);
+            } else {
+                log.info("[SMS] Пропущен дубликат message {} для номера {}", message, phoneNumber);
+            }
+        } finally {
+            lock.unlock();
+        }
+
+    }
+
     private void processPendingSms(String phoneNumber) {
-        Queue<String> queue = pendingSmsMap.get(phoneNumber);
-        if (queue == null && queue.isEmpty()) {
-            return;
+        ReentrantLock lock = clientLock.get(phoneNumber);
+        boolean locked = false;
+        try {
+            locked = lock.tryLock(LOCK_TIMEOUT_MS, TimeUnit.MILLISECONDS);
+            if (!locked) {
+                if (scheduledNumbers.add(phoneNumber)) {
+                    scheduler.schedule(() -> {
+                        scheduledNumbers.remove(phoneNumber);
+                        processPendingSms(phoneNumber);
+                    }, RETRY_DELAY_SECONDS, TimeUnit.SECONDS);
+                }
+                return;
+            }
+            Queue<String> queue = pendingSmsMap.get(phoneNumber);
+            if (queue != null) {
+                while (!queue.isEmpty()) {
+                    String msg = queue.poll();
+                    if (msg != null) {
+                        sendSmsNow(phoneNumber, msg);
+                    }
+                }
+            }
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } finally {
+            if (locked) {
+                lock.unlock();
+            }
         }
-        trySendSms(phoneNumber, queue.poll());
     }
 
-    private void scheduledPendingSmsIfAny(String phoneNumber) {
+    private void drainPendingQueue(String phoneNumber) {
         Queue<String> queue = pendingSmsMap.get(phoneNumber);
-        if (queue != null && !queue.isEmpty()) {
-            scheduler.schedule(() -> processPendingSms(phoneNumber), RETRY_DELAY_SECONDS, TimeUnit.SECONDS);
+        if (queue != null) {
+            while (!queue.isEmpty()) {
+                String msg = queue.poll();
+                if (msg != null) {
+                    sendSmsNow(phoneNumber, msg);
+                }
+            }
         }
     }
 
-    private void sendSmsNow(String phoneNumber, String message) throws InterruptedException {
-        log.info("SMS {} Отправляем на {}", message, phoneNumber);
-        Thread.sleep(2000);
-        System.out.println("ok");
+    private void sendSmsNow(String phoneNumber, String message) {
+        if (simulatedSendDelayMs > 0) {
+            try {
+                Thread.sleep(simulatedSendDelayMs);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        log.info("[SMS] Успешно отправлено на номер={} сообщение ={}", phoneNumber, message);
     }
 
 
@@ -83,5 +146,22 @@ public class SmsNotificatorService {
         if (!scheduler.awaitTermination(timeOutSecond, TimeUnit.SECONDS)) {
             scheduler.shutdownNow();
         }
+    }
+
+    private ScheduledExecutorService createSchedulerExecutor() {
+        return Executors.newScheduledThreadPool(2, new ThreadFactory() {
+            private final AtomicInteger counter = new AtomicInteger(1);
+
+            @Override
+            public Thread newThread(Runnable r) {
+                Thread t = new Thread(r, "smsSender-" + counter.getAndIncrement());
+                t.setDaemon(true);
+                return t;
+            }
+        });
+    }
+
+    public void setSimulatedSendDelay(int i) {
+        this.simulatedSendDelayMs = i;
     }
 }
