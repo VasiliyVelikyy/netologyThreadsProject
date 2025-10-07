@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static ru.moskalev.demo.Constants.ACCOUNT_COUNT;
+import static ru.moskalev.demo.Constants.*;
 import static ru.moskalev.demo.utils.TimeUtils.evaluateExecutionTime;
 
 @Service
@@ -44,7 +44,12 @@ public class PhoneNumberService {
         }
 
         for (int i = 9; i <= ACCOUNT_COUNT; i++) {
-            String key = "GEN_ACC_-" + i;
+            String key = ACCOUNT_GENERATE_PREFIX + i;
+            map.put(key, generateRandomPhone());
+        }
+
+        for (int i = 0; i <= ACCOUNT_COUNT_WITH_PROBLEM; i++) {
+            String key = ACCOUNT_ERROR_PREFIX + i;
             map.put(key, generateRandomPhone());
         }
 

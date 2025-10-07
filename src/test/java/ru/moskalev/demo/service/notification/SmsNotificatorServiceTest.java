@@ -27,26 +27,38 @@ class SmsNotificatorServiceTest {
 
     @Test
     public void fourAccount_smsNotify_threadExample() throws InterruptedException {
-        String phoneNumber = "+79991112233";
+        String phoneNumber1 = "+79991112233";
+        String phoneNumber2 = "+78009998811";
         String message = "Тестовое сообщение";
         int threadCount = 4;
 
-
+        smsNotificatorService.setSimulatedSendDelay(2000);
         ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
-        CountDownLatch latch = new CountDownLatch(4);
+        CountDownLatch latch = new CountDownLatch(8);
 
         for (int i = 1; i <= threadCount; i++) {
             final int msgId = i;
             executorService.submit(() -> {
                 try {
-                    smsNotificatorService.trySendSms(phoneNumber, message + " #" + msgId);
+                    smsNotificatorService.trySendSms(phoneNumber1, message + " #" + msgId);
                 } finally {
                     latch.countDown();
                 }
             });
         }
 
-        latch.await(5, TimeUnit.SECONDS);
+        for (int i = 1; i <= threadCount; i++) {
+            final int msgId = i;
+            executorService.submit(() -> {
+                try {
+                    smsNotificatorService.trySendSms(phoneNumber2, message + " #" + msgId);
+                } finally {
+                    latch.countDown();
+                }
+            });
+        }
+
+        latch.await(8, TimeUnit.SECONDS);
 
         Thread.sleep(10000);
 

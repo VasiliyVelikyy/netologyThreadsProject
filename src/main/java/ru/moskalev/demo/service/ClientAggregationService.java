@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
+import static ru.moskalev.demo.Constants.*;
 import static ru.moskalev.demo.utils.TimeUtils.evaluateExecutionTime;
 
 @Service
@@ -24,6 +25,46 @@ public class ClientAggregationService {
     private final WebClient webClient;
     private final BankAccountRepository accountRepository;
     private final ExecutorService executor = Executors.newFixedThreadPool(10);
+
+
+    public List<ClientFullInfo> getFullClientInfoAsync() {
+        long startTime = System.nanoTime();
+
+        log.info("Начинаю асинхронную агрегацию данных по всем счетам...");
+
+        List<BankAccount> accounts = accountRepository.findAll();
+
+        log.info("Найдено {} счетов для обработки", accounts.size());
+        List<Future<ClientFullInfo>> futures;
+
+
+        List<Callable<ClientFullInfo>> tasks = accounts.stream()
+                .map(acc -> (Callable<ClientFullInfo>) () -> fetchFullInfo(acc.getAccountNumber(),
+                        acc.getBalance()))
+                .toList();
+        try {
+            futures = executor.invokeAll(tasks);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        List<ClientFullInfo> results = new ArrayList<>();
+        for (Future<ClientFullInfo> future : futures) {
+            try {
+                ClientFullInfo info = future.get();
+                log.debug("Получен результат для счёта {}: баланс={}, телефон={}",
+                        info.account(), info.balance(), info.phoneNumber());
+                results.add(info);
+            } catch (InterruptedException | ExecutionException e) {
+                Thread.currentThread().interrupt();
+                Throwable cause = e.getCause();
+                log.error("Не удалось получить данные от = {}", cause.getMessage());
+            }
+        }
+
+        evaluateExecutionTime(startTime);
+        return results;
+    }
 
     public List<ClientFullInfo> getFullClientInfoAsyncWithCancel() {
         log.info("Начинаю асинхронную агрегацию данных по всем счетам...");
@@ -112,43 +153,6 @@ public class ClientAggregationService {
         return results;
     }
 
-    public List<ClientFullInfo> getFullClientInfoAsync() {
-        long startTime = System.nanoTime();
-
-        log.info("Начинаю асинхронную агрегацию данных по всем счетам...");
-
-        List<BankAccount> accounts = accountRepository.findAll();
-
-        log.info("Найдено {} счетов для обработки", accounts.size());
-        List<Future<ClientFullInfo>> futures;
-
-
-        List<Callable<ClientFullInfo>> tasks = accounts.stream()
-                .map(acc -> (Callable<ClientFullInfo>) () -> fetchFullInfo(acc.getAccountNumber(),
-                        acc.getBalance()))
-                .toList();
-        try {
-            futures = executor.invokeAll(tasks);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        List<ClientFullInfo> results = new ArrayList<>();
-        for (Future<ClientFullInfo> future : futures) {
-            try {
-                ClientFullInfo info = future.get();
-                log.debug("Получен результат для счёта {}: баланс={}, телефон={}",
-                        info.account(), info.balance(), info.phoneNumber());
-                results.add(info);
-            } catch (InterruptedException | ExecutionException e) {
-                Thread.currentThread().interrupt();
-                throw new RuntimeException("Ошибка выполнения задачи", e);
-            }
-        }
-
-        evaluateExecutionTime(startTime);
-        return results;
-    }
 
     private ClientFullInfo fetchFullInfo(String accountNumber, double balance) {
         String phone = getPhoneNumberSync(accountNumber);
@@ -156,27 +160,25 @@ public class ClientAggregationService {
     }
 
     private CompletableFuture<String> getPhoneNumberAsync(String accountNumber) {
-        String url = "http://localhost:8080/api/account/" + accountNumber + "/phone";
+        String url = LOCAL_HOST + URL_PHONE_BY_GOOD_ACCOUNT;
 
         return webClient.get()
-                .uri(url)
+                .uri(url, accountNumber)
                 .retrieve()
                 .bodyToMono(String.class)
                 .toFuture(); // блокирующий вызов для совместимости с синхронным кодом
     }
 
     private String getPhoneNumberSync(String accountNumber) {
-        String url = "http://localhost:8080/api/account/" + accountNumber + "/phone";
-
+        String url = LOCAL_HOST + URL_PHONE_BY_BAD_ACCOUNT;
         try {
             return webClient.get()
-                    .uri(url)
+                    .uri(url, accountNumber)
                     .retrieve()
                     .bodyToMono(String.class)
                     .block(); // блокирующий вызов для совместимости с синхронным кодом
         } catch (Exception e) {
-
-            return "UNKNOWN";
+            throw new RuntimeException(e.getMessage());
         }
     }
 
