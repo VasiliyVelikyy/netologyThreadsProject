@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.moskalev.demo.domain.BankAccount;
 import ru.moskalev.demo.domain.ClientFullInfo;
+import ru.moskalev.demo.domain.ClientFullInfoWithEmail;
+import ru.moskalev.demo.domain.ClientFullInfoWithEmailVerify;
 import ru.moskalev.demo.repository.BankAccountRepository;
 
 import java.util.ArrayList;
@@ -24,10 +26,86 @@ public class ClientAggregationService {
 
     private final WebClient webClient;
     private final BankAccountRepository accountRepository;
+    private final EmailService emailService;
+    private final VerificationEmailService verificationEmailService;
     private final ExecutorService executor = Executors.newFixedThreadPool(10);
 
+    public List<ClientFullInfoWithEmailVerify> getFullClientInfoWithEmailVerifyAsync() {
+        long startTime = System.nanoTime();
 
-    public List<ClientFullInfo> getFullClientInfoAsync() {
+        log.info("Начинаю асинхронную агрегацию данных по всем счетам через CompletableFuture...");
+
+        List<BankAccount> accounts = accountRepository.findAll();
+
+        log.info("Найдено {} счетов для обработки", accounts.size());
+
+        List<CompletableFuture<ClientFullInfoWithEmailVerify>> futures = accounts.stream()
+                .map(acc -> {
+                    String accountNumber = acc.getAccountNumber();
+                    double balance = acc.getBalance();
+
+                    return CompletableFuture.supplyAsync(() -> emailService.findEmail(accountNumber))
+                            .thenCompose(email -> {
+                                CompletableFuture<String> phoneFuture = getPhoneNumberAsync(accountNumber)
+                                        .thenApply(this::maskPhone);
+                                CompletableFuture<Boolean> verifyFuture =
+                                        verificationEmailService.isEmailVeifiedAsync(email);
+
+                                return phoneFuture.thenCombine(verifyFuture, (phone, verify) ->
+                                        new ClientFullInfoWithEmailVerify(accountNumber,
+                                                balance,
+                                                phone,
+                                                email,
+                                                verify));
+                            });
+                }).toList();
+
+        List<ClientFullInfoWithEmailVerify> result = futures.stream()
+                .map(CompletableFuture::join)
+                .toList();
+
+        evaluateExecutionTime(startTime);
+        return result;
+    }
+
+    public List<ClientFullInfoWithEmail> getFullClientInfoWithEmailAsync() {
+        long startTime = System.nanoTime();
+
+        log.info("Начинаю асинхронную агрегацию данных по всем счетам через CompletableFuture...");
+
+        List<BankAccount> accounts = accountRepository.findAll();
+
+        log.info("Найдено {} счетов для обработки", accounts.size());
+
+        List<CompletableFuture<ClientFullInfoWithEmail>> futures = accounts.stream()
+                .map(acc -> {
+                    String accountNumber = acc.getAccountNumber();
+                    double balance = acc.getBalance();
+
+                    CompletableFuture<String> phoneFuture = getPhoneNumberAsync(accountNumber)
+                            .thenApply(this::maskPhone);
+
+                    CompletableFuture<String> emailFuture = CompletableFuture.supplyAsync(
+                            () -> emailService.findEmail(accountNumber));
+
+                    return phoneFuture.thenCombine(emailFuture, (phone, email) ->
+                            new ClientFullInfoWithEmail(accountNumber, balance, phone, email)
+                    );
+                }).toList();
+
+        List<ClientFullInfoWithEmail> result = futures.stream()
+                .map(CompletableFuture::join)
+                .toList();
+        evaluateExecutionTime(startTime);
+        return result;
+    }
+
+    private String maskPhone(String phone) {
+        int len = phone.length();
+        return phone.substring(0, 3) + "****" + phone.substring(len - 2);
+    }
+
+    public List<ClientFullInfo> getFullClientInfoWithFuture() {
         long startTime = System.nanoTime();
 
         log.info("Начинаю асинхронную агрегацию данных по всем счетам...");
@@ -159,14 +237,14 @@ public class ClientAggregationService {
         return new ClientFullInfo(accountNumber, balance, phone);
     }
 
-    private CompletableFuture<String> getPhoneNumberAsync(String accountNumber) {
+    public CompletableFuture<String> getPhoneNumberAsync(String accountNumber) {
         String url = LOCAL_HOST + URL_PHONE_BY_GOOD_ACCOUNT;
 
         return webClient.get()
                 .uri(url, accountNumber)
                 .retrieve()
                 .bodyToMono(String.class)
-                .toFuture(); // блокирующий вызов для совместимости с синхронным кодом
+                .toFuture();
     }
 
     private String getPhoneNumberSync(String accountNumber) {
@@ -191,5 +269,6 @@ public class ClientAggregationService {
     public void shutdown() {
         executor.shutdown();
     }
+
 
 }

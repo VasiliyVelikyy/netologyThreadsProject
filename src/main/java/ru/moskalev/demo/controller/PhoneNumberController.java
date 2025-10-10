@@ -21,8 +21,9 @@ public class PhoneNumberController {
         String phone = phoneNumberService.findPhoneByAccNum(accountNumber);
         if (phone != null) {
             long delay = 1L + (long) (Math.random() * 1000);//0 to 999
-            log.info("PhoneNumberController accNum={}, delay={}", accountNumber, delay);
             Thread.sleep(delay);
+
+            log.info("PhoneNumberController phone={}", phone);
             return ResponseEntity.ok(phone);
         }
 

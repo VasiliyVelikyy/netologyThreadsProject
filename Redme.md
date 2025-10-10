@@ -49,5 +49,6 @@ http://localhost:8080/atomic-reference
 
 ### Полная инфа клиента
 http://localhost:8080/api/clients-full
+http://localhost:8080/api/clients-full-with-email
 http://localhost:8080/api/clients-invoke-by-timeout
 http://localhost:8080/api/clients-full-cancel

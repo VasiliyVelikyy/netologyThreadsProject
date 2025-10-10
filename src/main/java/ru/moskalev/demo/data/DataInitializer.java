@@ -38,7 +38,7 @@ public class DataInitializer {
 
         bankAccountRepository.saveAll(accounts);
 
-        System.out.println(" Инициализировано " + ACCOUNT_COUNT + " счетов.");
+        System.out.println(" Инициализировано " + (ACCOUNT_COUNT + ACCOUNT_COUNT_WITH_PROBLEM) + " счетов.");
         evaluateExecutionTime(startTime);
     }
 }

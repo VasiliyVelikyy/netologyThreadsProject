@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.moskalev.demo.domain.ClientFullInfo;
+import ru.moskalev.demo.domain.ClientFullInfoWithEmail;
+import ru.moskalev.demo.domain.ClientFullInfoWithEmailVerify;
 import ru.moskalev.demo.service.ClientAggregationService;
 
 import java.util.List;
@@ -18,7 +20,20 @@ public class ClientAggregationController {
 
     @GetMapping("/clients-full")
     public ResponseEntity<List<ClientFullInfo>> getClientsFull() {
-        List<ClientFullInfo> result = aggregationService.getFullClientInfoAsync();
+        List<ClientFullInfo> result = aggregationService.getFullClientInfoWithFuture();
+        return ResponseEntity.ok(result);
+    }
+
+
+    @GetMapping("/clients-full-with-email")
+    public ResponseEntity<List<ClientFullInfoWithEmail>> getClientsFullWithEmail() {
+        List<ClientFullInfoWithEmail> result = aggregationService.getFullClientInfoWithEmailAsync();
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/clients-full-with-email/verify")
+    public ResponseEntity<List<ClientFullInfoWithEmailVerify>> getClientsFullWithEmailVerify() {
+        List<ClientFullInfoWithEmailVerify> result = aggregationService.getFullClientInfoWithEmailVerifyAsync();
         return ResponseEntity.ok(result);
     }
 

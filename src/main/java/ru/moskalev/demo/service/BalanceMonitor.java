@@ -22,24 +22,28 @@ public class BalanceMonitor {
     private final ScheduledExecutorService scheduler = createScheduler();
     private final BankAccountRepository accountRepository;
     private final SmsNotificatorService smsNotificatorService;
+    private final ClientAggregationService aggregationService;
 
-    public BalanceMonitor(BankAccountRepository accountRepository, SmsNotificatorService smsNotificatorService) {
+    public BalanceMonitor(BankAccountRepository accountRepository,
+                          SmsNotificatorService smsNotificatorService,
+                          ClientAggregationService aggregationService) {
         this.accountRepository = accountRepository;
         this.smsNotificatorService = smsNotificatorService;
+        this.aggregationService = aggregationService;
 
-        scheduler.scheduleAtFixedRate(
-                this::checkForLowBalance,
-                0,
-                10,
-                TimeUnit.SECONDS
-        );
+//        scheduler.scheduleAtFixedRate(
+//                this::checkForLowBalance,
+//                0,
+//                10,
+//                TimeUnit.SECONDS
+//        );
 
-        scheduler.scheduleAtFixedRate(
-                this::checkForHighBalance,
-                0,
-                30,
-                TimeUnit.SECONDS
-        );
+//        scheduler.scheduleAtFixedRate(
+//                this::checkForHighBalance,
+//                0,
+//                30,
+//                TimeUnit.SECONDS
+//        );
     }
 
     private void checkForHighBalance() {
@@ -51,7 +55,8 @@ public class BalanceMonitor {
                 String message = "Внимание на счете " + account.getAccountNumber() +
                         " достаточный баланс: " + account.getBalance() + " Руб";
                 log.warn(message);
-                //   smsNotificatorService.trySendSms();
+
+                // smsNotificatorService.trySendSms();
             }
             log.info("Проверка завершена. Найдено {} счетов с достаточным балансом", lowBalances.size());
         } catch (Exception e) {
@@ -68,12 +73,24 @@ public class BalanceMonitor {
                 String message = "Внимание на счете " + account.getAccountNumber() +
                         " низкий баланс: " + account.getBalance() + " Руб";
                 log.warn(message);
-                //   smsNotificatorService.trySendSms();
+                fetchPhoneNumberAndSendSms(account, message);
             }
             log.info("Проверка завершена. Найдено {} счетов с низким балансом", lowBalances.size());
         } catch (Exception e) {
             log.error("Ошибка в фоновой задаче проверки низкого баланса", e);
         }
+    }
+
+    private void fetchPhoneNumberAndSendSms(BankAccount account, String message) {
+        aggregationService.getPhoneNumberAsync(account.getAccountNumber())
+                .thenAcceptAsync(phoneNumber -> {
+                    if (phoneNumber != null) {
+                        smsNotificatorService.trySendSms(phoneNumber, message);
+                    } else {
+                        log.warn("Не удалось получить номер счета для акканута ={}",
+                                account.getAccountNumber());
+                    }
+                });
     }
 
     private ScheduledExecutorService createScheduler() {
