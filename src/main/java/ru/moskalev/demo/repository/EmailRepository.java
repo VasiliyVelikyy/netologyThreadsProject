@@ -43,7 +43,8 @@ public class EmailRepository {
             throw new IllegalArgumentException(String.format("Email для аккаунта %s не найден", accNum));
         }
         try {
-            long delay = 1L + (long) (Math.random() * 1000);//0 to 999
+            long delay = 1L + (long) (Math.random() * 2000);//0 to 2
+            log.info("EmailRepository accnum = {} , delay = {}",accNum,delay);
             Thread.sleep(delay);
         } catch (Exception e) {
             throw new RuntimeException(e);

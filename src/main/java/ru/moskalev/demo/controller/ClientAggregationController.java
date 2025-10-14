@@ -27,7 +27,7 @@ public class ClientAggregationController {
 
     @GetMapping("/clients-full-with-email")
     public ResponseEntity<List<ClientFullInfoWithEmail>> getClientsFullWithEmail() {
-        List<ClientFullInfoWithEmail> result = aggregationService.getFullClientInfoWithEmailAsync();
+        List<ClientFullInfoWithEmail> result = aggregationService.getFullClientInfoWithEmailAsyncWithLogs();
         return ResponseEntity.ok(result);
     }
 
@@ -43,9 +43,15 @@ public class ClientAggregationController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/api/clients-full-cancel")
+    @GetMapping("/clients-full-cancel")
     public ResponseEntity<List<ClientFullInfo>> getClientsFullWithWithCancelTask() {
         List<ClientFullInfo> result = aggregationService.getFullClientInfoAsyncWithCancel();
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/clients-info-with-timeout")
+    public ResponseEntity<List<ClientFullInfoWithEmail>> getClientsFullWithEmailWithTimeout() {
+        List<ClientFullInfoWithEmail> result = aggregationService.getClientsFullWithEmailWithTimeout();
         return ResponseEntity.ok(result);
     }
 }

@@ -14,7 +14,9 @@ import ru.moskalev.demo.repository.BankAccountRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static ru.moskalev.demo.Constants.*;
 import static ru.moskalev.demo.utils.TimeUtils.evaluateExecutionTime;
@@ -28,7 +30,208 @@ public class ClientAggregationService {
     private final BankAccountRepository accountRepository;
     private final EmailService emailService;
     private final VerificationEmailService verificationEmailService;
-    private final ExecutorService executor = Executors.newFixedThreadPool(10);
+    private final ExecutorService executorFullInfo = Executors.newFixedThreadPool(10);
+    private final ExecutorService emailFetchExecutor = createEmailExecutor();
+
+    private ExecutorService createEmailExecutor() {
+        return Executors.newFixedThreadPool(5, new ThreadFactory() {
+            private final AtomicInteger counter = new AtomicInteger(1);
+
+            @Override
+            public Thread newThread(Runnable r) {
+                return new Thread(r, "emailFetcher" + counter.getAndIncrement());
+            }
+        });
+    }
+
+    public List<ClientFullInfoWithEmail> getClientsFullWithEmailWithTimeout() {
+        long startTime = System.nanoTime();
+
+        log.info("Начинаю асинхронную агрегацию данных по всем счетам через CompletableFuture...");
+
+        List<BankAccount> accounts = accountRepository.findAll();
+
+        log.info("Найдено {} счетов для обработки", accounts.size());
+
+        List<CompletableFuture<ClientFullInfoWithEmail>> futures = accounts.stream()
+                .map(acc -> {
+                    String accountNumber = acc.getAccountNumber();
+                    double balance = acc.getBalance();
+
+                    CompletableFuture<String> phoneFuture = getPhoneNumberAsync(accountNumber)
+                            .orTimeout(1, TimeUnit.SECONDS)
+                            .handle(this::handleFetchPhoneNumberWithTimeout)
+                            .thenApply(this::maskPhone)
+                            .whenComplete(this::checkCompleteFetchPhoneNum);
+
+                    CompletableFuture<String> emailFuture = getEmailFuture(accountNumber);
+
+                    return phoneFuture.thenCombine(emailFuture, (phone, email) -> {
+                                if (phone.contains(UKNOWN) || email.contains(UKNOWN)) {
+                                    return null;
+                                }
+                                return new ClientFullInfoWithEmail(accountNumber, balance, phone, email);
+                            }
+                    );
+                }).toList();
+
+        List<ClientFullInfoWithEmail> result = futures.stream()
+                .map(CompletableFuture::join)
+                .filter(Objects::nonNull)
+                .toList();
+        evaluateExecutionTime(startTime);
+        return result;
+    }
+
+    private CompletableFuture<String> getEmailFuture(String accountNumber) {
+        return CompletableFuture.supplyAsync(
+                        () -> emailService.findEmail(accountNumber),
+                        emailFetchExecutor)
+                .orTimeout(1, TimeUnit.SECONDS)
+                .handle((email, ex) -> handleFetchEmailExWithTimeout(email, ex, accountNumber));
+    }
+
+    private String handleFetchEmailExWithTimeout(String email, Throwable throwable, String accountNumber) {
+        if (throwable != null) {
+            if (throwable instanceof TimeoutException) {
+                log.warn("Таймаут при получении email  accnum={}",accountNumber);
+            } else {
+                log.warn("Ошибка при получении email  accnum={}" ,accountNumber);
+            }
+            return UKNOWN;
+        }
+        return email;
+    }
+
+    private String handleFetchPhoneNumberWithTimeout(String phone, Throwable throwable) {
+        if (throwable != null) {
+            if (throwable instanceof TimeoutException) {
+                log.warn("Таймаут при получении номера телефона");
+            } else {
+                log.warn("Ошибка при получении номера телефона {}" , throwable.getMessage());
+            }
+            return UKNOWN;
+        }
+        return phone;
+    }
+
+    public List<ClientFullInfoWithEmail> getFullClientInfoWithEmailAsyncWithLogs() {
+        long startTime = System.nanoTime();
+
+        log.info("Начинаю асинхронную агрегацию данных по всем счетам через CompletableFuture...");
+
+        List<BankAccount> accounts = accountRepository.findAll();
+
+        log.info("Найдено {} счетов для обработки", accounts.size());
+
+        List<CompletableFuture<ClientFullInfoWithEmail>> futures = accounts.stream()
+                .map(acc -> {
+                    String accountNumber = acc.getAccountNumber();
+                    double balance = acc.getBalance();
+
+                    CompletableFuture<String> phoneFuture = getPhoneFuture(acc, accountNumber);
+
+                    CompletableFuture<String> emailFuture = CompletableFuture.supplyAsync(
+                            () -> emailService.findEmail(accountNumber),
+                            emailFetchExecutor);
+
+                    return phoneFuture.thenCombine(emailFuture, (phone, email) -> {
+                                if (phone.contains(UKNOWN) || email.contains(UKNOWN)) {
+                                    return null;
+                                }
+                                return new ClientFullInfoWithEmail(accountNumber, balance, phone, email);
+                            }
+                    );
+                }).toList();
+
+        List<ClientFullInfoWithEmail> result = futures.stream()
+                .map(CompletableFuture::join)
+                .filter(Objects::nonNull)
+                .toList();
+        evaluateExecutionTime(startTime);
+        return result;
+    }
+
+    private CompletableFuture<String> getPhoneFuture(BankAccount acc, String accountNumber) {
+        return CompletableFuture
+                .supplyAsync(() -> {
+                    log.info("Step 1: starting initial date supply accnum={}", accountNumber);
+                    return "data";
+
+                }).thenCompose(ignored -> {
+                    log.info(ignored);
+                    log.info("Step 2 fetch phonenumber for account ={}", accountNumber);
+                    return getPhoneNumberAsync(accountNumber);
+                }).handle((phone, ex) -> {
+                    if (ex != null) {
+                        log.error("Step 3 failed to fetch phonenumber acc={} errormessage= {}", acc, ex.getMessage());
+                        return handleFetchPhoneNumber(phone, ex);
+                    } else {
+                        log.info("Step 3 :phone number fetched successfuly: phone={} , accnum={}", phone, accountNumber);
+                        return phone;
+                    }
+                }).thenApply(phone -> {
+                    String maskPhone = maskPhone(phone);
+                    log.info("Step 4:masking phone number {} , accNum={}", maskPhone, accountNumber);
+                    return maskPhone;
+                });
+    }
+
+    public List<ClientFullInfoWithEmail> getFullClientInfoWithEmailAsync() {
+        long startTime = System.nanoTime();
+
+        log.info("Начинаю асинхронную агрегацию данных по всем счетам через CompletableFuture...");
+
+        List<BankAccount> accounts = accountRepository.findAll();
+
+        log.info("Найдено {} счетов для обработки", accounts.size());
+
+        List<CompletableFuture<ClientFullInfoWithEmail>> futures = accounts.stream()
+                .map(acc -> {
+                    String accountNumber = acc.getAccountNumber();
+                    double balance = acc.getBalance();
+
+                    CompletableFuture<String> phoneFuture = getPhoneNumberAsync(accountNumber)
+                            .handle(this::handleFetchPhoneNumber)
+                            .thenApply(this::maskPhone);
+                    //.whenComplete(this::checkCompleteFetchPhoneNum);
+
+                    CompletableFuture<String> emailFuture = CompletableFuture.supplyAsync(
+                            () -> emailService.findEmail(accountNumber),
+                            emailFetchExecutor);
+
+                    return phoneFuture.thenCombine(emailFuture, (phone, email) -> {
+                                if (phone.contains(UKNOWN) || email.contains(UKNOWN)) {
+                                    return null;
+                                }
+                                return new ClientFullInfoWithEmail(accountNumber, balance, phone, email);
+                            }
+                    );
+                }).toList();
+
+        List<ClientFullInfoWithEmail> result = futures.stream()
+                .map(CompletableFuture::join)
+                .filter(Objects::nonNull)
+                .toList();
+        evaluateExecutionTime(startTime);
+        return result;
+    }
+
+    private void checkCompleteFetchPhoneNum(String s,
+                                            Throwable throwable) {
+        if (throwable != null) {
+            log.error("Failed " + throwable.getMessage());
+        } else {
+            log.info("Success {}", s);
+        }
+    }
+
+    private String handleFetchPhoneNumber(String result, Throwable throwable) {
+        if (throwable != null) {
+            return UKNOWN + " phoneNumber";
+        }
+        return result;
+    }
 
     public List<ClientFullInfoWithEmailVerify> getFullClientInfoWithEmailVerifyAsync() {
         long startTime = System.nanoTime();
@@ -68,39 +271,12 @@ public class ClientAggregationService {
         return result;
     }
 
-    public List<ClientFullInfoWithEmail> getFullClientInfoWithEmailAsync() {
-        long startTime = System.nanoTime();
-
-        log.info("Начинаю асинхронную агрегацию данных по всем счетам через CompletableFuture...");
-
-        List<BankAccount> accounts = accountRepository.findAll();
-
-        log.info("Найдено {} счетов для обработки", accounts.size());
-
-        List<CompletableFuture<ClientFullInfoWithEmail>> futures = accounts.stream()
-                .map(acc -> {
-                    String accountNumber = acc.getAccountNumber();
-                    double balance = acc.getBalance();
-
-                    CompletableFuture<String> phoneFuture = getPhoneNumberAsync(accountNumber)
-                            .thenApply(this::maskPhone);
-
-                    CompletableFuture<String> emailFuture = CompletableFuture.supplyAsync(
-                            () -> emailService.findEmail(accountNumber));
-
-                    return phoneFuture.thenCombine(emailFuture, (phone, email) ->
-                            new ClientFullInfoWithEmail(accountNumber, balance, phone, email)
-                    );
-                }).toList();
-
-        List<ClientFullInfoWithEmail> result = futures.stream()
-                .map(CompletableFuture::join)
-                .toList();
-        evaluateExecutionTime(startTime);
-        return result;
-    }
 
     private String maskPhone(String phone) {
+        if (phone.contains(UKNOWN)) {
+            return phone;
+        }
+
         int len = phone.length();
         return phone.substring(0, 3) + "****" + phone.substring(len - 2);
     }
@@ -121,7 +297,7 @@ public class ClientAggregationService {
                         acc.getBalance()))
                 .toList();
         try {
-            futures = executor.invokeAll(tasks);
+            futures = executorFullInfo.invokeAll(tasks);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -153,7 +329,7 @@ public class ClientAggregationService {
         List<Future<ClientFullInfo>> futures = new ArrayList<>();
 
         for (BankAccount acc : accounts) {
-            Future<ClientFullInfo> future = executor.submit(() -> fetchFullInfo(acc.getAccountNumber(),
+            Future<ClientFullInfo> future = executorFullInfo.submit(() -> fetchFullInfo(acc.getAccountNumber(),
                     acc.getBalance()));
             futures.add(future);
         }
@@ -205,7 +381,7 @@ public class ClientAggregationService {
                         acc.getBalance()))
                 .toList();
 
-        futures = executor.invokeAll(tasks, timeout, TimeUnit.MILLISECONDS);
+        futures = executorFullInfo.invokeAll(tasks, timeout, TimeUnit.MILLISECONDS);
 
         List<ClientFullInfo> results = new ArrayList<>();
         for (int i = 0; i < futures.size(); i++) {
@@ -238,7 +414,7 @@ public class ClientAggregationService {
     }
 
     public CompletableFuture<String> getPhoneNumberAsync(String accountNumber) {
-        String url = LOCAL_HOST + URL_PHONE_BY_GOOD_ACCOUNT;
+        String url = LOCAL_HOST + URL_PHONE_BY_BAD_ACCOUNT;
 
         return webClient.get()
                 .uri(url, accountNumber)
@@ -267,7 +443,7 @@ public class ClientAggregationService {
     //Если вы не вызовете shutdown(), пул потоков останется живым, и JVM не завершится, даже если Spring Boot "остановил" веб-контейнер.
     @PreDestroy
     public void shutdown() {
-        executor.shutdown();
+        executorFullInfo.shutdown();
     }
 
 
