@@ -10,4 +10,5 @@ public class Constants {
     public final static String ACCOUNT_ERROR_PREFIX = "ERROR_ACC_-";
     public final static String ACCOUNT_GENERATE_PREFIX = "GEN_ACC_-";
     public final static String LOCAL_HOST = "http://localhost:8080";
+    public final static String UKNOWN = "UKNOWN";
 }

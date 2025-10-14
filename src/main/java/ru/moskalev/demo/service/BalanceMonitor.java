@@ -90,8 +90,14 @@ public class BalanceMonitor {
                         log.warn("Не удалось получить номер счета для акканута ={}",
                                 account.getAccountNumber());
                     }
+                }).exceptionally(ex -> {
+                    log.error("Ошибка при получении номера для счета {}, message ={}",
+                            account.getAccountNumber(),
+                            ex.getMessage());
+                    return null;
                 });
     }
+
 
     private ScheduledExecutorService createScheduler() {
         return Executors.newScheduledThreadPool(2, new ThreadFactory() {

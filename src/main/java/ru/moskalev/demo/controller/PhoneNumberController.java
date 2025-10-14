@@ -32,7 +32,6 @@ public class PhoneNumberController {
 
     @GetMapping(URL_PHONE_BY_BAD_ACCOUNT)
     public ResponseEntity<String> getPhoneNumberWithProblem(@PathVariable String accountNumber) throws InterruptedException {
-        log.info("receive request " + accountNumber);
         if (accountNumber.contains(ACCOUNT_ERROR_PREFIX)) {
             String message = "Имитация сбоя при получении информации телефона для счета " + accountNumber;
             log.error(message);
