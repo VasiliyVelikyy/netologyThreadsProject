@@ -6,6 +6,7 @@ import ru.moskalev.demo.domain.BankAccount;
 import ru.moskalev.demo.repository.BankAccountRepository;
 import ru.moskalev.demo.service.notification.BalanceNotificationWithVolatileService;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -235,6 +236,14 @@ public class BankAccountService {
             Thread.currentThread().interrupt();
             return -1;
         }
+    }
+
+    public List<BankAccount> getAllAcc(){
+        return repository.findAll();
+    }
+
+    public BankAccount save(BankAccount account){
+       return repository.save(account);
     }
 }
 

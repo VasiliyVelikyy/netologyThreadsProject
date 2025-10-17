@@ -52,3 +52,9 @@ http://localhost:8080/api/clients-full
 http://localhost:8080/api/clients-full-with-email
 http://localhost:8080/api/clients-invoke-by-timeout
 http://localhost:8080/api/clients-full-cancel
+
+
+### forkjoin
+http://localhost:8080/api/get-sum/all/iteration
+http://localhost:8080/api/get-sum/all/recursive
+http://localhost:8080/api/interest/all
