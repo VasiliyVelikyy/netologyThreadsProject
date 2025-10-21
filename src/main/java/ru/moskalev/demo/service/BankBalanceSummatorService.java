@@ -41,7 +41,6 @@ public class BankBalanceSummatorService {
         long totalBalance = 0;
         for (int i = 0; i < account.size(); i++) {
             totalBalance += account.get(i).getBalance();
-
         }
         logResult(totalBalance);
 

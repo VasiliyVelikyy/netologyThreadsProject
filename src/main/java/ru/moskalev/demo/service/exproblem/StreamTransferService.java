@@ -27,7 +27,7 @@ public class StreamTransferService implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        operations = transferGeneratorService.generateTransfers(ACCOUNT_COUNT);
+        operations = transferGeneratorService.generateHotAccTransfers(ACCOUNT_COUNT);
     }
 
     public String startStream() {
@@ -70,5 +70,9 @@ public class StreamTransferService implements ApplicationRunner {
         customPool.shutdown();
 
         return evaluateExecutionTime(start);
+    }
+
+    public List<TransferGeneratorService.TransferOperation> getOperations() {
+        return operations;
     }
 }
