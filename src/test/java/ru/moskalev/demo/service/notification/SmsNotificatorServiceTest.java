@@ -3,7 +3,7 @@ package ru.moskalev.demo.service.notification;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import ru.moskalev.demo.BaseIntegrationTest;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -11,8 +11,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 
-@SpringBootTest
-class SmsNotificatorServiceTest {
+
+class SmsNotificatorServiceTest extends BaseIntegrationTest {
     private SmsNotificatorService smsNotificatorService;
 
     @BeforeEach
