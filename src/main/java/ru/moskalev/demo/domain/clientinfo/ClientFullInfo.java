@@ -1,4 +1,4 @@
-package ru.moskalev.demo.domain;
+package ru.moskalev.demo.domain.clientinfo;
 
 public record ClientFullInfo(
         String account,

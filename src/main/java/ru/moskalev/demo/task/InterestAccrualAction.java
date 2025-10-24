@@ -1,7 +1,7 @@
 package ru.moskalev.demo.task;
 
 import lombok.extern.slf4j.Slf4j;
-import ru.moskalev.demo.domain.BankAccount;
+import ru.moskalev.demo.domain.account.BankAccount;
 import ru.moskalev.demo.service.BankAccountService;
 
 import java.util.List;

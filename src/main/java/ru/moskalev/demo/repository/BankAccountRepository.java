@@ -3,7 +3,7 @@ package ru.moskalev.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.moskalev.demo.domain.BankAccount;
+import ru.moskalev.demo.domain.account.BankAccount;
 
 import java.util.List;
 import java.util.Optional;

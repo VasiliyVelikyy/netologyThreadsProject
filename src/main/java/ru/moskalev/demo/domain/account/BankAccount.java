@@ -1,4 +1,4 @@
-package ru.moskalev.demo.domain;
+package ru.moskalev.demo.domain.account;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

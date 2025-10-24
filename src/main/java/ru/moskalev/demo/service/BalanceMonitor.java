@@ -3,7 +3,7 @@ package ru.moskalev.demo.service;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.moskalev.demo.domain.BankAccount;
+import ru.moskalev.demo.domain.account.BankAccount;
 import ru.moskalev.demo.repository.BankAccountRepository;
 import ru.moskalev.demo.service.notification.SmsNotificatorService;
 

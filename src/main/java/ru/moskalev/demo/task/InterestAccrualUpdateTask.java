@@ -1,7 +1,7 @@
 package ru.moskalev.demo.task;
 
 import lombok.extern.slf4j.Slf4j;
-import ru.moskalev.demo.domain.AccountUpdater;
+import ru.moskalev.demo.domain.account.AccountUpdater;
 
 import java.util.ArrayList;
 import java.util.List;

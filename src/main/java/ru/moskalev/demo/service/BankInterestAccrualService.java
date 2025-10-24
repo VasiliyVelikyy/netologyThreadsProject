@@ -6,7 +6,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import ru.moskalev.demo.domain.AccountUpdater;
+import ru.moskalev.demo.domain.account.AccountUpdater;
 import ru.moskalev.demo.task.InterestAccrualUpdateTask;
 
 import java.util.List;
@@ -16,7 +16,6 @@ import java.util.concurrent.ForkJoinPool;
 @Slf4j
 @RequiredArgsConstructor
 public class BankInterestAccrualService {
-
 
     private final ForkJoinPool interestPool = new ForkJoinPool(10);
 

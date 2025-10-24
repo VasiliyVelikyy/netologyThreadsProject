@@ -6,10 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import ru.moskalev.demo.domain.BankAccount;
-import ru.moskalev.demo.domain.ClientFullInfo;
-import ru.moskalev.demo.domain.ClientFullInfoWithEmail;
-import ru.moskalev.demo.domain.ClientFullInfoWithEmailVerify;
+import ru.moskalev.demo.domain.account.BankAccount;
+import ru.moskalev.demo.domain.clientinfo.ClientFullInfo;
+import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmail;
+import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmailVerify;
 import ru.moskalev.demo.repository.BankAccountRepository;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package ru.moskalev.demo.domain;
+package ru.moskalev.demo.domain.account;
 
 import lombok.Getter;
 import lombok.Setter;

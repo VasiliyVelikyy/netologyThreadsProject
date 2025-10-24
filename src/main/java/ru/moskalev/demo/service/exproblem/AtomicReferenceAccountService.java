@@ -1,7 +1,7 @@
 package ru.moskalev.demo.service.exproblem;
 
 import org.springframework.stereotype.Service;
-import ru.moskalev.demo.domain.BankAccount;
+import ru.moskalev.demo.domain.account.BankAccount;
 import ru.moskalev.demo.repository.BankAccountRepository;
 
 import java.util.concurrent.ConcurrentHashMap;
