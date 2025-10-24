@@ -1,0 +1,82 @@
+[
+  {
+    "accountNumber": "ACC0001",
+    "amount": 10000.0
+  },
+  {
+    "accountNumber": "ACC0002",
+    "amount": 15000.0
+  },
+  {
+    "accountNumber": "ACC0003",
+    "amount": 20000.0
+  },
+  {
+    "accountNumber": "ACC0004",
+    "amount": 25000.0
+  },
+  {
+    "accountNumber": "ACC0005",
+    "amount": 30000.0
+  },
+  {
+    "accountNumber": "ACC0006",
+    "amount": 35000.0
+  },
+  {
+    "accountNumber": "ACC0007",
+    "amount": 40000.0
+  },
+  {
+    "accountNumber": "ACC0008",
+    "amount": 45000.0
+  },
+  {
+    "accountNumber": "ACC0009",
+    "amount": 50000.0
+  },
+  {
+    "accountNumber": "ACC0010",
+    "amount": 55000.0
+  },
+  {
+    "accountNumber": "ACC0011",
+    "amount": 60000.0
+  },
+  {
+    "accountNumber": "ACC0012",
+    "amount": 65000.0
+  },
+  {
+    "accountNumber": "ACC0013",
+    "amount": 70000.0
+  },
+  {
+    "accountNumber": "ACC0014",
+    "amount": 75000.0
+  },
+  {
+    "accountNumber": "ACC0015",
+    "amount": 80000.0
+  },
+  {
+    "accountNumber": "ACC0016",
+    "amount": 85000.0
+  },
+  {
+    "accountNumber": "ACC0017",
+    "amount": 90000.0
+  },
+  {
+    "accountNumber": "ACC0018",
+    "amount": 95000.0
+  },
+  {
+    "accountNumber": "ACC0019",
+    "amount": 100000.0
+  },
+  {
+    "accountNumber": "ACC0020",
+    "amount": 105000.0
+  }
+]
