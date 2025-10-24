@@ -5,9 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.moskalev.demo.domain.ClientFullInfo;
-import ru.moskalev.demo.domain.ClientFullInfoWithEmail;
-import ru.moskalev.demo.domain.ClientFullInfoWithEmailVerify;
+import ru.moskalev.demo.domain.clientinfo.ClientFullInfo;
+import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmail;
+import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmailVerify;
 import ru.moskalev.demo.service.ClientAggregationService;
 
 import java.util.List;

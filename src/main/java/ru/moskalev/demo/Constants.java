@@ -13,4 +13,5 @@ public class Constants {
     public final static String LOCAL_HOST = "http://localhost:8080";
     public final static String UKNOWN = "UKNOWN";
     public final static int BATCH_FOR_FORK_JOIN = 1000;
+    public final static int BATCHES_CREDIT_APP=10;
 }

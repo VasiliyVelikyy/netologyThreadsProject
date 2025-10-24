@@ -2,7 +2,7 @@ package ru.moskalev.demo.data;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
-import ru.moskalev.demo.domain.BankAccount;
+import ru.moskalev.demo.domain.account.BankAccount;
 import ru.moskalev.demo.repository.BankAccountRepository;
 
 import java.util.List;
