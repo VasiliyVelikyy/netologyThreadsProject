@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import ru.moskalev.demo.service.PhoneNumberService;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static ru.moskalev.demo.Constants.*;
 
 @RestController
@@ -16,14 +18,18 @@ import static ru.moskalev.demo.Constants.*;
 public class PhoneNumberController {
     public final PhoneNumberService phoneNumberService;
 
+    AtomicInteger count = new AtomicInteger(0);
+
     @GetMapping(URL_PHONE_BY_GOOD_ACCOUNT)
     public ResponseEntity<String> getPhoneNumber(@PathVariable String accountNumber) throws InterruptedException {
         String phone = phoneNumberService.findPhoneByAccNum(accountNumber);
         if (phone != null) {
-            long delay = 1L + (long) (Math.random() * 1000);//0 to 999
+            //long delay = 1L + (long) (Math.random() * 1000);//0 to 999
+            long delay = 200;
+            log.info("PhoneNumberController phone={}, delay ={}, count={} , accNumber={}",
+                    phone, delay, count.incrementAndGet(), accountNumber);
             Thread.sleep(delay);
 
-            log.info("PhoneNumberController phone={}", phone);
             return ResponseEntity.ok(phone);
         }
 

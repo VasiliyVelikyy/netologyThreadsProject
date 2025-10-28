@@ -50,6 +50,7 @@ http://localhost:8080/atomic-reference
 ### Полная инфа клиента
 http://localhost:8080/api/clients-full
 http://localhost:8080/api/clients-full-with-email
+http://localhost:8080/api/clients-full-with-email/with-virtual-threads
 http://localhost:8080/api/clients-invoke-by-timeout
 http://localhost:8080/api/clients-full-cancel
 
@@ -58,3 +59,9 @@ http://localhost:8080/api/clients-full-cancel
 http://localhost:8080/api/get-sum/all/iteration
 http://localhost:8080/api/get-sum/all/recursive
 http://localhost:8080/api/interest/all
+
+
+
+http://localhost:8080/api/demo/vt
+
+
