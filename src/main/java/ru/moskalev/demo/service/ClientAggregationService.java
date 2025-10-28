@@ -12,6 +12,7 @@ import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmail;
 import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmailVerify;
 import ru.moskalev.demo.repository.BankAccountRepository;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +33,7 @@ public class ClientAggregationService {
     private final VerificationEmailService verificationEmailService;
     private final ExecutorService executorFullInfo = Executors.newFixedThreadPool(10);
     private final ExecutorService emailFetchExecutor = createEmailExecutor();
+    private final Semaphore webClientSemaphore = new Semaphore(600);
 
     private ExecutorService createEmailExecutor() {
         return Executors.newFixedThreadPool(5, new ThreadFactory() {
@@ -94,9 +96,9 @@ public class ClientAggregationService {
     private String handleFetchEmailExWithTimeout(String email, Throwable throwable, String accountNumber) {
         if (throwable != null) {
             if (throwable instanceof TimeoutException) {
-                log.warn("Таймаут при получении email  accnum={}",accountNumber);
+                log.warn("Таймаут при получении email  accnum={}", accountNumber);
             } else {
-                log.warn("Ошибка при получении email  accnum={}" ,accountNumber);
+                log.warn("Ошибка при получении email  accnum={}", accountNumber);
             }
             return UKNOWN;
         }
@@ -108,7 +110,7 @@ public class ClientAggregationService {
             if (throwable instanceof TimeoutException) {
                 log.warn("Таймаут при получении номера телефона");
             } else {
-                log.warn("Ошибка при получении номера телефона {}" , throwable.getMessage());
+                log.warn("Ошибка при получении номера телефона {}", throwable.getMessage());
             }
             return UKNOWN;
         }
@@ -151,6 +153,50 @@ public class ClientAggregationService {
         evaluateExecutionTime(startTime);
         return result;
     }
+
+    public List<ClientFullInfoWithEmail> getFullClientInfoWithEmailVT() throws ExecutionException, InterruptedException, TimeoutException {
+        long startTime = System.nanoTime();
+        log.info("Виртуальные потоки. Начинаю асинхронную агрегацию данных по всем счетам...");
+        List<BankAccount> accounts = accountRepository.findAll();
+
+        log.info("Найдено {} счетов для обработки", accounts.size());
+
+        if (accounts.isEmpty()) {
+            evaluateExecutionTime(startTime);
+            return List.of();
+        }
+
+        try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
+            List<StructuredTaskScope.Subtask<ClientFullInfoWithEmail>> tasks = accounts.stream().map(
+                            acc -> scope.fork(() -> proccessAccountSequentialy(acc)))
+                    .toList();
+
+            //scope.joinUntil(Instant.now().plusMillis(50000));
+            scope.joinUntil(Instant.now().plusMillis(50000));
+            scope.throwIfFailed();
+
+            List<ClientFullInfoWithEmail> results = tasks
+                    .stream()
+                    .map(StructuredTaskScope.Subtask::get)
+                    .toList();
+
+            evaluateExecutionTime(startTime);
+            return results;
+        }
+    }
+
+    private ClientFullInfoWithEmail proccessAccountSequentialy(BankAccount acc) {
+        String accountNumber = acc.getAccountNumber();
+        double balance = acc.getBalance();
+
+        String phone = getPhoneNumberForVTWithSemaphore(accountNumber);
+        String email = emailService.findEmail(accountNumber);
+
+        String maskedPhone = maskPhone(phone);
+        checkCompleteFetchPhoneNum(maskedPhone, null);
+        return new ClientFullInfoWithEmail(accountNumber, balance, maskedPhone, email);
+    }
+
 
     private CompletableFuture<String> getPhoneFuture(BankAccount acc, String accountNumber) {
         return CompletableFuture
@@ -320,6 +366,23 @@ public class ClientAggregationService {
         return results;
     }
 
+    public List<ClientFullInfo> getFullClientInfoWithVirtualThreads() {
+        long startTime = System.nanoTime();
+        log.info("Виртуальные потоки. Начинаю асинхронную агрегацию данных по всем счетам...");
+        List<BankAccount> accounts = accountRepository.findAll();
+
+        log.info("Найдено {} счетов для обработки", accounts.size());
+
+        List<ClientFullInfo> results = new ArrayList<>();
+        try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+
+        }
+
+
+        evaluateExecutionTime(startTime);
+        return results;
+    }
+
     public List<ClientFullInfo> getFullClientInfoAsyncWithCancel() {
         log.info("Начинаю асинхронную агрегацию данных по всем счетам...");
 
@@ -424,7 +487,7 @@ public class ClientAggregationService {
     }
 
     private String getPhoneNumberSync(String accountNumber) {
-        String url = LOCAL_HOST + URL_PHONE_BY_BAD_ACCOUNT;
+        String url = LOCAL_HOST + URL_PHONE_BY_GOOD_ACCOUNT;
         try {
             return webClient.get()
                     .uri(url, accountNumber)
@@ -434,6 +497,29 @@ public class ClientAggregationService {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    private String getPhoneNumberForVTWithSemaphore(String accountNumber) {
+        String url = LOCAL_HOST + URL_PHONE_BY_GOOD_ACCOUNT;
+        try {
+            webClientSemaphore.acquire();
+            try {
+                return webClient.get()
+                        .uri(url, accountNumber)
+                        .retrieve()
+                        .bodyToMono(String.class)
+                        .block(); // блокирующий вызов для совместимости с синхронным кодом
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            } finally {
+                webClientSemaphore.release();
+            }
+
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
+            throw new RuntimeException(ex.getMessage());
+        }
+
     }
 
     //все потоки в нём non-daemon (обычные).

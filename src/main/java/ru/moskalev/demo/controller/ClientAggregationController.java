@@ -11,6 +11,8 @@ import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmailVerify;
 import ru.moskalev.demo.service.ClientAggregationService;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,10 +26,22 @@ public class ClientAggregationController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/clients-full/with-virtual-threads")
+    public ResponseEntity<List<ClientFullInfo>> getClientsFullWithVirtualThreads() {
+        List<ClientFullInfo> result = aggregationService.getFullClientInfoWithVirtualThreads();
+        return ResponseEntity.ok(result);
+    }
+
 
     @GetMapping("/clients-full-with-email")
     public ResponseEntity<List<ClientFullInfoWithEmail>> getClientsFullWithEmail() {
         List<ClientFullInfoWithEmail> result = aggregationService.getFullClientInfoWithEmailAsyncWithLogs();
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/clients-full-with-email/with-virtual-threads")
+    public ResponseEntity<List<ClientFullInfoWithEmail>> getClientsFullWithEmailWithVirtualThreads() throws ExecutionException, InterruptedException, TimeoutException {
+        List<ClientFullInfoWithEmail> result = aggregationService.getFullClientInfoWithEmailVT();
         return ResponseEntity.ok(result);
     }
 
