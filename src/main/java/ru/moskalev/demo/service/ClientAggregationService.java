@@ -172,7 +172,9 @@ public class ClientAggregationService {
                     .toList();
 
             //scope.joinUntil(Instant.now().plusMillis(50000));
-            scope.joinUntil(Instant.now().plusMillis(50000));
+//            scope.joinUntil(Instant.now().plusMillis(50000));
+//            scope.throwIfFailed();
+            scope.join();
             scope.throwIfFailed();
 
             List<ClientFullInfoWithEmail> results = tasks
@@ -181,6 +183,7 @@ public class ClientAggregationService {
                     .toList();
 
             evaluateExecutionTime(startTime);
+            log.debug("Успешно обработно записей ={}",results.size());
             return results;
         }
     }
@@ -500,7 +503,7 @@ public class ClientAggregationService {
     }
 
     private String getPhoneNumberForVTWithSemaphore(String accountNumber) {
-        String url = LOCAL_HOST + URL_PHONE_BY_GOOD_ACCOUNT;
+        String url = LOCAL_HOST + URL_PHONE_BY_BAD_ACCOUNT;
         try {
             webClientSemaphore.acquire();
             try {
