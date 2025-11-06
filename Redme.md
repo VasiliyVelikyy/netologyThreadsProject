@@ -1,3 +1,11 @@
+Запуск docker compose
+cd C:\Users\vasia\IdeaProjects\netologiaBankApp
+docker compose up -d
+
+
+Prometheus → http://localhost:9090
+Grafana → http://localhost:3000 (логин: admin, пароль: admin)
+
 http://localhost:8080/h2-console
 
 http://localhost:8080/hello
@@ -64,4 +72,26 @@ http://localhost:8080/api/interest/all
 
 http://localhost:8080/api/demo/vt
 
+ПРоблема: почему error не показывает ошибки - старый запрос
 
+```sum(rate(http_server_requests_seconds_count{application="$application", instance="$instance", status=~"5.."}[1m])) ```
+
+Нужно выполнить в прометеусе http_server_requests_seconds_count{status="500"}
+Посмотреть, какие label’ы есть у результата. Там нет label application
+Вариант 1 (быстрый): Уберите фильтрацию по application и instance
+
+``` sum(rate(http_server_requests_seconds_count{status=~"5.."}[1m])) ```
+ 
+для графика rate выставить ```sum(rate(http_server_requests_seconds_count[1m]))```
+запрос на количество ошибок за час  ```sum(increase(http_server_requests_seconds_count{status=~"5.."}[1h]))```
+
+duration было 
+```
+sum(rate(http_server_requests_seconds_sum{application="$application", instance="$instance", status!~"5.."}[1m]))/sum(rate(http_server_requests_seconds_count{application="$application", instance="$instance", status!~"5.."}[1m]))
+```
+стало 
+
+```
+sum(rate(http_server_requests_seconds_sum{status!~"5.."}[1m]))
+/
+sum(rate(http_server_requests_seconds_count{status!~"5.."}[1m]))```

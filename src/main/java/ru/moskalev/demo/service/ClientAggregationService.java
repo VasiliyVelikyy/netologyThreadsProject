@@ -33,7 +33,7 @@ public class ClientAggregationService {
     private final VerificationEmailService verificationEmailService;
     private final ExecutorService executorFullInfo = Executors.newFixedThreadPool(10);
     private final ExecutorService emailFetchExecutor = createEmailExecutor();
-    private final Semaphore webClientSemaphore = new Semaphore(600);
+    private final Semaphore webClientSemaphore = new Semaphore(200);
 
     private ExecutorService createEmailExecutor() {
         return Executors.newFixedThreadPool(5, new ThreadFactory() {
@@ -171,10 +171,10 @@ public class ClientAggregationService {
                             acc -> scope.fork(() -> proccessAccountSequentialy(acc)))
                     .toList();
 
-            //scope.joinUntil(Instant.now().plusMillis(50000));
-//            scope.joinUntil(Instant.now().plusMillis(50000));
-//            scope.throwIfFailed();
-            scope.join();
+
+            //основной поток будет ждать завершения всех запущенных подзадач (subtasks) в рамках StructuredTaskScope не более 50 секунд.
+             scope.joinUntil(Instant.now().plusMillis(50000));
+            //ожидание всех задач
             scope.throwIfFailed();
 
             List<ClientFullInfoWithEmail> results = tasks
@@ -183,21 +183,29 @@ public class ClientAggregationService {
                     .toList();
 
             evaluateExecutionTime(startTime);
-            log.debug("Успешно обработно записей ={}",results.size());
+            log.debug("Успешно обработно записей ={}", results.size());
             return results;
         }
     }
 
     private ClientFullInfoWithEmail proccessAccountSequentialy(BankAccount acc) {
-        String accountNumber = acc.getAccountNumber();
-        double balance = acc.getBalance();
+        try {
+            String accountNumber = acc.getAccountNumber();
+            double balance = acc.getBalance();
 
-        String phone = getPhoneNumberForVTWithSemaphore(accountNumber);
-        String email = emailService.findEmail(accountNumber);
+            String phone = getPhoneNumberForVTWithSemaphore(accountNumber);
+            String email = emailService.findEmail(accountNumber);
 
-        String maskedPhone = maskPhone(phone);
-        checkCompleteFetchPhoneNum(maskedPhone, null);
-        return new ClientFullInfoWithEmail(accountNumber, balance, maskedPhone, email);
+            String maskedPhone = maskPhone(phone);
+            checkCompleteFetchPhoneNum(maskedPhone, null);
+            return new ClientFullInfoWithEmail(accountNumber, balance, maskedPhone, email);
+        } catch (Exception e) {
+            log.error("Ошибка при обработке счёта {}: {}",
+                    acc != null ? acc.getAccountNumber() : "null",
+                    e,
+                    e);
+            throw e;
+        }
     }
 
 
@@ -503,7 +511,8 @@ public class ClientAggregationService {
     }
 
     private String getPhoneNumberForVTWithSemaphore(String accountNumber) {
-        String url = LOCAL_HOST + URL_PHONE_BY_BAD_ACCOUNT;
+        String url = LOCAL_HOST + URL_PHONE_BY_GOOD_ACCOUNT;
+
         try {
             webClientSemaphore.acquire();
             try {
