@@ -40,7 +40,7 @@ public class ClientAggregationController {
     }
 
     @GetMapping("/clients-full-with-email/with-virtual-threads")
-    public ResponseEntity<List<ClientFullInfoWithEmail>> getClientsFullWithEmailWithVirtualThreads() throws ExecutionException, InterruptedException, TimeoutException {
+    public ResponseEntity<List<ClientFullInfoWithEmail>> getClientsFullWithEmailWithVirtualThreads() throws Exception {
         List<ClientFullInfoWithEmail> result = aggregationService.getFullClientInfoWithEmailVT();
         return ResponseEntity.ok(result);
     }

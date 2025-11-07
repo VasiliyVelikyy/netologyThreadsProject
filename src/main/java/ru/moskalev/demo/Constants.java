@@ -3,7 +3,7 @@ package ru.moskalev.demo;
 public class Constants {
     public static final double BALANCE_THRESHOLD = 100.0;
     public static final int ITERATIONS_FOR_SPEED_TEST = 1_000_000;
-    public final static int ACCOUNT_COUNT = 10000;
+    public final static int ACCOUNT_COUNT = 100000;
     public final static int ACCOUNT_COUNT_WITH_PROBLEM = 10;
     public final static int SIZE_OF_ALL_ACCOUNTS = ACCOUNT_COUNT + ACCOUNT_COUNT_WITH_PROBLEM;
     public final static String URL_PHONE_BY_GOOD_ACCOUNT = "/api/account/{accountNumber}/phone";
