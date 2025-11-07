@@ -1,7 +1,9 @@
 package ru.moskalev.demo.service;
 
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Timer;
 import jakarta.annotation.PreDestroy;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,7 @@ import static ru.moskalev.demo.Constants.*;
 import static ru.moskalev.demo.utils.TimeUtils.evaluateExecutionTime;
 
 @Service
-@RequiredArgsConstructor
+
 public class ClientAggregationService {
     private static final Logger log = LoggerFactory.getLogger(ClientAggregationService.class);
 
@@ -34,6 +36,26 @@ public class ClientAggregationService {
     private final ExecutorService executorFullInfo = Executors.newFixedThreadPool(10);
     private final ExecutorService emailFetchExecutor = createEmailExecutor();
     private final Semaphore webClientSemaphore = new Semaphore(200);
+    private final Counter clientInfoAsyncCounter;
+    private final Timer clientInfoAsyncTimer;
+
+    public ClientAggregationService(WebClient webClient,
+                                    BankAccountRepository accountRepository,
+                                    EmailService emailService,
+                                    VerificationEmailService verificationEmailService,
+                                    MeterRegistry meterRegistry) {
+        this.webClient = webClient;
+        this.accountRepository = accountRepository;
+        this.emailService = emailService;
+        this.verificationEmailService = verificationEmailService;
+        this.clientInfoAsyncCounter = Counter.builder("client.info.async.requests.total")
+                .description("Total number of calls info clients")
+                .register(meterRegistry);
+        this.clientInfoAsyncTimer = Timer.builder("client.info.async.requests")
+                .description("Times of duration method info clients")
+                .register(meterRegistry);
+
+    }
 
     private ExecutorService createEmailExecutor() {
         return Executors.newFixedThreadPool(5, new ThreadFactory() {
@@ -154,38 +176,42 @@ public class ClientAggregationService {
         return result;
     }
 
-    public List<ClientFullInfoWithEmail> getFullClientInfoWithEmailVT() throws ExecutionException, InterruptedException, TimeoutException {
-        long startTime = System.nanoTime();
-        log.info("Виртуальные потоки. Начинаю асинхронную агрегацию данных по всем счетам...");
-        List<BankAccount> accounts = accountRepository.findAll();
 
-        log.info("Найдено {} счетов для обработки", accounts.size());
+    public List<ClientFullInfoWithEmail> getFullClientInfoWithEmailVT() throws Exception {
+        return clientInfoAsyncTimer.recordCallable(() -> {
+            clientInfoAsyncCounter.increment();
+            long startTime = System.nanoTime();
+            log.info("Виртуальные потоки. Начинаю асинхронную агрегацию данных по всем счетам...");
+            List<BankAccount> accounts = accountRepository.findAll();
 
-        if (accounts.isEmpty()) {
-            evaluateExecutionTime(startTime);
-            return List.of();
-        }
+            log.info("Найдено {} счетов для обработки", accounts.size());
 
-        try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-            List<StructuredTaskScope.Subtask<ClientFullInfoWithEmail>> tasks = accounts.stream().map(
-                            acc -> scope.fork(() -> proccessAccountSequentialy(acc)))
-                    .toList();
+            if (accounts.isEmpty()) {
+                evaluateExecutionTime(startTime);
+                return List.of();
+            }
+
+            try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
+                List<StructuredTaskScope.Subtask<ClientFullInfoWithEmail>> tasks = accounts.stream().map(
+                                acc -> scope.fork(() -> proccessAccountSequentialy(acc)))
+                        .toList();
 
 
-            //основной поток будет ждать завершения всех запущенных подзадач (subtasks) в рамках StructuredTaskScope не более 50 секунд.
-             scope.joinUntil(Instant.now().plusMillis(50000));
-            //ожидание всех задач
-            scope.throwIfFailed();
+                //основной поток будет ждать завершения всех запущенных подзадач (subtasks) в рамках StructuredTaskScope не более 50 секунд.
+                scope.joinUntil(Instant.now().plusMillis(500000));
+                //ожидание всех задач
+                scope.throwIfFailed();
 
-            List<ClientFullInfoWithEmail> results = tasks
-                    .stream()
-                    .map(StructuredTaskScope.Subtask::get)
-                    .toList();
+                List<ClientFullInfoWithEmail> results = tasks
+                        .stream()
+                        .map(StructuredTaskScope.Subtask::get)
+                        .toList();
 
-            evaluateExecutionTime(startTime);
-            log.debug("Успешно обработно записей ={}", results.size());
-            return results;
-        }
+                evaluateExecutionTime(startTime);
+                log.debug("Успешно обработно записей ={}", results.size());
+                return results;
+            }
+        });
     }
 
     private ClientFullInfoWithEmail proccessAccountSequentialy(BankAccount acc) {

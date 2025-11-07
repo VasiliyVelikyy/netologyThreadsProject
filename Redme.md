@@ -95,3 +95,6 @@ sum(rate(http_server_requests_seconds_sum{application="$application", instance="
 sum(rate(http_server_requests_seconds_sum{status!~"5.."}[1m]))
 /
 sum(rate(http_server_requests_seconds_count{status!~"5.."}[1m]))```
+
+
+sum(jvm_memory_used_bytes{application="$application", instance="$instance", area="heap"})*100/sum(jvm_memory_max_bytes{application="$application",instance="$instance", area="heap"})
