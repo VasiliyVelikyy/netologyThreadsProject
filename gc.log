@@ -1,0 +1,1053 @@
+[2025-11-11T20:12:20.248+0300][0.013s] Initializing The Z Garbage Collector
+[2025-11-11T20:12:20.248+0300][0.013s] Version: 21.0.9+7-LTS-338 (release)
+[2025-11-11T20:12:20.248+0300][0.013s] Using legacy single-generation mode
+[2025-11-11T20:12:20.248+0300][0.013s] NUMA Support: Disabled
+[2025-11-11T20:12:20.248+0300][0.013s] CPUs: 12 total, 12 available
+[2025-11-11T20:12:20.248+0300][0.013s] Memory: 32117M
+[2025-11-11T20:12:20.249+0300][0.013s] Large Page Support: Disabled
+[2025-11-11T20:12:20.249+0300][0.013s] GC Workers: 3 (dynamic)
+[2025-11-11T20:12:20.249+0300][0.014s] Address Space Type: Contiguous/Unrestricted/Complete
+[2025-11-11T20:12:20.249+0300][0.014s] Address Space Size: 128480M x 3 = 385440M
+[2025-11-11T20:12:20.250+0300][0.014s] Min Capacity: 8M
+[2025-11-11T20:12:20.250+0300][0.014s] Initial Capacity: 502M
+[2025-11-11T20:12:20.250+0300][0.014s] Max Capacity: 8030M
+[2025-11-11T20:12:20.250+0300][0.014s] Medium Page Size: 32M
+[2025-11-11T20:12:20.250+0300][0.014s] Pre-touch: Disabled
+[2025-11-11T20:12:20.250+0300][0.014s] Uncommit: Enabled
+[2025-11-11T20:12:20.250+0300][0.015s] Uncommit Delay: 300s
+[2025-11-11T20:12:20.268+0300][0.032s] Runtime Workers: 8
+[2025-11-11T20:12:20.268+0300][0.033s] Using The Z Garbage Collector
+[2025-11-11T20:12:20.281+0300][0.045s] CDS archive(s) mapped at: [0x000001492d000000-0x000001492dc90000-0x000001492dc90000), size 13172736, SharedBaseAddress: 0x000001492d000000, ArchiveRelocationMode: 1.
+[2025-11-11T20:12:20.281+0300][0.045s] Compressed class space mapped at: 0x000001492e000000-0x000001496e000000, reserved size: 1073741824
+[2025-11-11T20:12:20.281+0300][0.045s] Narrow klass base: 0x000001492d000000, Narrow klass shift: 0, Narrow klass range: 0x100000000
+[2025-11-11T20:12:22.530+0300][2.295s] GC(0) Garbage Collection (Metadata GC Threshold)
+[2025-11-11T20:12:22.530+0300][2.295s] GC(0) Using 3 workers
+[2025-11-11T20:12:22.530+0300][2.295s] GC(0) Pause Mark Start 0.016ms
+[2025-11-11T20:12:22.546+0300][2.310s] GC(0) Concurrent Mark 15.110ms
+[2025-11-11T20:12:22.546+0300][2.310s] GC(0) Pause Mark End 0.017ms
+[2025-11-11T20:12:22.546+0300][2.310s] GC(0) Concurrent Mark Free 0.001ms
+[2025-11-11T20:12:22.547+0300][2.312s] GC(0) Concurrent Process Non-Strong References 1.805ms
+[2025-11-11T20:12:22.548+0300][2.312s] GC(0) Concurrent Reset Relocation Set 0.001ms
+[2025-11-11T20:12:22.554+0300][2.319s] GC(0) Concurrent Select Relocation Set 6.910ms
+[2025-11-11T20:12:22.554+0300][2.319s] GC(0) Pause Relocate Start 0.009ms
+[2025-11-11T20:12:22.561+0300][2.326s] GC(0) Concurrent Relocate 6.425ms
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Load: 0.00/0.00/0.00
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) MMU: 2ms/99.2%, 5ms/99.7%, 10ms/99.7%, 20ms/99.8%, 50ms/99.9%, 100ms/100.0%
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Mark: 2 stripe(s), 2 proactive flush(es), 2 terminate flush(es), 0 completion(s), 0 continuation(s) 
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Mark Stack Usage: 32M
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) NMethods: 2851 registered, 0 unregistered
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Metaspace: 20M used, 21M committed, 1088M reserved
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Soft: 4539 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Weak: 3094 encountered, 1331 discovered, 972 enqueued
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Final: 0 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Phantom: 336 encountered, 260 discovered, 0 enqueued
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Small Pages: 55 / 110M, Empty: 0M, Relocated: 12M, In-Place: 0
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Medium Pages: 1 / 32M, Empty: 0M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Large Pages: 0 / 0M, Empty: 0M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Forwarding Usage: 4M
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Min Capacity: 8M(0%)
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Max Capacity: 8030M(100%)
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Soft Max Capacity: 8030M(100%)
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0)                Mark Start          Mark End        Relocate Start      Relocate End           High               Low         
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0)  Capacity:      502M (6%)          502M (6%)          502M (6%)          502M (6%)          502M (6%)          502M (6%)     
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0)      Free:     7888M (98%)        7886M (98%)        7886M (98%)        7970M (99%)        7970M (99%)        7874M (98%)    
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0)      Used:      142M (2%)          144M (2%)          144M (2%)           60M (1%)          156M (2%)           60M (1%)     
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0)      Live:         -                16M (0%)           16M (0%)           16M (0%)             -                  -          
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Allocated:         -                 2M (0%)            2M (0%)            9M (0%)             -                  -          
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0)   Garbage:         -               125M (2%)          125M (2%)           33M (0%)             -                  -          
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Reclaimed:         -                  -                 0M (0%)           91M (1%)             -                  -          
+[2025-11-11T20:12:22.562+0300][2.326s] GC(0) Garbage Collection (Metadata GC Threshold) 142M(2%)->60M(1%)
+[2025-11-11T20:12:24.918+0300][4.683s] GC(1) Garbage Collection (Metadata GC Threshold)
+[2025-11-11T20:12:24.918+0300][4.683s] GC(1) Using 3 workers
+[2025-11-11T20:12:24.918+0300][4.683s] GC(1) Pause Mark Start 0.006ms
+[2025-11-11T20:12:24.962+0300][4.726s] GC(1) Concurrent Mark 43.045ms
+[2025-11-11T20:12:24.962+0300][4.726s] GC(1) Pause Mark End 0.014ms
+[2025-11-11T20:12:24.962+0300][4.726s] GC(1) Concurrent Mark Free 0.001ms
+[2025-11-11T20:12:24.965+0300][4.730s] GC(1) Concurrent Process Non-Strong References 4.042ms
+[2025-11-11T20:12:24.965+0300][4.730s] GC(1) Concurrent Reset Relocation Set 0.006ms
+[2025-11-11T20:12:24.970+0300][4.735s] GC(1) Concurrent Select Relocation Set 4.461ms
+[2025-11-11T20:12:24.970+0300][4.735s] GC(1) Pause Relocate Start 0.014ms
+[2025-11-11T20:12:24.980+0300][4.744s] GC(1) Concurrent Relocate 9.418ms
+[2025-11-11T20:12:24.980+0300][4.744s] GC(1) Load: 0.00/0.00/0.00
+[2025-11-11T20:12:24.980+0300][4.744s] GC(1) MMU: 2ms/99.2%, 5ms/99.7%, 10ms/99.7%, 20ms/99.8%, 50ms/99.9%, 100ms/100.0%
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) Mark: 2 stripe(s), 2 proactive flush(es), 1 terminate flush(es), 0 completion(s), 0 continuation(s) 
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) Mark Stack Usage: 32M
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) NMethods: 4549 registered, 50 unregistered
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) Metaspace: 35M used, 35M committed, 1088M reserved
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) Soft: 9692 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) Weak: 4612 encountered, 2327 discovered, 841 enqueued
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) Final: 0 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) Phantom: 347 encountered, 285 discovered, 1 enqueued
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) Small Pages: 83 / 166M, Empty: 4M, Relocated: 17M, In-Place: 0
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) Medium Pages: 1 / 32M, Empty: 0M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) Large Pages: 0 / 0M, Empty: 0M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) Forwarding Usage: 6M
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) Min Capacity: 8M(0%)
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) Max Capacity: 8030M(100%)
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1) Soft Max Capacity: 8030M(100%)
+[2025-11-11T20:12:24.980+0300][4.745s] GC(1)                Mark Start          Mark End        Relocate Start      Relocate End           High               Low         
+[2025-11-11T20:12:24.981+0300][4.745s] GC(1)  Capacity:      502M (6%)          502M (6%)          502M (6%)          502M (6%)          502M (6%)          502M (6%)     
+[2025-11-11T20:12:24.981+0300][4.745s] GC(1)      Free:     7832M (98%)        7830M (98%)        7798M (97%)        7930M (99%)        7930M (99%)        7792M (97%)    
+[2025-11-11T20:12:24.981+0300][4.745s] GC(1)      Used:      198M (2%)          200M (2%)          232M (3%)          100M (1%)          238M (3%)          100M (1%)     
+[2025-11-11T20:12:24.981+0300][4.745s] GC(1)      Live:         -                27M (0%)           27M (0%)           27M (0%)             -                  -          
+[2025-11-11T20:12:24.981+0300][4.745s] GC(1) Allocated:         -                 2M (0%)           38M (0%)           37M (0%)             -                  -          
+[2025-11-11T20:12:24.981+0300][4.745s] GC(1)   Garbage:         -               170M (2%)          166M (2%)           34M (0%)             -                  -          
+[2025-11-11T20:12:24.981+0300][4.745s] GC(1) Reclaimed:         -                  -                 4M (0%)          135M (2%)             -                  -          
+[2025-11-11T20:12:24.981+0300][4.745s] GC(1) Garbage Collection (Metadata GC Threshold) 198M(2%)->100M(1%)
+[2025-11-11T20:12:26.595+0300][6.360s] GC(2) Garbage Collection (Metadata GC Threshold)
+[2025-11-11T20:12:26.595+0300][6.360s] GC(2) Using 3 workers
+[2025-11-11T20:12:26.595+0300][6.360s] GC(2) Pause Mark Start 0.008ms
+[2025-11-11T20:12:26.647+0300][6.411s] GC(2) Concurrent Mark 51.564ms
+[2025-11-11T20:12:26.647+0300][6.412s] GC(2) Pause Mark End 0.044ms
+[2025-11-11T20:12:26.647+0300][6.412s] GC(2) Concurrent Mark Free 0.000ms
+[2025-11-11T20:12:26.651+0300][6.416s] GC(2) Concurrent Process Non-Strong References 4.279ms
+[2025-11-11T20:12:26.651+0300][6.416s] GC(2) Concurrent Reset Relocation Set 0.006ms
+[2025-11-11T20:12:26.654+0300][6.418s] GC(2) Concurrent Select Relocation Set 2.340ms
+[2025-11-11T20:12:26.654+0300][6.418s] GC(2) Pause Relocate Start 0.007ms
+[2025-11-11T20:12:26.658+0300][6.422s] GC(2) Concurrent Relocate 3.963ms
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Load: 0.00/0.00/0.00
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) MMU: 2ms/97.8%, 5ms/99.1%, 10ms/99.5%, 20ms/99.7%, 50ms/99.9%, 100ms/99.9%
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Mark: 2 stripe(s), 5 proactive flush(es), 1 terminate flush(es), 1 completion(s), 0 continuation(s) 
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Mark Stack Usage: 32M
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) NMethods: 5031 registered, 64 unregistered
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Metaspace: 59M used, 60M committed, 1088M reserved
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Soft: 10554 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Weak: 5395 encountered, 2846 discovered, 629 enqueued
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Final: 0 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Phantom: 368 encountered, 296 discovered, 0 enqueued
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Small Pages: 78 / 156M, Empty: 6M, Relocated: 8M, In-Place: 0
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Medium Pages: 2 / 64M, Empty: 0M, Relocated: 2M, In-Place: 0
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Large Pages: 0 / 0M, Empty: 0M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Forwarding Usage: 2M
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Min Capacity: 8M(0%)
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Max Capacity: 8030M(100%)
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Soft Max Capacity: 8030M(100%)
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2)                Mark Start          Mark End        Relocate Start      Relocate End           High               Low         
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2)  Capacity:      502M (6%)          502M (6%)          502M (6%)          502M (6%)          502M (6%)          502M (6%)     
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2)      Free:     7810M (97%)        7806M (97%)        7810M (97%)        7954M (99%)        7954M (99%)        7776M (97%)    
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2)      Used:      220M (3%)          224M (3%)          220M (3%)           76M (1%)          254M (3%)           76M (1%)     
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2)      Live:         -                34M (0%)           34M (0%)           34M (0%)             -                  -          
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Allocated:         -                 4M (0%)            6M (0%)            5M (0%)             -                  -          
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2)   Garbage:         -               185M (2%)          179M (2%)           35M (0%)             -                  -          
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Reclaimed:         -                  -                 6M (0%)          149M (2%)             -                  -          
+[2025-11-11T20:12:26.658+0300][6.423s] GC(2) Garbage Collection (Metadata GC Threshold) 220M(3%)->76M(1%)
+[2025-11-11T20:12:29.261+0300][9.025s] GC(3) Garbage Collection (CodeCache GC Threshold)
+[2025-11-11T20:12:29.261+0300][9.025s] GC(3) Using 3 workers
+[2025-11-11T20:12:29.261+0300][9.026s] GC(3) Pause Mark Start 0.016ms
+[2025-11-11T20:12:29.343+0300][9.108s] GC(3) Concurrent Mark 82.030ms
+[2025-11-11T20:12:29.343+0300][9.108s] GC(3) Pause Mark End 0.030ms
+[2025-11-11T20:12:29.343+0300][9.108s] GC(3) Concurrent Mark Free 0.002ms
+[2025-11-11T20:12:29.350+0300][9.115s] GC(3) Concurrent Process Non-Strong References 7.302ms
+[2025-11-11T20:12:29.350+0300][9.115s] GC(3) Concurrent Reset Relocation Set 0.005ms
+[2025-11-11T20:12:29.355+0300][9.119s] GC(3) Concurrent Select Relocation Set 3.768ms
+[2025-11-11T20:12:29.355+0300][9.119s] GC(3) Pause Relocate Start 0.018ms
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Concurrent Relocate 11.595ms
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Load: 0.00/0.00/0.00
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) MMU: 2ms/97.8%, 5ms/99.1%, 10ms/99.5%, 20ms/99.7%, 50ms/99.9%, 100ms/99.9%
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Mark: 2 stripe(s), 2 proactive flush(es), 1 terminate flush(es), 0 completion(s), 0 continuation(s) 
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Mark Stack Usage: 32M
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) NMethods: 6697 registered, 1300 unregistered
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Metaspace: 72M used, 73M committed, 1088M reserved
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Soft: 9599 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Weak: 8411 encountered, 4387 discovered, 1093 enqueued
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Final: 0 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Phantom: 373 encountered, 231 discovered, 1 enqueued
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Small Pages: 176 / 352M, Empty: 48M, Relocated: 15M, In-Place: 0
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Medium Pages: 2 / 64M, Empty: 32M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Large Pages: 0 / 0M, Empty: 0M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Forwarding Usage: 6M
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Min Capacity: 8M(0%)
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Max Capacity: 8030M(100%)
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Soft Max Capacity: 8030M(100%)
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3)                Mark Start          Mark End        Relocate Start      Relocate End           High               Low         
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3)  Capacity:      502M (6%)          502M (6%)          502M (6%)          502M (6%)          502M (6%)          502M (6%)     
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3)      Free:     7614M (95%)        7612M (95%)        7692M (96%)        7938M (99%)        7938M (99%)        7612M (95%)    
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3)      Used:      416M (5%)          418M (5%)          338M (4%)           92M (1%)          418M (5%)           92M (1%)     
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3)      Live:         -                48M (1%)           48M (1%)           48M (1%)             -                  -          
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Allocated:         -                 2M (0%)            2M (0%)            3M (0%)             -                  -          
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3)   Garbage:         -               367M (5%)          287M (4%)           39M (0%)             -                  -          
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Reclaimed:         -                  -                80M (1%)          327M (4%)             -                  -          
+[2025-11-11T20:12:29.366+0300][9.131s] GC(3) Garbage Collection (CodeCache GC Threshold) 416M(5%)->92M(1%)
+[2025-11-11T20:12:30.309+0300][10.073s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:12:30.309+0300][10.073s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:12:30.309+0300][10.073s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:12:30.309+0300][10.073s]   Collector: Garbage Collection Cycle                     65.382 / 105.671      65.382 / 105.671      65.382 / 105.671      65.382 / 105.671     ms
+[2025-11-11T20:12:30.309+0300][10.073s]  Contention: Mark Segment Reset Contention                     0 / 1                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:12:30.309+0300][10.073s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:30.309+0300][10.073s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:30.309+0300][10.073s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:30.309+0300][10.073s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:30.309+0300][10.073s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:30.309+0300][10.073s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:30.309+0300][10.073s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:30.309+0300][10.073s]      Memory: Allocation Rate                                  80 / 238              80 / 238              80 / 238              80 / 238         MB/s
+[2025-11-11T20:12:30.309+0300][10.073s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:30.309+0300][10.073s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:30.309+0300][10.073s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:12:30.309+0300][10.073s]      Memory: Page Cache Hit L1                                21 / 46               21 / 46               21 / 46               21 / 46          ops/s
+[2025-11-11T20:12:30.309+0300][10.073s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:30.309+0300][10.073s]      Memory: Page Cache Hit L3                                18 / 64               18 / 64               18 / 64               18 / 64          ops/s
+[2025-11-11T20:12:30.309+0300][10.073s]      Memory: Page Cache Miss                                   0 / 1                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:12:30.309+0300][10.073s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:12:30.309+0300][10.073s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:30.309+0300][10.073s]      Memory: Undo Object Allocation Succeeded                  0 / 3                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:12:30.309+0300][10.073s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:30.309+0300][10.073s]       Phase: Concurrent Mark                              47.937 / 82.030       47.937 / 82.030       47.937 / 82.030       47.937 / 82.030      ms
+[2025-11-11T20:12:30.309+0300][10.073s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:30.309+0300][10.074s]       Phase: Concurrent Mark Free                          0.001 / 0.002         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:12:30.309+0300][10.074s]       Phase: Concurrent Process Non-Strong References      4.357 / 7.302         4.357 / 7.302         4.357 / 7.302         4.357 / 7.302       ms
+[2025-11-11T20:12:30.309+0300][10.074s]       Phase: Concurrent Relocate                           7.850 / 11.595        7.850 / 11.595        7.850 / 11.595        7.850 / 11.595      ms
+[2025-11-11T20:12:30.309+0300][10.074s]       Phase: Concurrent Reset Relocation Set               0.004 / 0.006         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:12:30.309+0300][10.074s]       Phase: Concurrent Select Relocation Set              4.370 / 6.910         4.370 / 6.910         4.370 / 6.910         4.370 / 6.910       ms
+[2025-11-11T20:12:30.309+0300][10.074s]       Phase: Pause Mark End                                0.026 / 0.044         0.026 / 0.044         0.026 / 0.044         0.026 / 0.044       ms
+[2025-11-11T20:12:30.309+0300][10.074s]       Phase: Pause Mark Start                              0.011 / 0.016         0.011 / 0.016         0.011 / 0.016         0.011 / 0.016       ms
+[2025-11-11T20:12:30.309+0300][10.074s]       Phase: Pause Relocate Start                          0.012 / 0.018         0.012 / 0.018         0.012 / 0.018         0.012 / 0.018       ms
+[2025-11-11T20:12:30.309+0300][10.074s]    Subphase: Concurrent Classes Purge                      0.394 / 1.321         0.394 / 1.321         0.394 / 1.321         0.394 / 1.321       ms
+[2025-11-11T20:12:30.309+0300][10.074s]    Subphase: Concurrent Classes Unlink                     2.808 / 4.447         2.808 / 4.447         2.808 / 4.447         2.808 / 4.447       ms
+[2025-11-11T20:12:30.309+0300][10.074s]    Subphase: Concurrent Mark                              43.935 / 79.358       43.935 / 79.358       43.935 / 79.358       43.935 / 79.358      ms
+[2025-11-11T20:12:30.309+0300][10.074s]    Subphase: Concurrent Mark Try Flush                     0.091 / 0.609         0.091 / 0.609         0.091 / 0.609         0.091 / 0.609       ms
+[2025-11-11T20:12:30.310+0300][10.074s]    Subphase: Concurrent Mark Try Terminate                 4.305 / 15.929        4.305 / 15.929        4.305 / 15.929        4.305 / 15.929      ms
+[2025-11-11T20:12:30.310+0300][10.074s]    Subphase: Concurrent References Enqueue                 0.004 / 0.006         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:12:30.310+0300][10.074s]    Subphase: Concurrent References Process                 0.267 / 0.447         0.267 / 0.447         0.267 / 0.447         0.267 / 0.447       ms
+[2025-11-11T20:12:30.310+0300][10.074s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.117 / 0.345         0.117 / 0.345         0.117 / 0.345         0.117 / 0.345       ms
+[2025-11-11T20:12:30.310+0300][10.074s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:30.310+0300][10.074s]    Subphase: Concurrent Roots JavaThreads                  1.163 / 2.472         1.163 / 2.472         1.163 / 2.472         1.163 / 2.472       ms
+[2025-11-11T20:12:30.310+0300][10.074s]    Subphase: Concurrent Roots OopStorageSet                0.045 / 0.087         0.045 / 0.087         0.045 / 0.087         0.045 / 0.087       ms
+[2025-11-11T20:12:30.310+0300][10.074s]    Subphase: Concurrent Weak Roots OopStorageSet           0.717 / 0.945         0.717 / 0.945         0.717 / 0.945         0.717 / 0.945       ms
+[2025-11-11T20:12:30.310+0300][10.074s]    Subphase: Pause Mark Try Complete                       0.002 / 0.005         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:12:30.310+0300][10.074s]      System: Java Threads                                     26 / 47               26 / 47               26 / 47               26 / 47          threads
+[2025-11-11T20:12:30.310+0300][10.074s] =========================================================================================================================================================
+[2025-11-11T20:12:40.304+0300][20.069s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:12:40.304+0300][20.069s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:12:40.304+0300][20.069s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:12:40.304+0300][20.069s]   Collector: Garbage Collection Cycle                      0.000 / 0.000        65.382 / 105.671      65.382 / 105.671      65.382 / 105.671     ms
+[2025-11-11T20:12:40.304+0300][20.069s]  Contention: Mark Segment Reset Contention                     0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:12:40.304+0300][20.069s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:40.304+0300][20.069s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:40.304+0300][20.069s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:40.304+0300][20.069s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:40.304+0300][20.069s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:40.304+0300][20.069s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:40.304+0300][20.069s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:40.304+0300][20.069s]      Memory: Allocation Rate                                   1 / 6                40 / 238              40 / 238              40 / 238         MB/s
+[2025-11-11T20:12:40.304+0300][20.069s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:40.304+0300][20.069s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:40.304+0300][20.069s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:12:40.304+0300][20.069s]      Memory: Page Cache Hit L1                                 0 / 3                10 / 46               10 / 46               10 / 46          ops/s
+[2025-11-11T20:12:40.304+0300][20.069s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:40.304+0300][20.069s]      Memory: Page Cache Hit L3                                 0 / 0                 9 / 64                9 / 64                9 / 64          ops/s
+[2025-11-11T20:12:40.304+0300][20.069s]      Memory: Page Cache Miss                                   0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:12:40.304+0300][20.069s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:12:40.304+0300][20.069s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:40.304+0300][20.069s]      Memory: Undo Object Allocation Succeeded                  0 / 0                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:12:40.304+0300][20.069s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:40.304+0300][20.069s]       Phase: Concurrent Mark                               0.000 / 0.000        47.937 / 82.030       47.937 / 82.030       47.937 / 82.030      ms
+[2025-11-11T20:12:40.304+0300][20.069s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:40.304+0300][20.069s]       Phase: Concurrent Mark Free                          0.000 / 0.000         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:12:40.304+0300][20.069s]       Phase: Concurrent Process Non-Strong References      0.000 / 0.000         4.357 / 7.302         4.357 / 7.302         4.357 / 7.302       ms
+[2025-11-11T20:12:40.304+0300][20.069s]       Phase: Concurrent Relocate                           0.000 / 0.000         7.850 / 11.595        7.850 / 11.595        7.850 / 11.595      ms
+[2025-11-11T20:12:40.304+0300][20.069s]       Phase: Concurrent Reset Relocation Set               0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:12:40.304+0300][20.069s]       Phase: Concurrent Select Relocation Set              0.000 / 0.000         4.370 / 6.910         4.370 / 6.910         4.370 / 6.910       ms
+[2025-11-11T20:12:40.304+0300][20.069s]       Phase: Pause Mark End                                0.000 / 0.000         0.026 / 0.044         0.026 / 0.044         0.026 / 0.044       ms
+[2025-11-11T20:12:40.304+0300][20.069s]       Phase: Pause Mark Start                              0.000 / 0.000         0.011 / 0.016         0.011 / 0.016         0.011 / 0.016       ms
+[2025-11-11T20:12:40.304+0300][20.069s]       Phase: Pause Relocate Start                          0.000 / 0.000         0.012 / 0.018         0.012 / 0.018         0.012 / 0.018       ms
+[2025-11-11T20:12:40.304+0300][20.069s]    Subphase: Concurrent Classes Purge                      0.000 / 0.000         0.394 / 1.321         0.394 / 1.321         0.394 / 1.321       ms
+[2025-11-11T20:12:40.304+0300][20.069s]    Subphase: Concurrent Classes Unlink                     0.000 / 0.000         2.808 / 4.447         2.808 / 4.447         2.808 / 4.447       ms
+[2025-11-11T20:12:40.304+0300][20.069s]    Subphase: Concurrent Mark                               0.000 / 0.000        43.935 / 79.358       43.935 / 79.358       43.935 / 79.358      ms
+[2025-11-11T20:12:40.304+0300][20.069s]    Subphase: Concurrent Mark Try Flush                     0.000 / 0.000         0.091 / 0.609         0.091 / 0.609         0.091 / 0.609       ms
+[2025-11-11T20:12:40.304+0300][20.069s]    Subphase: Concurrent Mark Try Terminate                 0.000 / 0.000         4.305 / 15.929        4.305 / 15.929        4.305 / 15.929      ms
+[2025-11-11T20:12:40.305+0300][20.069s]    Subphase: Concurrent References Enqueue                 0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:12:40.305+0300][20.069s]    Subphase: Concurrent References Process                 0.000 / 0.000         0.267 / 0.447         0.267 / 0.447         0.267 / 0.447       ms
+[2025-11-11T20:12:40.305+0300][20.069s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.000 / 0.000         0.117 / 0.345         0.117 / 0.345         0.117 / 0.345       ms
+[2025-11-11T20:12:40.305+0300][20.069s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:40.305+0300][20.069s]    Subphase: Concurrent Roots JavaThreads                  0.000 / 0.000         1.163 / 2.472         1.163 / 2.472         1.163 / 2.472       ms
+[2025-11-11T20:12:40.305+0300][20.069s]    Subphase: Concurrent Roots OopStorageSet                0.000 / 0.000         0.045 / 0.087         0.045 / 0.087         0.045 / 0.087       ms
+[2025-11-11T20:12:40.305+0300][20.069s]    Subphase: Concurrent Weak Roots OopStorageSet           0.000 / 0.000         0.717 / 0.945         0.717 / 0.945         0.717 / 0.945       ms
+[2025-11-11T20:12:40.305+0300][20.069s]    Subphase: Pause Mark Try Complete                       0.000 / 0.000         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:12:40.305+0300][20.069s]      System: Java Threads                                      0 / 0                26 / 47               26 / 47               26 / 47          threads
+[2025-11-11T20:12:40.305+0300][20.069s] =========================================================================================================================================================
+[2025-11-11T20:12:50.302+0300][30.067s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:12:50.302+0300][30.067s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:12:50.302+0300][30.067s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:12:50.302+0300][30.067s]   Collector: Garbage Collection Cycle                      0.000 / 0.000        65.382 / 105.671      65.382 / 105.671      65.382 / 105.671     ms
+[2025-11-11T20:12:50.302+0300][30.067s]  Contention: Mark Segment Reset Contention                     0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:12:50.302+0300][30.067s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:50.302+0300][30.067s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:50.302+0300][30.067s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:50.302+0300][30.067s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:50.302+0300][30.067s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:50.302+0300][30.067s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:50.302+0300][30.067s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:50.302+0300][30.067s]      Memory: Allocation Rate                                   0 / 0                27 / 238              27 / 238              27 / 238         MB/s
+[2025-11-11T20:12:50.302+0300][30.067s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:50.302+0300][30.067s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:50.302+0300][30.067s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:12:50.302+0300][30.067s]      Memory: Page Cache Hit L1                                 0 / 0                 7 / 46                7 / 46                7 / 46          ops/s
+[2025-11-11T20:12:50.302+0300][30.067s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:50.302+0300][30.067s]      Memory: Page Cache Hit L3                                 0 / 0                 6 / 64                6 / 64                6 / 64          ops/s
+[2025-11-11T20:12:50.302+0300][30.067s]      Memory: Page Cache Miss                                   0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:12:50.302+0300][30.067s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:12:50.302+0300][30.067s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:50.302+0300][30.067s]      Memory: Undo Object Allocation Succeeded                  0 / 0                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:12:50.302+0300][30.067s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:12:50.302+0300][30.067s]       Phase: Concurrent Mark                               0.000 / 0.000        47.937 / 82.030       47.937 / 82.030       47.937 / 82.030      ms
+[2025-11-11T20:12:50.302+0300][30.067s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:50.302+0300][30.067s]       Phase: Concurrent Mark Free                          0.000 / 0.000         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:12:50.302+0300][30.067s]       Phase: Concurrent Process Non-Strong References      0.000 / 0.000         4.357 / 7.302         4.357 / 7.302         4.357 / 7.302       ms
+[2025-11-11T20:12:50.302+0300][30.067s]       Phase: Concurrent Relocate                           0.000 / 0.000         7.850 / 11.595        7.850 / 11.595        7.850 / 11.595      ms
+[2025-11-11T20:12:50.302+0300][30.067s]       Phase: Concurrent Reset Relocation Set               0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:12:50.302+0300][30.067s]       Phase: Concurrent Select Relocation Set              0.000 / 0.000         4.370 / 6.910         4.370 / 6.910         4.370 / 6.910       ms
+[2025-11-11T20:12:50.303+0300][30.067s]       Phase: Pause Mark End                                0.000 / 0.000         0.026 / 0.044         0.026 / 0.044         0.026 / 0.044       ms
+[2025-11-11T20:12:50.303+0300][30.067s]       Phase: Pause Mark Start                              0.000 / 0.000         0.011 / 0.016         0.011 / 0.016         0.011 / 0.016       ms
+[2025-11-11T20:12:50.303+0300][30.067s]       Phase: Pause Relocate Start                          0.000 / 0.000         0.012 / 0.018         0.012 / 0.018         0.012 / 0.018       ms
+[2025-11-11T20:12:50.303+0300][30.067s]    Subphase: Concurrent Classes Purge                      0.000 / 0.000         0.394 / 1.321         0.394 / 1.321         0.394 / 1.321       ms
+[2025-11-11T20:12:50.303+0300][30.067s]    Subphase: Concurrent Classes Unlink                     0.000 / 0.000         2.808 / 4.447         2.808 / 4.447         2.808 / 4.447       ms
+[2025-11-11T20:12:50.303+0300][30.067s]    Subphase: Concurrent Mark                               0.000 / 0.000        43.935 / 79.358       43.935 / 79.358       43.935 / 79.358      ms
+[2025-11-11T20:12:50.303+0300][30.067s]    Subphase: Concurrent Mark Try Flush                     0.000 / 0.000         0.091 / 0.609         0.091 / 0.609         0.091 / 0.609       ms
+[2025-11-11T20:12:50.303+0300][30.067s]    Subphase: Concurrent Mark Try Terminate                 0.000 / 0.000         4.305 / 15.929        4.305 / 15.929        4.305 / 15.929      ms
+[2025-11-11T20:12:50.303+0300][30.067s]    Subphase: Concurrent References Enqueue                 0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:12:50.303+0300][30.067s]    Subphase: Concurrent References Process                 0.000 / 0.000         0.267 / 0.447         0.267 / 0.447         0.267 / 0.447       ms
+[2025-11-11T20:12:50.303+0300][30.067s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.000 / 0.000         0.117 / 0.345         0.117 / 0.345         0.117 / 0.345       ms
+[2025-11-11T20:12:50.303+0300][30.067s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:12:50.303+0300][30.067s]    Subphase: Concurrent Roots JavaThreads                  0.000 / 0.000         1.163 / 2.472         1.163 / 2.472         1.163 / 2.472       ms
+[2025-11-11T20:12:50.303+0300][30.067s]    Subphase: Concurrent Roots OopStorageSet                0.000 / 0.000         0.045 / 0.087         0.045 / 0.087         0.045 / 0.087       ms
+[2025-11-11T20:12:50.303+0300][30.067s]    Subphase: Concurrent Weak Roots OopStorageSet           0.000 / 0.000         0.717 / 0.945         0.717 / 0.945         0.717 / 0.945       ms
+[2025-11-11T20:12:50.303+0300][30.067s]    Subphase: Pause Mark Try Complete                       0.000 / 0.000         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:12:50.303+0300][30.067s]      System: Java Threads                                      0 / 0                26 / 47               26 / 47               26 / 47          threads
+[2025-11-11T20:12:50.303+0300][30.067s] =========================================================================================================================================================
+[2025-11-11T20:13:00.311+0300][40.076s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:13:00.311+0300][40.076s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:13:00.311+0300][40.076s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:13:00.311+0300][40.076s]   Collector: Garbage Collection Cycle                      0.000 / 0.000        65.382 / 105.671      65.382 / 105.671      65.382 / 105.671     ms
+[2025-11-11T20:13:00.311+0300][40.076s]  Contention: Mark Segment Reset Contention                     0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:13:00.311+0300][40.076s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:00.311+0300][40.076s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:00.311+0300][40.076s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:00.311+0300][40.076s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:00.311+0300][40.076s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:00.311+0300][40.076s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:00.311+0300][40.076s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:00.311+0300][40.076s]      Memory: Allocation Rate                                   0 / 2                20 / 238              20 / 238              20 / 238         MB/s
+[2025-11-11T20:13:00.311+0300][40.076s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:00.311+0300][40.076s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:00.311+0300][40.076s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:13:00.311+0300][40.076s]      Memory: Page Cache Hit L1                                 0 / 1                 5 / 46                5 / 46                5 / 46          ops/s
+[2025-11-11T20:13:00.311+0300][40.076s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:00.311+0300][40.076s]      Memory: Page Cache Hit L3                                 0 / 0                 4 / 64                4 / 64                4 / 64          ops/s
+[2025-11-11T20:13:00.311+0300][40.076s]      Memory: Page Cache Miss                                   0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:13:00.311+0300][40.076s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:13:00.311+0300][40.076s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:00.311+0300][40.076s]      Memory: Undo Object Allocation Succeeded                  0 / 0                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:13:00.311+0300][40.076s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:00.311+0300][40.076s]       Phase: Concurrent Mark                               0.000 / 0.000        47.937 / 82.030       47.937 / 82.030       47.937 / 82.030      ms
+[2025-11-11T20:13:00.311+0300][40.076s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:00.311+0300][40.076s]       Phase: Concurrent Mark Free                          0.000 / 0.000         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:13:00.311+0300][40.076s]       Phase: Concurrent Process Non-Strong References      0.000 / 0.000         4.357 / 7.302         4.357 / 7.302         4.357 / 7.302       ms
+[2025-11-11T20:13:00.311+0300][40.076s]       Phase: Concurrent Relocate                           0.000 / 0.000         7.850 / 11.595        7.850 / 11.595        7.850 / 11.595      ms
+[2025-11-11T20:13:00.311+0300][40.076s]       Phase: Concurrent Reset Relocation Set               0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:13:00.311+0300][40.076s]       Phase: Concurrent Select Relocation Set              0.000 / 0.000         4.370 / 6.910         4.370 / 6.910         4.370 / 6.910       ms
+[2025-11-11T20:13:00.311+0300][40.076s]       Phase: Pause Mark End                                0.000 / 0.000         0.026 / 0.044         0.026 / 0.044         0.026 / 0.044       ms
+[2025-11-11T20:13:00.311+0300][40.076s]       Phase: Pause Mark Start                              0.000 / 0.000         0.011 / 0.016         0.011 / 0.016         0.011 / 0.016       ms
+[2025-11-11T20:13:00.311+0300][40.076s]       Phase: Pause Relocate Start                          0.000 / 0.000         0.012 / 0.018         0.012 / 0.018         0.012 / 0.018       ms
+[2025-11-11T20:13:00.311+0300][40.076s]    Subphase: Concurrent Classes Purge                      0.000 / 0.000         0.394 / 1.321         0.394 / 1.321         0.394 / 1.321       ms
+[2025-11-11T20:13:00.311+0300][40.076s]    Subphase: Concurrent Classes Unlink                     0.000 / 0.000         2.808 / 4.447         2.808 / 4.447         2.808 / 4.447       ms
+[2025-11-11T20:13:00.311+0300][40.076s]    Subphase: Concurrent Mark                               0.000 / 0.000        43.935 / 79.358       43.935 / 79.358       43.935 / 79.358      ms
+[2025-11-11T20:13:00.311+0300][40.076s]    Subphase: Concurrent Mark Try Flush                     0.000 / 0.000         0.091 / 0.609         0.091 / 0.609         0.091 / 0.609       ms
+[2025-11-11T20:13:00.311+0300][40.076s]    Subphase: Concurrent Mark Try Terminate                 0.000 / 0.000         4.305 / 15.929        4.305 / 15.929        4.305 / 15.929      ms
+[2025-11-11T20:13:00.311+0300][40.076s]    Subphase: Concurrent References Enqueue                 0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:13:00.311+0300][40.076s]    Subphase: Concurrent References Process                 0.000 / 0.000         0.267 / 0.447         0.267 / 0.447         0.267 / 0.447       ms
+[2025-11-11T20:13:00.311+0300][40.076s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.000 / 0.000         0.117 / 0.345         0.117 / 0.345         0.117 / 0.345       ms
+[2025-11-11T20:13:00.311+0300][40.076s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:00.311+0300][40.076s]    Subphase: Concurrent Roots JavaThreads                  0.000 / 0.000         1.163 / 2.472         1.163 / 2.472         1.163 / 2.472       ms
+[2025-11-11T20:13:00.312+0300][40.076s]    Subphase: Concurrent Roots OopStorageSet                0.000 / 0.000         0.045 / 0.087         0.045 / 0.087         0.045 / 0.087       ms
+[2025-11-11T20:13:00.312+0300][40.076s]    Subphase: Concurrent Weak Roots OopStorageSet           0.000 / 0.000         0.717 / 0.945         0.717 / 0.945         0.717 / 0.945       ms
+[2025-11-11T20:13:00.312+0300][40.076s]    Subphase: Pause Mark Try Complete                       0.000 / 0.000         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:13:00.312+0300][40.076s]      System: Java Threads                                      0 / 0                26 / 47               26 / 47               26 / 47          threads
+[2025-11-11T20:13:00.312+0300][40.076s] =========================================================================================================================================================
+[2025-11-11T20:13:10.306+0300][50.070s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:13:10.306+0300][50.070s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:13:10.306+0300][50.070s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:13:10.306+0300][50.070s]   Collector: Garbage Collection Cycle                      0.000 / 0.000        65.382 / 105.671      65.382 / 105.671      65.382 / 105.671     ms
+[2025-11-11T20:13:10.306+0300][50.070s]  Contention: Mark Segment Reset Contention                     0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:13:10.306+0300][50.070s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:10.306+0300][50.070s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:10.306+0300][50.070s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:10.306+0300][50.070s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:10.306+0300][50.070s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:10.306+0300][50.070s]      Memory: Allocation Rate                                   0 / 0                16 / 238              16 / 238              16 / 238         MB/s
+[2025-11-11T20:13:10.306+0300][50.070s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:10.306+0300][50.070s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:10.306+0300][50.070s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:13:10.306+0300][50.070s]      Memory: Page Cache Hit L1                                 0 / 0                 4 / 46                4 / 46                4 / 46          ops/s
+[2025-11-11T20:13:10.306+0300][50.070s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:10.306+0300][50.070s]      Memory: Page Cache Hit L3                                 0 / 0                 3 / 64                3 / 64                3 / 64          ops/s
+[2025-11-11T20:13:10.306+0300][50.070s]      Memory: Page Cache Miss                                   0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:13:10.306+0300][50.070s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:13:10.306+0300][50.070s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:10.306+0300][50.070s]      Memory: Undo Object Allocation Succeeded                  0 / 0                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:13:10.306+0300][50.070s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:10.306+0300][50.070s]       Phase: Concurrent Mark                               0.000 / 0.000        47.937 / 82.030       47.937 / 82.030       47.937 / 82.030      ms
+[2025-11-11T20:13:10.306+0300][50.070s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:10.306+0300][50.070s]       Phase: Concurrent Mark Free                          0.000 / 0.000         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:13:10.306+0300][50.070s]       Phase: Concurrent Process Non-Strong References      0.000 / 0.000         4.357 / 7.302         4.357 / 7.302         4.357 / 7.302       ms
+[2025-11-11T20:13:10.306+0300][50.070s]       Phase: Concurrent Relocate                           0.000 / 0.000         7.850 / 11.595        7.850 / 11.595        7.850 / 11.595      ms
+[2025-11-11T20:13:10.306+0300][50.070s]       Phase: Concurrent Reset Relocation Set               0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:13:10.306+0300][50.070s]       Phase: Concurrent Select Relocation Set              0.000 / 0.000         4.370 / 6.910         4.370 / 6.910         4.370 / 6.910       ms
+[2025-11-11T20:13:10.306+0300][50.070s]       Phase: Pause Mark End                                0.000 / 0.000         0.026 / 0.044         0.026 / 0.044         0.026 / 0.044       ms
+[2025-11-11T20:13:10.306+0300][50.070s]       Phase: Pause Mark Start                              0.000 / 0.000         0.011 / 0.016         0.011 / 0.016         0.011 / 0.016       ms
+[2025-11-11T20:13:10.306+0300][50.070s]       Phase: Pause Relocate Start                          0.000 / 0.000         0.012 / 0.018         0.012 / 0.018         0.012 / 0.018       ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Subphase: Concurrent Classes Purge                      0.000 / 0.000         0.394 / 1.321         0.394 / 1.321         0.394 / 1.321       ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Subphase: Concurrent Classes Unlink                     0.000 / 0.000         2.808 / 4.447         2.808 / 4.447         2.808 / 4.447       ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Subphase: Concurrent Mark                               0.000 / 0.000        43.935 / 79.358       43.935 / 79.358       43.935 / 79.358      ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Subphase: Concurrent Mark Try Flush                     0.000 / 0.000         0.091 / 0.609         0.091 / 0.609         0.091 / 0.609       ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Subphase: Concurrent Mark Try Terminate                 0.000 / 0.000         4.305 / 15.929        4.305 / 15.929        4.305 / 15.929      ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Subphase: Concurrent References Enqueue                 0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Subphase: Concurrent References Process                 0.000 / 0.000         0.267 / 0.447         0.267 / 0.447         0.267 / 0.447       ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.000 / 0.000         0.117 / 0.345         0.117 / 0.345         0.117 / 0.345       ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Subphase: Concurrent Roots JavaThreads                  0.000 / 0.000         1.163 / 2.472         1.163 / 2.472         1.163 / 2.472       ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Subphase: Concurrent Roots OopStorageSet                0.000 / 0.000         0.045 / 0.087         0.045 / 0.087         0.045 / 0.087       ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Subphase: Concurrent Weak Roots OopStorageSet           0.000 / 0.000         0.717 / 0.945         0.717 / 0.945         0.717 / 0.945       ms
+[2025-11-11T20:13:10.306+0300][50.070s]    Subphase: Pause Mark Try Complete                       0.000 / 0.000         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:13:10.306+0300][50.071s]      System: Java Threads                                      0 / 0                26 / 47               26 / 47               26 / 47          threads
+[2025-11-11T20:13:10.306+0300][50.071s] =========================================================================================================================================================
+[2025-11-11T20:13:20.305+0300][60.069s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:13:20.305+0300][60.070s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:13:20.305+0300][60.070s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:13:20.305+0300][60.070s]   Collector: Garbage Collection Cycle                      0.000 / 0.000        65.382 / 105.671      65.382 / 105.671      65.382 / 105.671     ms
+[2025-11-11T20:13:20.305+0300][60.070s]  Contention: Mark Segment Reset Contention                     0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:13:20.305+0300][60.070s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:20.305+0300][60.070s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:20.305+0300][60.070s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:20.305+0300][60.070s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:20.305+0300][60.070s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:20.305+0300][60.070s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:20.305+0300][60.070s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:20.305+0300][60.070s]      Memory: Allocation Rate                                   0 / 0                13 / 238              13 / 238              13 / 238         MB/s
+[2025-11-11T20:13:20.305+0300][60.070s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:20.305+0300][60.070s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:20.305+0300][60.070s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:13:20.305+0300][60.070s]      Memory: Page Cache Hit L1                                 0 / 0                 3 / 46                3 / 46                3 / 46          ops/s
+[2025-11-11T20:13:20.305+0300][60.070s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:20.305+0300][60.070s]      Memory: Page Cache Hit L3                                 0 / 0                 3 / 64                3 / 64                3 / 64          ops/s
+[2025-11-11T20:13:20.305+0300][60.070s]      Memory: Page Cache Miss                                   0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:13:20.305+0300][60.070s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:13:20.305+0300][60.070s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:20.305+0300][60.070s]      Memory: Undo Object Allocation Succeeded                  0 / 0                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:13:20.305+0300][60.070s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:20.305+0300][60.070s]       Phase: Concurrent Mark                               0.000 / 0.000        47.937 / 82.030       47.937 / 82.030       47.937 / 82.030      ms
+[2025-11-11T20:13:20.305+0300][60.070s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:20.305+0300][60.070s]       Phase: Concurrent Mark Free                          0.000 / 0.000         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:13:20.305+0300][60.070s]       Phase: Concurrent Process Non-Strong References      0.000 / 0.000         4.357 / 7.302         4.357 / 7.302         4.357 / 7.302       ms
+[2025-11-11T20:13:20.305+0300][60.070s]       Phase: Concurrent Relocate                           0.000 / 0.000         7.850 / 11.595        7.850 / 11.595        7.850 / 11.595      ms
+[2025-11-11T20:13:20.305+0300][60.070s]       Phase: Concurrent Reset Relocation Set               0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:13:20.305+0300][60.070s]       Phase: Concurrent Select Relocation Set              0.000 / 0.000         4.370 / 6.910         4.370 / 6.910         4.370 / 6.910       ms
+[2025-11-11T20:13:20.305+0300][60.070s]       Phase: Pause Mark End                                0.000 / 0.000         0.026 / 0.044         0.026 / 0.044         0.026 / 0.044       ms
+[2025-11-11T20:13:20.305+0300][60.070s]       Phase: Pause Mark Start                              0.000 / 0.000         0.011 / 0.016         0.011 / 0.016         0.011 / 0.016       ms
+[2025-11-11T20:13:20.305+0300][60.070s]       Phase: Pause Relocate Start                          0.000 / 0.000         0.012 / 0.018         0.012 / 0.018         0.012 / 0.018       ms
+[2025-11-11T20:13:20.305+0300][60.070s]    Subphase: Concurrent Classes Purge                      0.000 / 0.000         0.394 / 1.321         0.394 / 1.321         0.394 / 1.321       ms
+[2025-11-11T20:13:20.305+0300][60.070s]    Subphase: Concurrent Classes Unlink                     0.000 / 0.000         2.808 / 4.447         2.808 / 4.447         2.808 / 4.447       ms
+[2025-11-11T20:13:20.305+0300][60.070s]    Subphase: Concurrent Mark                               0.000 / 0.000        43.935 / 79.358       43.935 / 79.358       43.935 / 79.358      ms
+[2025-11-11T20:13:20.305+0300][60.070s]    Subphase: Concurrent Mark Try Flush                     0.000 / 0.000         0.091 / 0.609         0.091 / 0.609         0.091 / 0.609       ms
+[2025-11-11T20:13:20.306+0300][60.070s]    Subphase: Concurrent Mark Try Terminate                 0.000 / 0.000         4.305 / 15.929        4.305 / 15.929        4.305 / 15.929      ms
+[2025-11-11T20:13:20.306+0300][60.070s]    Subphase: Concurrent References Enqueue                 0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:13:20.306+0300][60.070s]    Subphase: Concurrent References Process                 0.000 / 0.000         0.267 / 0.447         0.267 / 0.447         0.267 / 0.447       ms
+[2025-11-11T20:13:20.306+0300][60.070s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.000 / 0.000         0.117 / 0.345         0.117 / 0.345         0.117 / 0.345       ms
+[2025-11-11T20:13:20.306+0300][60.070s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:20.306+0300][60.070s]    Subphase: Concurrent Roots JavaThreads                  0.000 / 0.000         1.163 / 2.472         1.163 / 2.472         1.163 / 2.472       ms
+[2025-11-11T20:13:20.306+0300][60.070s]    Subphase: Concurrent Roots OopStorageSet                0.000 / 0.000         0.045 / 0.087         0.045 / 0.087         0.045 / 0.087       ms
+[2025-11-11T20:13:20.306+0300][60.070s]    Subphase: Concurrent Weak Roots OopStorageSet           0.000 / 0.000         0.717 / 0.945         0.717 / 0.945         0.717 / 0.945       ms
+[2025-11-11T20:13:20.306+0300][60.070s]    Subphase: Pause Mark Try Complete                       0.000 / 0.000         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:13:20.306+0300][60.070s]      System: Java Threads                                      0 / 0                26 / 47               26 / 47               26 / 47          threads
+[2025-11-11T20:13:20.306+0300][60.070s] =========================================================================================================================================================
+[2025-11-11T20:13:30.302+0300][70.066s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:13:30.302+0300][70.066s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:13:30.302+0300][70.066s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:13:30.302+0300][70.066s]   Collector: Garbage Collection Cycle                      0.000 / 0.000        65.382 / 105.671      65.382 / 105.671      65.382 / 105.671     ms
+[2025-11-11T20:13:30.302+0300][70.066s]  Contention: Mark Segment Reset Contention                     0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:13:30.302+0300][70.066s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:30.302+0300][70.066s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:30.302+0300][70.066s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:30.302+0300][70.066s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:30.302+0300][70.066s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:30.302+0300][70.066s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:30.302+0300][70.066s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:30.302+0300][70.066s]      Memory: Allocation Rate                                   0 / 2                11 / 238              11 / 238              11 / 238         MB/s
+[2025-11-11T20:13:30.302+0300][70.066s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:30.302+0300][70.067s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:30.302+0300][70.067s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:13:30.302+0300][70.067s]      Memory: Page Cache Hit L1                                 0 / 1                 3 / 46                3 / 46                3 / 46          ops/s
+[2025-11-11T20:13:30.302+0300][70.067s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:30.302+0300][70.067s]      Memory: Page Cache Hit L3                                 0 / 0                 2 / 64                2 / 64                2 / 64          ops/s
+[2025-11-11T20:13:30.302+0300][70.067s]      Memory: Page Cache Miss                                   0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:13:30.302+0300][70.067s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:13:30.302+0300][70.067s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:30.302+0300][70.067s]      Memory: Undo Object Allocation Succeeded                  0 / 0                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:13:30.302+0300][70.067s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:30.302+0300][70.067s]       Phase: Concurrent Mark                               0.000 / 0.000        47.937 / 82.030       47.937 / 82.030       47.937 / 82.030      ms
+[2025-11-11T20:13:30.302+0300][70.067s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:30.302+0300][70.067s]       Phase: Concurrent Mark Free                          0.000 / 0.000         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:13:30.302+0300][70.067s]       Phase: Concurrent Process Non-Strong References      0.000 / 0.000         4.357 / 7.302         4.357 / 7.302         4.357 / 7.302       ms
+[2025-11-11T20:13:30.302+0300][70.067s]       Phase: Concurrent Relocate                           0.000 / 0.000         7.850 / 11.595        7.850 / 11.595        7.850 / 11.595      ms
+[2025-11-11T20:13:30.302+0300][70.067s]       Phase: Concurrent Reset Relocation Set               0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:13:30.302+0300][70.067s]       Phase: Concurrent Select Relocation Set              0.000 / 0.000         4.370 / 6.910         4.370 / 6.910         4.370 / 6.910       ms
+[2025-11-11T20:13:30.302+0300][70.067s]       Phase: Pause Mark End                                0.000 / 0.000         0.026 / 0.044         0.026 / 0.044         0.026 / 0.044       ms
+[2025-11-11T20:13:30.302+0300][70.067s]       Phase: Pause Mark Start                              0.000 / 0.000         0.011 / 0.016         0.011 / 0.016         0.011 / 0.016       ms
+[2025-11-11T20:13:30.302+0300][70.067s]       Phase: Pause Relocate Start                          0.000 / 0.000         0.012 / 0.018         0.012 / 0.018         0.012 / 0.018       ms
+[2025-11-11T20:13:30.302+0300][70.067s]    Subphase: Concurrent Classes Purge                      0.000 / 0.000         0.394 / 1.321         0.394 / 1.321         0.394 / 1.321       ms
+[2025-11-11T20:13:30.302+0300][70.067s]    Subphase: Concurrent Classes Unlink                     0.000 / 0.000         2.808 / 4.447         2.808 / 4.447         2.808 / 4.447       ms
+[2025-11-11T20:13:30.302+0300][70.067s]    Subphase: Concurrent Mark                               0.000 / 0.000        43.935 / 79.358       43.935 / 79.358       43.935 / 79.358      ms
+[2025-11-11T20:13:30.302+0300][70.067s]    Subphase: Concurrent Mark Try Flush                     0.000 / 0.000         0.091 / 0.609         0.091 / 0.609         0.091 / 0.609       ms
+[2025-11-11T20:13:30.302+0300][70.067s]    Subphase: Concurrent Mark Try Terminate                 0.000 / 0.000         4.305 / 15.929        4.305 / 15.929        4.305 / 15.929      ms
+[2025-11-11T20:13:30.302+0300][70.067s]    Subphase: Concurrent References Enqueue                 0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:13:30.303+0300][70.067s]    Subphase: Concurrent References Process                 0.000 / 0.000         0.267 / 0.447         0.267 / 0.447         0.267 / 0.447       ms
+[2025-11-11T20:13:30.303+0300][70.067s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.000 / 0.000         0.117 / 0.345         0.117 / 0.345         0.117 / 0.345       ms
+[2025-11-11T20:13:30.303+0300][70.067s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:30.303+0300][70.067s]    Subphase: Concurrent Roots JavaThreads                  0.000 / 0.000         1.163 / 2.472         1.163 / 2.472         1.163 / 2.472       ms
+[2025-11-11T20:13:30.303+0300][70.067s]    Subphase: Concurrent Roots OopStorageSet                0.000 / 0.000         0.045 / 0.087         0.045 / 0.087         0.045 / 0.087       ms
+[2025-11-11T20:13:30.303+0300][70.067s]    Subphase: Concurrent Weak Roots OopStorageSet           0.000 / 0.000         0.717 / 0.945         0.717 / 0.945         0.717 / 0.945       ms
+[2025-11-11T20:13:30.303+0300][70.067s]    Subphase: Pause Mark Try Complete                       0.000 / 0.000         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:13:30.303+0300][70.067s]      System: Java Threads                                      0 / 0                26 / 47               26 / 47               26 / 47          threads
+[2025-11-11T20:13:30.303+0300][70.067s] =========================================================================================================================================================
+[2025-11-11T20:13:40.312+0300][80.076s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:13:40.312+0300][80.076s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:13:40.312+0300][80.076s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:13:40.312+0300][80.076s]   Collector: Garbage Collection Cycle                      0.000 / 0.000        65.382 / 105.671      65.382 / 105.671      65.382 / 105.671     ms
+[2025-11-11T20:13:40.312+0300][80.076s]  Contention: Mark Segment Reset Contention                     0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:13:40.312+0300][80.076s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:40.312+0300][80.076s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:40.312+0300][80.076s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:40.312+0300][80.076s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:40.312+0300][80.076s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:40.312+0300][80.076s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:40.312+0300][80.076s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:40.312+0300][80.076s]      Memory: Allocation Rate                                   0 / 0                10 / 238              10 / 238              10 / 238         MB/s
+[2025-11-11T20:13:40.312+0300][80.076s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:40.312+0300][80.076s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:40.312+0300][80.076s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:13:40.312+0300][80.076s]      Memory: Page Cache Hit L1                                 0 / 0                 2 / 46                2 / 46                2 / 46          ops/s
+[2025-11-11T20:13:40.312+0300][80.076s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:40.312+0300][80.076s]      Memory: Page Cache Hit L3                                 0 / 0                 2 / 64                2 / 64                2 / 64          ops/s
+[2025-11-11T20:13:40.312+0300][80.076s]      Memory: Page Cache Miss                                   0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:13:40.312+0300][80.076s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:13:40.312+0300][80.076s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:40.312+0300][80.076s]      Memory: Undo Object Allocation Succeeded                  0 / 0                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:13:40.312+0300][80.076s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:40.312+0300][80.076s]       Phase: Concurrent Mark                               0.000 / 0.000        47.937 / 82.030       47.937 / 82.030       47.937 / 82.030      ms
+[2025-11-11T20:13:40.312+0300][80.076s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:40.312+0300][80.076s]       Phase: Concurrent Mark Free                          0.000 / 0.000         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:13:40.312+0300][80.076s]       Phase: Concurrent Process Non-Strong References      0.000 / 0.000         4.357 / 7.302         4.357 / 7.302         4.357 / 7.302       ms
+[2025-11-11T20:13:40.312+0300][80.077s]       Phase: Concurrent Relocate                           0.000 / 0.000         7.850 / 11.595        7.850 / 11.595        7.850 / 11.595      ms
+[2025-11-11T20:13:40.312+0300][80.077s]       Phase: Concurrent Reset Relocation Set               0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:13:40.312+0300][80.077s]       Phase: Concurrent Select Relocation Set              0.000 / 0.000         4.370 / 6.910         4.370 / 6.910         4.370 / 6.910       ms
+[2025-11-11T20:13:40.312+0300][80.077s]       Phase: Pause Mark End                                0.000 / 0.000         0.026 / 0.044         0.026 / 0.044         0.026 / 0.044       ms
+[2025-11-11T20:13:40.312+0300][80.077s]       Phase: Pause Mark Start                              0.000 / 0.000         0.011 / 0.016         0.011 / 0.016         0.011 / 0.016       ms
+[2025-11-11T20:13:40.312+0300][80.077s]       Phase: Pause Relocate Start                          0.000 / 0.000         0.012 / 0.018         0.012 / 0.018         0.012 / 0.018       ms
+[2025-11-11T20:13:40.312+0300][80.077s]    Subphase: Concurrent Classes Purge                      0.000 / 0.000         0.394 / 1.321         0.394 / 1.321         0.394 / 1.321       ms
+[2025-11-11T20:13:40.312+0300][80.077s]    Subphase: Concurrent Classes Unlink                     0.000 / 0.000         2.808 / 4.447         2.808 / 4.447         2.808 / 4.447       ms
+[2025-11-11T20:13:40.312+0300][80.077s]    Subphase: Concurrent Mark                               0.000 / 0.000        43.935 / 79.358       43.935 / 79.358       43.935 / 79.358      ms
+[2025-11-11T20:13:40.312+0300][80.077s]    Subphase: Concurrent Mark Try Flush                     0.000 / 0.000         0.091 / 0.609         0.091 / 0.609         0.091 / 0.609       ms
+[2025-11-11T20:13:40.312+0300][80.077s]    Subphase: Concurrent Mark Try Terminate                 0.000 / 0.000         4.305 / 15.929        4.305 / 15.929        4.305 / 15.929      ms
+[2025-11-11T20:13:40.312+0300][80.077s]    Subphase: Concurrent References Enqueue                 0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:13:40.312+0300][80.077s]    Subphase: Concurrent References Process                 0.000 / 0.000         0.267 / 0.447         0.267 / 0.447         0.267 / 0.447       ms
+[2025-11-11T20:13:40.312+0300][80.077s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.000 / 0.000         0.117 / 0.345         0.117 / 0.345         0.117 / 0.345       ms
+[2025-11-11T20:13:40.312+0300][80.077s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:40.312+0300][80.077s]    Subphase: Concurrent Roots JavaThreads                  0.000 / 0.000         1.163 / 2.472         1.163 / 2.472         1.163 / 2.472       ms
+[2025-11-11T20:13:40.312+0300][80.077s]    Subphase: Concurrent Roots OopStorageSet                0.000 / 0.000         0.045 / 0.087         0.045 / 0.087         0.045 / 0.087       ms
+[2025-11-11T20:13:40.312+0300][80.077s]    Subphase: Concurrent Weak Roots OopStorageSet           0.000 / 0.000         0.717 / 0.945         0.717 / 0.945         0.717 / 0.945       ms
+[2025-11-11T20:13:40.312+0300][80.077s]    Subphase: Pause Mark Try Complete                       0.000 / 0.000         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:13:40.312+0300][80.077s]      System: Java Threads                                      0 / 0                26 / 47               26 / 47               26 / 47          threads
+[2025-11-11T20:13:40.312+0300][80.077s] =========================================================================================================================================================
+[2025-11-11T20:13:50.304+0300][90.068s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:13:50.304+0300][90.068s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:13:50.304+0300][90.068s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:13:50.304+0300][90.068s]   Collector: Garbage Collection Cycle                      0.000 / 0.000        65.382 / 105.671      65.382 / 105.671      65.382 / 105.671     ms
+[2025-11-11T20:13:50.304+0300][90.068s]  Contention: Mark Segment Reset Contention                     0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:13:50.304+0300][90.068s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:50.304+0300][90.068s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:50.304+0300][90.068s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:50.304+0300][90.068s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:50.304+0300][90.068s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:50.304+0300][90.068s]      Memory: Allocation Rate                                   0 / 2                 9 / 238               9 / 238               9 / 238         MB/s
+[2025-11-11T20:13:50.304+0300][90.068s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:50.304+0300][90.068s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:50.304+0300][90.068s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:13:50.304+0300][90.068s]      Memory: Page Cache Hit L1                                 0 / 1                 2 / 46                2 / 46                2 / 46          ops/s
+[2025-11-11T20:13:50.304+0300][90.068s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:50.304+0300][90.068s]      Memory: Page Cache Hit L3                                 0 / 0                 2 / 64                2 / 64                2 / 64          ops/s
+[2025-11-11T20:13:50.304+0300][90.068s]      Memory: Page Cache Miss                                   0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:13:50.304+0300][90.068s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:13:50.304+0300][90.068s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:50.304+0300][90.068s]      Memory: Undo Object Allocation Succeeded                  0 / 0                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:13:50.304+0300][90.068s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:13:50.304+0300][90.068s]       Phase: Concurrent Mark                               0.000 / 0.000        47.937 / 82.030       47.937 / 82.030       47.937 / 82.030      ms
+[2025-11-11T20:13:50.304+0300][90.068s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:50.304+0300][90.068s]       Phase: Concurrent Mark Free                          0.000 / 0.000         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:13:50.304+0300][90.068s]       Phase: Concurrent Process Non-Strong References      0.000 / 0.000         4.357 / 7.302         4.357 / 7.302         4.357 / 7.302       ms
+[2025-11-11T20:13:50.304+0300][90.068s]       Phase: Concurrent Relocate                           0.000 / 0.000         7.850 / 11.595        7.850 / 11.595        7.850 / 11.595      ms
+[2025-11-11T20:13:50.304+0300][90.068s]       Phase: Concurrent Reset Relocation Set               0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:13:50.304+0300][90.068s]       Phase: Concurrent Select Relocation Set              0.000 / 0.000         4.370 / 6.910         4.370 / 6.910         4.370 / 6.910       ms
+[2025-11-11T20:13:50.304+0300][90.068s]       Phase: Pause Mark End                                0.000 / 0.000         0.026 / 0.044         0.026 / 0.044         0.026 / 0.044       ms
+[2025-11-11T20:13:50.304+0300][90.068s]       Phase: Pause Mark Start                              0.000 / 0.000         0.011 / 0.016         0.011 / 0.016         0.011 / 0.016       ms
+[2025-11-11T20:13:50.304+0300][90.068s]       Phase: Pause Relocate Start                          0.000 / 0.000         0.012 / 0.018         0.012 / 0.018         0.012 / 0.018       ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Subphase: Concurrent Classes Purge                      0.000 / 0.000         0.394 / 1.321         0.394 / 1.321         0.394 / 1.321       ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Subphase: Concurrent Classes Unlink                     0.000 / 0.000         2.808 / 4.447         2.808 / 4.447         2.808 / 4.447       ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Subphase: Concurrent Mark                               0.000 / 0.000        43.935 / 79.358       43.935 / 79.358       43.935 / 79.358      ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Subphase: Concurrent Mark Try Flush                     0.000 / 0.000         0.091 / 0.609         0.091 / 0.609         0.091 / 0.609       ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Subphase: Concurrent Mark Try Terminate                 0.000 / 0.000         4.305 / 15.929        4.305 / 15.929        4.305 / 15.929      ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Subphase: Concurrent References Enqueue                 0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Subphase: Concurrent References Process                 0.000 / 0.000         0.267 / 0.447         0.267 / 0.447         0.267 / 0.447       ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.000 / 0.000         0.117 / 0.345         0.117 / 0.345         0.117 / 0.345       ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Subphase: Concurrent Roots JavaThreads                  0.000 / 0.000         1.163 / 2.472         1.163 / 2.472         1.163 / 2.472       ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Subphase: Concurrent Roots OopStorageSet                0.000 / 0.000         0.045 / 0.087         0.045 / 0.087         0.045 / 0.087       ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Subphase: Concurrent Weak Roots OopStorageSet           0.000 / 0.000         0.717 / 0.945         0.717 / 0.945         0.717 / 0.945       ms
+[2025-11-11T20:13:50.304+0300][90.068s]    Subphase: Pause Mark Try Complete                       0.000 / 0.000         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:13:50.304+0300][90.068s]      System: Java Threads                                      0 / 0                26 / 47               26 / 47               26 / 47          threads
+[2025-11-11T20:13:50.304+0300][90.068s] =========================================================================================================================================================
+[2025-11-11T20:14:00.317+0300][100.081s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:14:00.317+0300][100.081s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:14:00.317+0300][100.081s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:14:00.317+0300][100.081s]   Collector: Garbage Collection Cycle                      0.000 / 0.000        65.382 / 105.671      65.382 / 105.671      65.382 / 105.671     ms
+[2025-11-11T20:14:00.317+0300][100.081s]  Contention: Mark Segment Reset Contention                     0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:14:00.317+0300][100.081s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:00.317+0300][100.081s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:00.317+0300][100.081s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:00.317+0300][100.081s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:00.317+0300][100.081s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:00.317+0300][100.081s]      Memory: Allocation Rate                                   0 / 0                 8 / 238               8 / 238               8 / 238         MB/s
+[2025-11-11T20:14:00.317+0300][100.081s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:00.317+0300][100.081s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:00.317+0300][100.081s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:14:00.317+0300][100.081s]      Memory: Page Cache Hit L1                                 0 / 0                 2 / 46                2 / 46                2 / 46          ops/s
+[2025-11-11T20:14:00.317+0300][100.081s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:00.317+0300][100.081s]      Memory: Page Cache Hit L3                                 0 / 0                 1 / 64                1 / 64                1 / 64          ops/s
+[2025-11-11T20:14:00.317+0300][100.081s]      Memory: Page Cache Miss                                   0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:14:00.317+0300][100.081s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:14:00.317+0300][100.081s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:00.317+0300][100.081s]      Memory: Undo Object Allocation Succeeded                  0 / 0                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:14:00.317+0300][100.081s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:00.317+0300][100.081s]       Phase: Concurrent Mark                               0.000 / 0.000        47.937 / 82.030       47.937 / 82.030       47.937 / 82.030      ms
+[2025-11-11T20:14:00.317+0300][100.081s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:00.317+0300][100.081s]       Phase: Concurrent Mark Free                          0.000 / 0.000         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:14:00.317+0300][100.081s]       Phase: Concurrent Process Non-Strong References      0.000 / 0.000         4.357 / 7.302         4.357 / 7.302         4.357 / 7.302       ms
+[2025-11-11T20:14:00.317+0300][100.081s]       Phase: Concurrent Relocate                           0.000 / 0.000         7.850 / 11.595        7.850 / 11.595        7.850 / 11.595      ms
+[2025-11-11T20:14:00.317+0300][100.081s]       Phase: Concurrent Reset Relocation Set               0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:14:00.317+0300][100.081s]       Phase: Concurrent Select Relocation Set              0.000 / 0.000         4.370 / 6.910         4.370 / 6.910         4.370 / 6.910       ms
+[2025-11-11T20:14:00.317+0300][100.081s]       Phase: Pause Mark End                                0.000 / 0.000         0.026 / 0.044         0.026 / 0.044         0.026 / 0.044       ms
+[2025-11-11T20:14:00.317+0300][100.081s]       Phase: Pause Mark Start                              0.000 / 0.000         0.011 / 0.016         0.011 / 0.016         0.011 / 0.016       ms
+[2025-11-11T20:14:00.317+0300][100.081s]       Phase: Pause Relocate Start                          0.000 / 0.000         0.012 / 0.018         0.012 / 0.018         0.012 / 0.018       ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Subphase: Concurrent Classes Purge                      0.000 / 0.000         0.394 / 1.321         0.394 / 1.321         0.394 / 1.321       ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Subphase: Concurrent Classes Unlink                     0.000 / 0.000         2.808 / 4.447         2.808 / 4.447         2.808 / 4.447       ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Subphase: Concurrent Mark                               0.000 / 0.000        43.935 / 79.358       43.935 / 79.358       43.935 / 79.358      ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Subphase: Concurrent Mark Try Flush                     0.000 / 0.000         0.091 / 0.609         0.091 / 0.609         0.091 / 0.609       ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Subphase: Concurrent Mark Try Terminate                 0.000 / 0.000         4.305 / 15.929        4.305 / 15.929        4.305 / 15.929      ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Subphase: Concurrent References Enqueue                 0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Subphase: Concurrent References Process                 0.000 / 0.000         0.267 / 0.447         0.267 / 0.447         0.267 / 0.447       ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.000 / 0.000         0.117 / 0.345         0.117 / 0.345         0.117 / 0.345       ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Subphase: Concurrent Roots JavaThreads                  0.000 / 0.000         1.163 / 2.472         1.163 / 2.472         1.163 / 2.472       ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Subphase: Concurrent Roots OopStorageSet                0.000 / 0.000         0.045 / 0.087         0.045 / 0.087         0.045 / 0.087       ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Subphase: Concurrent Weak Roots OopStorageSet           0.000 / 0.000         0.717 / 0.945         0.717 / 0.945         0.717 / 0.945       ms
+[2025-11-11T20:14:00.317+0300][100.081s]    Subphase: Pause Mark Try Complete                       0.000 / 0.000         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:14:00.317+0300][100.081s]      System: Java Threads                                      0 / 0                26 / 47               26 / 47               26 / 47          threads
+[2025-11-11T20:14:00.317+0300][100.081s] =========================================================================================================================================================
+[2025-11-11T20:14:10.309+0300][110.074s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:14:10.309+0300][110.074s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:14:10.309+0300][110.074s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:14:10.309+0300][110.074s]   Collector: Garbage Collection Cycle                      0.000 / 0.000        65.382 / 105.671      65.382 / 105.671      65.382 / 105.671     ms
+[2025-11-11T20:14:10.309+0300][110.074s]  Contention: Mark Segment Reset Contention                     0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:14:10.309+0300][110.074s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:10.309+0300][110.074s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:10.309+0300][110.074s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:10.309+0300][110.074s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:10.309+0300][110.074s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:10.309+0300][110.074s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:10.309+0300][110.074s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:10.309+0300][110.074s]      Memory: Allocation Rate                                   0 / 0                 7 / 238               7 / 238               7 / 238         MB/s
+[2025-11-11T20:14:10.309+0300][110.074s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:10.309+0300][110.074s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:10.309+0300][110.074s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:14:10.309+0300][110.074s]      Memory: Page Cache Hit L1                                 0 / 0                 2 / 46                2 / 46                2 / 46          ops/s
+[2025-11-11T20:14:10.309+0300][110.074s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:10.309+0300][110.074s]      Memory: Page Cache Hit L3                                 0 / 0                 1 / 64                1 / 64                1 / 64          ops/s
+[2025-11-11T20:14:10.309+0300][110.074s]      Memory: Page Cache Miss                                   0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:14:10.309+0300][110.074s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:14:10.309+0300][110.074s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:10.309+0300][110.074s]      Memory: Undo Object Allocation Succeeded                  0 / 0                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:14:10.309+0300][110.074s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:10.309+0300][110.074s]       Phase: Concurrent Mark                               0.000 / 0.000        47.937 / 82.030       47.937 / 82.030       47.937 / 82.030      ms
+[2025-11-11T20:14:10.309+0300][110.074s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:10.309+0300][110.074s]       Phase: Concurrent Mark Free                          0.000 / 0.000         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:14:10.309+0300][110.074s]       Phase: Concurrent Process Non-Strong References      0.000 / 0.000         4.357 / 7.302         4.357 / 7.302         4.357 / 7.302       ms
+[2025-11-11T20:14:10.309+0300][110.074s]       Phase: Concurrent Relocate                           0.000 / 0.000         7.850 / 11.595        7.850 / 11.595        7.850 / 11.595      ms
+[2025-11-11T20:14:10.309+0300][110.074s]       Phase: Concurrent Reset Relocation Set               0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:14:10.309+0300][110.074s]       Phase: Concurrent Select Relocation Set              0.000 / 0.000         4.370 / 6.910         4.370 / 6.910         4.370 / 6.910       ms
+[2025-11-11T20:14:10.309+0300][110.074s]       Phase: Pause Mark End                                0.000 / 0.000         0.026 / 0.044         0.026 / 0.044         0.026 / 0.044       ms
+[2025-11-11T20:14:10.309+0300][110.074s]       Phase: Pause Mark Start                              0.000 / 0.000         0.011 / 0.016         0.011 / 0.016         0.011 / 0.016       ms
+[2025-11-11T20:14:10.309+0300][110.074s]       Phase: Pause Relocate Start                          0.000 / 0.000         0.012 / 0.018         0.012 / 0.018         0.012 / 0.018       ms
+[2025-11-11T20:14:10.309+0300][110.074s]    Subphase: Concurrent Classes Purge                      0.000 / 0.000         0.394 / 1.321         0.394 / 1.321         0.394 / 1.321       ms
+[2025-11-11T20:14:10.309+0300][110.074s]    Subphase: Concurrent Classes Unlink                     0.000 / 0.000         2.808 / 4.447         2.808 / 4.447         2.808 / 4.447       ms
+[2025-11-11T20:14:10.309+0300][110.074s]    Subphase: Concurrent Mark                               0.000 / 0.000        43.935 / 79.358       43.935 / 79.358       43.935 / 79.358      ms
+[2025-11-11T20:14:10.309+0300][110.074s]    Subphase: Concurrent Mark Try Flush                     0.000 / 0.000         0.091 / 0.609         0.091 / 0.609         0.091 / 0.609       ms
+[2025-11-11T20:14:10.309+0300][110.074s]    Subphase: Concurrent Mark Try Terminate                 0.000 / 0.000         4.305 / 15.929        4.305 / 15.929        4.305 / 15.929      ms
+[2025-11-11T20:14:10.309+0300][110.074s]    Subphase: Concurrent References Enqueue                 0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:14:10.309+0300][110.074s]    Subphase: Concurrent References Process                 0.000 / 0.000         0.267 / 0.447         0.267 / 0.447         0.267 / 0.447       ms
+[2025-11-11T20:14:10.309+0300][110.074s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.000 / 0.000         0.117 / 0.345         0.117 / 0.345         0.117 / 0.345       ms
+[2025-11-11T20:14:10.309+0300][110.074s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:10.309+0300][110.074s]    Subphase: Concurrent Roots JavaThreads                  0.000 / 0.000         1.163 / 2.472         1.163 / 2.472         1.163 / 2.472       ms
+[2025-11-11T20:14:10.309+0300][110.074s]    Subphase: Concurrent Roots OopStorageSet                0.000 / 0.000         0.045 / 0.087         0.045 / 0.087         0.045 / 0.087       ms
+[2025-11-11T20:14:10.310+0300][110.074s]    Subphase: Concurrent Weak Roots OopStorageSet           0.000 / 0.000         0.717 / 0.945         0.717 / 0.945         0.717 / 0.945       ms
+[2025-11-11T20:14:10.310+0300][110.074s]    Subphase: Pause Mark Try Complete                       0.000 / 0.000         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:14:10.310+0300][110.074s]      System: Java Threads                                      0 / 0                26 / 47               26 / 47               26 / 47          threads
+[2025-11-11T20:14:10.310+0300][110.074s] =========================================================================================================================================================
+[2025-11-11T20:14:20.309+0300][120.073s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:14:20.309+0300][120.073s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:14:20.309+0300][120.073s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:14:20.309+0300][120.073s]   Collector: Garbage Collection Cycle                      0.000 / 0.000        65.382 / 105.671      65.382 / 105.671      65.382 / 105.671     ms
+[2025-11-11T20:14:20.309+0300][120.073s]  Contention: Mark Segment Reset Contention                     0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:14:20.309+0300][120.073s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:20.309+0300][120.073s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:20.309+0300][120.073s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:20.309+0300][120.073s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:20.309+0300][120.073s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:20.309+0300][120.073s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:20.309+0300][120.073s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:20.309+0300][120.073s]      Memory: Allocation Rate                                   0 / 0                 6 / 238               6 / 238               6 / 238         MB/s
+[2025-11-11T20:14:20.309+0300][120.073s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:20.309+0300][120.073s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:20.309+0300][120.073s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:14:20.309+0300][120.073s]      Memory: Page Cache Hit L1                                 0 / 0                 1 / 46                1 / 46                1 / 46          ops/s
+[2025-11-11T20:14:20.309+0300][120.073s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:20.309+0300][120.073s]      Memory: Page Cache Hit L3                                 0 / 0                 1 / 64                1 / 64                1 / 64          ops/s
+[2025-11-11T20:14:20.309+0300][120.073s]      Memory: Page Cache Miss                                   0 / 0                 0 / 1                 0 / 1                 0 / 1           ops/s
+[2025-11-11T20:14:20.309+0300][120.074s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:14:20.309+0300][120.074s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:20.309+0300][120.074s]      Memory: Undo Object Allocation Succeeded                  0 / 0                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:14:20.309+0300][120.074s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:20.309+0300][120.074s]       Phase: Concurrent Mark                               0.000 / 0.000        47.937 / 82.030       47.937 / 82.030       47.937 / 82.030      ms
+[2025-11-11T20:14:20.309+0300][120.074s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:20.309+0300][120.074s]       Phase: Concurrent Mark Free                          0.000 / 0.000         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:14:20.309+0300][120.074s]       Phase: Concurrent Process Non-Strong References      0.000 / 0.000         4.357 / 7.302         4.357 / 7.302         4.357 / 7.302       ms
+[2025-11-11T20:14:20.309+0300][120.074s]       Phase: Concurrent Relocate                           0.000 / 0.000         7.850 / 11.595        7.850 / 11.595        7.850 / 11.595      ms
+[2025-11-11T20:14:20.309+0300][120.074s]       Phase: Concurrent Reset Relocation Set               0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:14:20.309+0300][120.074s]       Phase: Concurrent Select Relocation Set              0.000 / 0.000         4.370 / 6.910         4.370 / 6.910         4.370 / 6.910       ms
+[2025-11-11T20:14:20.309+0300][120.074s]       Phase: Pause Mark End                                0.000 / 0.000         0.026 / 0.044         0.026 / 0.044         0.026 / 0.044       ms
+[2025-11-11T20:14:20.309+0300][120.074s]       Phase: Pause Mark Start                              0.000 / 0.000         0.011 / 0.016         0.011 / 0.016         0.011 / 0.016       ms
+[2025-11-11T20:14:20.309+0300][120.074s]       Phase: Pause Relocate Start                          0.000 / 0.000         0.012 / 0.018         0.012 / 0.018         0.012 / 0.018       ms
+[2025-11-11T20:14:20.309+0300][120.074s]    Subphase: Concurrent Classes Purge                      0.000 / 0.000         0.394 / 1.321         0.394 / 1.321         0.394 / 1.321       ms
+[2025-11-11T20:14:20.309+0300][120.074s]    Subphase: Concurrent Classes Unlink                     0.000 / 0.000         2.808 / 4.447         2.808 / 4.447         2.808 / 4.447       ms
+[2025-11-11T20:14:20.309+0300][120.074s]    Subphase: Concurrent Mark                               0.000 / 0.000        43.935 / 79.358       43.935 / 79.358       43.935 / 79.358      ms
+[2025-11-11T20:14:20.309+0300][120.074s]    Subphase: Concurrent Mark Try Flush                     0.000 / 0.000         0.091 / 0.609         0.091 / 0.609         0.091 / 0.609       ms
+[2025-11-11T20:14:20.309+0300][120.074s]    Subphase: Concurrent Mark Try Terminate                 0.000 / 0.000         4.305 / 15.929        4.305 / 15.929        4.305 / 15.929      ms
+[2025-11-11T20:14:20.309+0300][120.074s]    Subphase: Concurrent References Enqueue                 0.000 / 0.000         0.004 / 0.006         0.004 / 0.006         0.004 / 0.006       ms
+[2025-11-11T20:14:20.309+0300][120.074s]    Subphase: Concurrent References Process                 0.000 / 0.000         0.267 / 0.447         0.267 / 0.447         0.267 / 0.447       ms
+[2025-11-11T20:14:20.309+0300][120.074s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.000 / 0.000         0.117 / 0.345         0.117 / 0.345         0.117 / 0.345       ms
+[2025-11-11T20:14:20.309+0300][120.074s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:20.309+0300][120.074s]    Subphase: Concurrent Roots JavaThreads                  0.000 / 0.000         1.163 / 2.472         1.163 / 2.472         1.163 / 2.472       ms
+[2025-11-11T20:14:20.309+0300][120.074s]    Subphase: Concurrent Roots OopStorageSet                0.000 / 0.000         0.045 / 0.087         0.045 / 0.087         0.045 / 0.087       ms
+[2025-11-11T20:14:20.309+0300][120.074s]    Subphase: Concurrent Weak Roots OopStorageSet           0.000 / 0.000         0.717 / 0.945         0.717 / 0.945         0.717 / 0.945       ms
+[2025-11-11T20:14:20.309+0300][120.074s]    Subphase: Pause Mark Try Complete                       0.000 / 0.000         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:14:20.309+0300][120.074s]      System: Java Threads                                      0 / 0                26 / 47               26 / 47               26 / 47          threads
+[2025-11-11T20:14:20.309+0300][120.074s] =========================================================================================================================================================
+[2025-11-11T20:14:22.803+0300][122.567s] GC(4) Garbage Collection (Warmup)
+[2025-11-11T20:14:22.803+0300][122.567s] GC(4) Using 3 workers
+[2025-11-11T20:14:22.803+0300][122.567s] GC(4) Pause Mark Start 0.014ms
+[2025-11-11T20:14:22.864+0300][122.629s] GC(4) Concurrent Mark 61.212ms
+[2025-11-11T20:14:22.864+0300][122.629s] GC(4) Pause Mark End 0.044ms
+[2025-11-11T20:14:22.864+0300][122.629s] GC(4) Concurrent Mark Free 0.002ms
+[2025-11-11T20:14:22.871+0300][122.635s] GC(4) Concurrent Process Non-Strong References 6.179ms
+[2025-11-11T20:14:22.871+0300][122.635s] GC(4) Concurrent Reset Relocation Set 0.008ms
+[2025-11-11T20:14:22.874+0300][122.639s] GC(4) Concurrent Select Relocation Set 3.210ms
+[2025-11-11T20:14:22.874+0300][122.639s] GC(4) Pause Relocate Start 0.013ms
+[2025-11-11T20:14:22.878+0300][122.642s] GC(4) Concurrent Relocate 3.558ms
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Load: 0.00/0.00/0.00
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) MMU: 2ms/97.8%, 5ms/99.1%, 10ms/99.4%, 20ms/99.7%, 50ms/99.9%, 100ms/99.9%
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Mark: 2 stripe(s), 2 proactive flush(es), 1 terminate flush(es), 0 completion(s), 0 continuation(s) 
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Mark Stack Usage: 32M
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) NMethods: 6995 registered, 1307 unregistered
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Metaspace: 74M used, 75M committed, 1152M reserved
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Soft: 9692 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Weak: 7712 encountered, 2321 discovered, 107 enqueued
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Final: 0 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Phantom: 373 encountered, 292 discovered, 0 enqueued
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Small Pages: 43 / 86M, Empty: 0M, Relocated: 3M, In-Place: 0
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Medium Pages: 1 / 32M, Empty: 0M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Large Pages: 84 / 1008M, Empty: 0M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Forwarding Usage: 1M
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Min Capacity: 8M(0%)
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Max Capacity: 8030M(100%)
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Soft Max Capacity: 8030M(100%)
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4)                Mark Start          Mark End        Relocate Start      Relocate End           High               Low         
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4)  Capacity:     1414M (18%)        1594M (20%)        1606M (20%)        1606M (20%)        1606M (20%)        1414M (18%)    
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4)      Free:     6904M (86%)        6722M (84%)        6706M (84%)        6736M (84%)        6904M (86%)        6700M (83%)    
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4)      Used:     1126M (14%)        1308M (16%)        1324M (16%)        1294M (16%)        1330M (17%)        1126M (14%)    
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4)      Live:         -              1056M (13%)        1056M (13%)        1056M (13%)            -                  -          
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Allocated:         -               182M (2%)          198M (2%)          199M (2%)             -                  -          
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4)   Garbage:         -                69M (1%)           69M (1%)           37M (0%)             -                  -          
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Reclaimed:         -                  -                 0M (0%)           31M (0%)             -                  -          
+[2025-11-11T20:14:22.878+0300][122.643s] GC(4) Garbage Collection (Warmup) 1126M(14%)->1294M(16%)
+[2025-11-11T20:14:23.504+0300][123.268s] GC(5) Garbage Collection (Warmup)
+[2025-11-11T20:14:23.504+0300][123.268s] GC(5) Using 3 workers
+[2025-11-11T20:14:23.504+0300][123.268s] GC(5) Pause Mark Start 0.019ms
+[2025-11-11T20:14:23.566+0300][123.330s] GC(5) Concurrent Mark 61.718ms
+[2025-11-11T20:14:23.566+0300][123.330s] GC(5) Pause Mark End 0.032ms
+[2025-11-11T20:14:23.566+0300][123.330s] GC(5) Concurrent Mark Free 0.001ms
+[2025-11-11T20:14:23.575+0300][123.339s] GC(5) Concurrent Process Non-Strong References 8.989ms
+[2025-11-11T20:14:23.575+0300][123.340s] GC(5) Concurrent Reset Relocation Set 0.004ms
+[2025-11-11T20:14:23.578+0300][123.343s] GC(5) Concurrent Select Relocation Set 2.948ms
+[2025-11-11T20:14:23.578+0300][123.343s] GC(5) Pause Relocate Start 0.021ms
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) Concurrent Relocate 2.380ms
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) Load: 0.00/0.00/0.00
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) MMU: 2ms/97.8%, 5ms/99.1%, 10ms/99.4%, 20ms/99.7%, 50ms/99.9%, 100ms/99.9%
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) Mark: 2 stripe(s), 2 proactive flush(es), 1 terminate flush(es), 0 completion(s), 0 continuation(s) 
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) Mark Stack Usage: 32M
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) NMethods: 6683 registered, 1647 unregistered
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) Metaspace: 74M used, 75M committed, 1152M reserved
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) Soft: 9697 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) Weak: 7619 encountered, 2946 discovered, 6 enqueued
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) Final: 0 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) Phantom: 374 encountered, 287 discovered, 0 enqueued
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) Small Pages: 32 / 64M, Empty: 0M, Relocated: 1M, In-Place: 0
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) Medium Pages: 1 / 32M, Empty: 0M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) Large Pages: 134 / 1608M, Empty: 0M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) Forwarding Usage: 0M
+[2025-11-11T20:14:23.581+0300][123.345s] GC(5) Min Capacity: 8M(0%)
+[2025-11-11T20:14:23.581+0300][123.346s] GC(5) Max Capacity: 8030M(100%)
+[2025-11-11T20:14:23.581+0300][123.346s] GC(5) Soft Max Capacity: 8030M(100%)
+[2025-11-11T20:14:23.581+0300][123.346s] GC(5)                Mark Start          Mark End        Relocate Start      Relocate End           High               Low         
+[2025-11-11T20:14:23.581+0300][123.346s] GC(5)  Capacity:     2014M (25%)        2146M (27%)        2182M (27%)        2182M (27%)        2182M (27%)        2014M (25%)    
+[2025-11-11T20:14:23.581+0300][123.346s] GC(5)      Free:     6326M (79%)        6192M (77%)        6156M (77%)        6162M (77%)        6326M (79%)        6150M (77%)    
+[2025-11-11T20:14:23.581+0300][123.346s] GC(5)      Used:     1704M (21%)        1838M (23%)        1874M (23%)        1868M (23%)        1880M (23%)        1704M (21%)    
+[2025-11-11T20:14:23.581+0300][123.346s] GC(5)      Live:         -              1656M (21%)        1656M (21%)        1656M (21%)            -                  -          
+[2025-11-11T20:14:23.581+0300][123.346s] GC(5) Allocated:         -               134M (2%)          170M (2%)          171M (2%)             -                  -          
+[2025-11-11T20:14:23.581+0300][123.346s] GC(5)   Garbage:         -                47M (1%)           47M (1%)           39M (0%)             -                  -          
+[2025-11-11T20:14:23.581+0300][123.346s] GC(5) Reclaimed:         -                  -                 0M (0%)            7M (0%)             -                  -          
+[2025-11-11T20:14:23.581+0300][123.346s] GC(5) Garbage Collection (Warmup) 1704M(21%)->1868M(23%)
+[2025-11-11T20:14:23.815+0300][123.580s] GC(6) Garbage Collection (Warmup)
+[2025-11-11T20:14:23.816+0300][123.580s] GC(6) Using 3 workers
+[2025-11-11T20:14:23.816+0300][123.580s] GC(6) Pause Mark Start 0.013ms
+[2025-11-11T20:14:23.862+0300][123.626s] GC(6) Concurrent Mark 46.454ms
+[2025-11-11T20:14:23.862+0300][123.627s] GC(6) Pause Mark End 0.022ms
+[2025-11-11T20:14:23.862+0300][123.627s] GC(6) Concurrent Mark Free 0.001ms
+[2025-11-11T20:14:23.869+0300][123.634s] GC(6) Concurrent Process Non-Strong References 7.354ms
+[2025-11-11T20:14:23.869+0300][123.634s] GC(6) Concurrent Reset Relocation Set 0.002ms
+[2025-11-11T20:14:23.872+0300][123.637s] GC(6) Concurrent Select Relocation Set 3.302ms
+[2025-11-11T20:14:23.873+0300][123.638s] GC(6) Pause Relocate Start 0.027ms
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Concurrent Relocate 2.169ms
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Load: 0.00/0.00/0.00
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) MMU: 2ms/97.8%, 5ms/99.1%, 10ms/99.4%, 20ms/99.7%, 50ms/99.9%, 100ms/99.9%
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Mark: 2 stripe(s), 2 proactive flush(es), 1 terminate flush(es), 0 completion(s), 0 continuation(s) 
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Mark Stack Usage: 32M
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) NMethods: 6703 registered, 1647 unregistered
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Metaspace: 74M used, 75M committed, 1152M reserved
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Soft: 9697 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Weak: 7611 encountered, 2946 discovered, 0 enqueued
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Final: 0 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Phantom: 374 encountered, 278 discovered, 0 enqueued
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Small Pages: 35 / 70M, Empty: 2M, Relocated: 1M, In-Place: 0
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Medium Pages: 1 / 32M, Empty: 0M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Large Pages: 200 / 2400M, Empty: 0M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Forwarding Usage: 0M
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Min Capacity: 8M(0%)
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Max Capacity: 8030M(100%)
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Soft Max Capacity: 8030M(100%)
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6)                Mark Start          Mark End        Relocate Start      Relocate End           High               Low         
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6)  Capacity:     2806M (35%)        2806M (35%)        2806M (35%)        2806M (35%)        2806M (35%)        2806M (35%)    
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6)      Free:     5528M (69%)        5526M (69%)        5528M (69%)        5536M (69%)        5536M (69%)        5524M (69%)    
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6)      Used:     2502M (31%)        2504M (31%)        2502M (31%)        2494M (31%)        2506M (31%)        2494M (31%)    
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6)      Live:         -              2448M (30%)        2448M (30%)        2448M (30%)            -                  -          
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Allocated:         -                 2M (0%)            2M (0%)            5M (0%)             -                  -          
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6)   Garbage:         -                53M (1%)           51M (1%)           39M (0%)             -                  -          
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Reclaimed:         -                  -                 2M (0%)           13M (0%)             -                  -          
+[2025-11-11T20:14:23.875+0300][123.640s] GC(6) Garbage Collection (Warmup) 2502M(31%)->2494M(31%)
+[2025-11-11T20:14:28.607+0300][128.372s] GC(7) Garbage Collection (Proactive)
+[2025-11-11T20:14:28.607+0300][128.372s] GC(7) Using 3 workers
+[2025-11-11T20:14:28.607+0300][128.372s] GC(7) Pause Mark Start 0.017ms
+[2025-11-11T20:14:28.654+0300][128.418s] GC(7) Concurrent Mark 46.717ms
+[2025-11-11T20:14:28.654+0300][128.419s] GC(7) Pause Mark End 0.023ms
+[2025-11-11T20:14:28.654+0300][128.419s] GC(7) Concurrent Mark Free 0.001ms
+[2025-11-11T20:14:28.665+0300][128.430s] GC(7) Concurrent Process Non-Strong References 10.896ms
+[2025-11-11T20:14:28.665+0300][128.430s] GC(7) Concurrent Reset Relocation Set 0.001ms
+[2025-11-11T20:14:28.666+0300][128.431s] GC(7) Concurrent Select Relocation Set 1.793ms
+[2025-11-11T20:14:28.667+0300][128.432s] GC(7) Pause Relocate Start 0.014ms
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Concurrent Relocate 1.238ms
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Load: 0.00/0.00/0.00
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) MMU: 2ms/97.8%, 5ms/99.1%, 10ms/99.4%, 20ms/99.7%, 50ms/99.9%, 100ms/99.9%
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Mark: 2 stripe(s), 2 proactive flush(es), 1 terminate flush(es), 0 completion(s), 0 continuation(s) 
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Mark Stack Usage: 32M
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) NMethods: 2014 registered, 6363 unregistered
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Metaspace: 74M used, 75M committed, 1152M reserved
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Soft: 9697 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Weak: 7612 encountered, 2714 discovered, 0 enqueued
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Final: 0 encountered, 0 discovered, 0 enqueued
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Phantom: 374 encountered, 272 discovered, 0 enqueued
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Small Pages: 35 / 70M, Empty: 0M, Relocated: 1M, In-Place: 0
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Medium Pages: 1 / 32M, Empty: 0M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Large Pages: 300 / 3600M, Empty: 0M, Relocated: 0M, In-Place: 0
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Forwarding Usage: 0M
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Min Capacity: 8M(0%)
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Max Capacity: 8030M(100%)
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Soft Max Capacity: 8030M(100%)
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7)                Mark Start          Mark End        Relocate Start      Relocate End           High               Low         
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7)  Capacity:     4006M (50%)        4006M (50%)        4006M (50%)        4006M (50%)        4006M (50%)        4006M (50%)    
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7)      Free:     4328M (54%)        4326M (54%)        4326M (54%)        4340M (54%)        4340M (54%)        4320M (54%)    
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7)      Used:     3702M (46%)        3704M (46%)        3704M (46%)        3690M (46%)        3710M (46%)        3690M (46%)    
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7)      Live:         -              3648M (45%)        3648M (45%)        3648M (45%)            -                  -          
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Allocated:         -                 2M (0%)            2M (0%)            1M (0%)             -                  -          
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7)   Garbage:         -                53M (1%)           53M (1%)           39M (0%)             -                  -          
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Reclaimed:         -                  -                 0M (0%)           13M (0%)             -                  -          
+[2025-11-11T20:14:28.668+0300][128.433s] GC(7) Garbage Collection (Proactive) 3702M(46%)->3690M(46%)
+[2025-11-11T20:14:30.304+0300][130.068s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:14:30.304+0300][130.068s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:14:30.304+0300][130.068s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:14:30.304+0300][130.068s]   Collector: Garbage Collection Cycle                     68.536 / 77.134       66.959 / 105.671      66.959 / 105.671      66.959 / 105.671     ms
+[2025-11-11T20:14:30.304+0300][130.068s]  Contention: Mark Segment Reset Contention                     0 / 2                 0 / 2                 0 / 2                 0 / 2           ops/s
+[2025-11-11T20:14:30.304+0300][130.068s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:30.304+0300][130.068s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:30.304+0300][130.068s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:30.304+0300][130.068s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:30.304+0300][130.068s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:30.304+0300][130.068s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:30.304+0300][130.068s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:30.304+0300][130.068s]      Memory: Allocation Rate                                 364 / 2414             34 / 2414             34 / 2414             34 / 2414        MB/s
+[2025-11-11T20:14:30.304+0300][130.068s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:30.304+0300][130.068s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:30.304+0300][130.068s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:14:30.304+0300][130.068s]      Memory: Page Cache Hit L1                                 3 / 19                1 / 46                1 / 46                1 / 46          ops/s
+[2025-11-11T20:14:30.304+0300][130.068s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:30.304+0300][130.068s]      Memory: Page Cache Hit L3                                 0 / 8                 1 / 64                1 / 64                1 / 64          ops/s
+[2025-11-11T20:14:30.304+0300][130.068s]      Memory: Page Cache Miss                                  29 / 199               2 / 199               2 / 199               2 / 199         ops/s
+[2025-11-11T20:14:30.304+0300][130.068s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:14:30.304+0300][130.068s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:30.304+0300][130.068s]      Memory: Undo Object Allocation Succeeded                  0 / 0                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:14:30.304+0300][130.068s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:30.304+0300][130.068s]       Phase: Concurrent Mark                              54.025 / 61.718       50.981 / 82.030       50.981 / 82.030       50.981 / 82.030      ms
+[2025-11-11T20:14:30.304+0300][130.068s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:30.304+0300][130.068s]       Phase: Concurrent Mark Free                          0.001 / 0.002         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:14:30.304+0300][130.068s]       Phase: Concurrent Process Non-Strong References      8.354 / 10.896        6.356 / 10.896        6.356 / 10.896        6.356 / 10.896      ms
+[2025-11-11T20:14:30.304+0300][130.069s]       Phase: Concurrent Relocate                           2.337 / 3.558         5.093 / 11.595        5.093 / 11.595        5.093 / 11.595      ms
+[2025-11-11T20:14:30.304+0300][130.069s]       Phase: Concurrent Reset Relocation Set               0.003 / 0.008         0.004 / 0.008         0.004 / 0.008         0.004 / 0.008       ms
+[2025-11-11T20:14:30.304+0300][130.069s]       Phase: Concurrent Select Relocation Set              2.813 / 3.302         3.591 / 6.910         3.591 / 6.910         3.591 / 6.910       ms
+[2025-11-11T20:14:30.304+0300][130.069s]       Phase: Pause Mark End                                0.030 / 0.044         0.028 / 0.044         0.028 / 0.044         0.028 / 0.044       ms
+[2025-11-11T20:14:30.304+0300][130.069s]       Phase: Pause Mark Start                              0.016 / 0.019         0.014 / 0.019         0.014 / 0.019         0.014 / 0.019       ms
+[2025-11-11T20:14:30.304+0300][130.069s]       Phase: Pause Relocate Start                          0.019 / 0.027         0.015 / 0.027         0.015 / 0.027         0.015 / 0.027       ms
+[2025-11-11T20:14:30.304+0300][130.069s]    Subphase: Concurrent Classes Purge                      1.603 / 5.683         0.998 / 5.683         0.998 / 5.683         0.998 / 5.683       ms
+[2025-11-11T20:14:30.304+0300][130.069s]    Subphase: Concurrent Classes Unlink                     5.496 / 7.122         4.152 / 7.122         4.152 / 7.122         4.152 / 7.122       ms
+[2025-11-11T20:14:30.304+0300][130.069s]    Subphase: Concurrent Mark                              47.963 / 58.296       45.949 / 79.358       45.949 / 79.358       45.949 / 79.358      ms
+[2025-11-11T20:14:30.304+0300][130.069s]    Subphase: Concurrent Mark Try Flush                     0.078 / 0.151         0.085 / 0.609         0.085 / 0.609         0.085 / 0.609       ms
+[2025-11-11T20:14:30.304+0300][130.069s]    Subphase: Concurrent Mark Try Terminate                 6.061 / 13.669        5.107 / 15.929        5.107 / 15.929        5.107 / 15.929      ms
+[2025-11-11T20:14:30.304+0300][130.069s]    Subphase: Concurrent References Enqueue                 0.003 / 0.007         0.003 / 0.007         0.003 / 0.007         0.003 / 0.007       ms
+[2025-11-11T20:14:30.304+0300][130.069s]    Subphase: Concurrent References Process                 0.302 / 0.363         0.285 / 0.447         0.285 / 0.447         0.285 / 0.447       ms
+[2025-11-11T20:14:30.304+0300][130.069s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.179 / 0.434         0.149 / 0.434         0.149 / 0.434         0.149 / 0.434       ms
+[2025-11-11T20:14:30.304+0300][130.069s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:30.304+0300][130.069s]    Subphase: Concurrent Roots JavaThreads                  1.612 / 2.869         1.388 / 2.869         1.388 / 2.869         1.388 / 2.869       ms
+[2025-11-11T20:14:30.304+0300][130.069s]    Subphase: Concurrent Roots OopStorageSet                0.034 / 0.045         0.039 / 0.087         0.039 / 0.087         0.039 / 0.087       ms
+[2025-11-11T20:14:30.304+0300][130.069s]    Subphase: Concurrent Weak Roots OopStorageSet           0.691 / 0.968         0.704 / 0.968         0.704 / 0.968         0.704 / 0.968       ms
+[2025-11-11T20:14:30.304+0300][130.069s]    Subphase: Pause Mark Try Complete                       0.000 / 0.000         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:14:30.304+0300][130.069s]      System: Java Threads                                     39 / 40               33 / 47               33 / 47               33 / 47          threads
+[2025-11-11T20:14:30.304+0300][130.069s] =========================================================================================================================================================
+[2025-11-11T20:14:40.311+0300][140.076s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:14:40.311+0300][140.076s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:14:40.311+0300][140.076s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:14:40.311+0300][140.076s]   Collector: Garbage Collection Cycle                      0.000 / 0.000        66.959 / 105.671      66.959 / 105.671      66.959 / 105.671     ms
+[2025-11-11T20:14:40.311+0300][140.076s]  Contention: Mark Segment Reset Contention                     0 / 0                 0 / 2                 0 / 2                 0 / 2           ops/s
+[2025-11-11T20:14:40.311+0300][140.076s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:40.311+0300][140.076s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:40.311+0300][140.076s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:40.311+0300][140.076s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:40.311+0300][140.076s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:40.311+0300][140.076s]      Memory: Allocation Rate                                   0 / 4                31 / 2414             31 / 2414             31 / 2414        MB/s
+[2025-11-11T20:14:40.311+0300][140.076s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:40.311+0300][140.076s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:40.311+0300][140.076s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:14:40.311+0300][140.076s]      Memory: Page Cache Hit L1                                 0 / 2                 1 / 46                1 / 46                1 / 46          ops/s
+[2025-11-11T20:14:40.311+0300][140.076s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:40.311+0300][140.076s]      Memory: Page Cache Hit L3                                 0 / 0                 1 / 64                1 / 64                1 / 64          ops/s
+[2025-11-11T20:14:40.311+0300][140.076s]      Memory: Page Cache Miss                                   0 / 0                 2 / 199               2 / 199               2 / 199         ops/s
+[2025-11-11T20:14:40.311+0300][140.076s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:14:40.311+0300][140.076s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:40.311+0300][140.076s]      Memory: Undo Object Allocation Succeeded                  0 / 0                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:14:40.311+0300][140.076s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:40.311+0300][140.076s]       Phase: Concurrent Mark                               0.000 / 0.000        50.981 / 82.030       50.981 / 82.030       50.981 / 82.030      ms
+[2025-11-11T20:14:40.311+0300][140.076s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:40.311+0300][140.076s]       Phase: Concurrent Mark Free                          0.000 / 0.000         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:14:40.311+0300][140.076s]       Phase: Concurrent Process Non-Strong References      0.000 / 0.000         6.356 / 10.896        6.356 / 10.896        6.356 / 10.896      ms
+[2025-11-11T20:14:40.311+0300][140.076s]       Phase: Concurrent Relocate                           0.000 / 0.000         5.093 / 11.595        5.093 / 11.595        5.093 / 11.595      ms
+[2025-11-11T20:14:40.311+0300][140.076s]       Phase: Concurrent Reset Relocation Set               0.000 / 0.000         0.004 / 0.008         0.004 / 0.008         0.004 / 0.008       ms
+[2025-11-11T20:14:40.311+0300][140.076s]       Phase: Concurrent Select Relocation Set              0.000 / 0.000         3.591 / 6.910         3.591 / 6.910         3.591 / 6.910       ms
+[2025-11-11T20:14:40.311+0300][140.076s]       Phase: Pause Mark End                                0.000 / 0.000         0.028 / 0.044         0.028 / 0.044         0.028 / 0.044       ms
+[2025-11-11T20:14:40.311+0300][140.076s]       Phase: Pause Mark Start                              0.000 / 0.000         0.014 / 0.019         0.014 / 0.019         0.014 / 0.019       ms
+[2025-11-11T20:14:40.311+0300][140.076s]       Phase: Pause Relocate Start                          0.000 / 0.000         0.015 / 0.027         0.015 / 0.027         0.015 / 0.027       ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Subphase: Concurrent Classes Purge                      0.000 / 0.000         0.998 / 5.683         0.998 / 5.683         0.998 / 5.683       ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Subphase: Concurrent Classes Unlink                     0.000 / 0.000         4.152 / 7.122         4.152 / 7.122         4.152 / 7.122       ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Subphase: Concurrent Mark                               0.000 / 0.000        45.949 / 79.358       45.949 / 79.358       45.949 / 79.358      ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Subphase: Concurrent Mark Try Flush                     0.000 / 0.000         0.085 / 0.609         0.085 / 0.609         0.085 / 0.609       ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Subphase: Concurrent Mark Try Terminate                 0.000 / 0.000         5.107 / 15.929        5.107 / 15.929        5.107 / 15.929      ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Subphase: Concurrent References Enqueue                 0.000 / 0.000         0.003 / 0.007         0.003 / 0.007         0.003 / 0.007       ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Subphase: Concurrent References Process                 0.000 / 0.000         0.285 / 0.447         0.285 / 0.447         0.285 / 0.447       ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.000 / 0.000         0.149 / 0.434         0.149 / 0.434         0.149 / 0.434       ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Subphase: Concurrent Roots JavaThreads                  0.000 / 0.000         1.388 / 2.869         1.388 / 2.869         1.388 / 2.869       ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Subphase: Concurrent Roots OopStorageSet                0.000 / 0.000         0.039 / 0.087         0.039 / 0.087         0.039 / 0.087       ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Subphase: Concurrent Weak Roots OopStorageSet           0.000 / 0.000         0.704 / 0.968         0.704 / 0.968         0.704 / 0.968       ms
+[2025-11-11T20:14:40.311+0300][140.076s]    Subphase: Pause Mark Try Complete                       0.000 / 0.000         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:14:40.311+0300][140.076s]      System: Java Threads                                      0 / 0                33 / 47               33 / 47               33 / 47          threads
+[2025-11-11T20:14:40.311+0300][140.076s] =========================================================================================================================================================
+[2025-11-11T20:14:50.309+0300][150.073s] === Garbage Collection Statistics =======================================================================================================================
+[2025-11-11T20:14:50.309+0300][150.073s]                                                              Last 10s              Last 10m              Last 10h                Total
+[2025-11-11T20:14:50.309+0300][150.073s]                                                              Avg / Max             Avg / Max             Avg / Max             Avg / Max
+[2025-11-11T20:14:50.309+0300][150.073s]   Collector: Garbage Collection Cycle                      0.000 / 0.000        66.959 / 105.671      66.959 / 105.671      66.959 / 105.671     ms
+[2025-11-11T20:14:50.309+0300][150.073s]  Contention: Mark Segment Reset Contention                     0 / 0                 0 / 2                 0 / 2                 0 / 2           ops/s
+[2025-11-11T20:14:50.309+0300][150.073s]  Contention: Mark SeqNum Reset Contention                      0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:50.309+0300][150.073s]    Critical: Allocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:50.309+0300][150.073s]    Critical: Allocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:50.309+0300][150.073s]    Critical: GC Locker Stall                                   0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:50.309+0300][150.073s]    Critical: GC Locker Stall                               0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:50.309+0300][150.073s]    Critical: Relocation Stall                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:50.309+0300][150.073s]    Critical: Relocation Stall                              0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:50.309+0300][150.073s]      Memory: Allocation Rate                                   0 / 0                29 / 2414             29 / 2414             29 / 2414        MB/s
+[2025-11-11T20:14:50.309+0300][150.073s]      Memory: Defragment                                        0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:50.309+0300][150.073s]      Memory: Out Of Memory                                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:50.309+0300][150.073s]      Memory: Page Cache Flush                                  0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:14:50.309+0300][150.074s]      Memory: Page Cache Hit L1                                 0 / 0                 1 / 46                1 / 46                1 / 46          ops/s
+[2025-11-11T20:14:50.309+0300][150.074s]      Memory: Page Cache Hit L2                                 0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:50.309+0300][150.074s]      Memory: Page Cache Hit L3                                 0 / 0                 1 / 64                1 / 64                1 / 64          ops/s
+[2025-11-11T20:14:50.309+0300][150.074s]      Memory: Page Cache Miss                                   0 / 0                 1 / 199               1 / 199               1 / 199         ops/s
+[2025-11-11T20:14:50.309+0300][150.074s]      Memory: Uncommit                                          0 / 0                 0 / 0                 0 / 0                 0 / 0           MB/s
+[2025-11-11T20:14:50.309+0300][150.074s]      Memory: Undo Object Allocation Failed                     0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:50.309+0300][150.074s]      Memory: Undo Object Allocation Succeeded                  0 / 0                 0 / 3                 0 / 3                 0 / 3           ops/s
+[2025-11-11T20:14:50.309+0300][150.074s]      Memory: Undo Page Allocation                              0 / 0                 0 / 0                 0 / 0                 0 / 0           ops/s
+[2025-11-11T20:14:50.309+0300][150.074s]       Phase: Concurrent Mark                               0.000 / 0.000        50.981 / 82.030       50.981 / 82.030       50.981 / 82.030      ms
+[2025-11-11T20:14:50.310+0300][150.074s]       Phase: Concurrent Mark Continue                      0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:50.310+0300][150.074s]       Phase: Concurrent Mark Free                          0.000 / 0.000         0.001 / 0.002         0.001 / 0.002         0.001 / 0.002       ms
+[2025-11-11T20:14:50.310+0300][150.074s]       Phase: Concurrent Process Non-Strong References      0.000 / 0.000         6.356 / 10.896        6.356 / 10.896        6.356 / 10.896      ms
+[2025-11-11T20:14:50.310+0300][150.074s]       Phase: Concurrent Relocate                           0.000 / 0.000         5.093 / 11.595        5.093 / 11.595        5.093 / 11.595      ms
+[2025-11-11T20:14:50.310+0300][150.074s]       Phase: Concurrent Reset Relocation Set               0.000 / 0.000         0.004 / 0.008         0.004 / 0.008         0.004 / 0.008       ms
+[2025-11-11T20:14:50.310+0300][150.074s]       Phase: Concurrent Select Relocation Set              0.000 / 0.000         3.591 / 6.910         3.591 / 6.910         3.591 / 6.910       ms
+[2025-11-11T20:14:50.310+0300][150.074s]       Phase: Pause Mark End                                0.000 / 0.000         0.028 / 0.044         0.028 / 0.044         0.028 / 0.044       ms
+[2025-11-11T20:14:50.310+0300][150.074s]       Phase: Pause Mark Start                              0.000 / 0.000         0.014 / 0.019         0.014 / 0.019         0.014 / 0.019       ms
+[2025-11-11T20:14:50.310+0300][150.074s]       Phase: Pause Relocate Start                          0.000 / 0.000         0.015 / 0.027         0.015 / 0.027         0.015 / 0.027       ms
+[2025-11-11T20:14:50.310+0300][150.074s]    Subphase: Concurrent Classes Purge                      0.000 / 0.000         0.998 / 5.683         0.998 / 5.683         0.998 / 5.683       ms
+[2025-11-11T20:14:50.310+0300][150.074s]    Subphase: Concurrent Classes Unlink                     0.000 / 0.000         4.152 / 7.122         4.152 / 7.122         4.152 / 7.122       ms
+[2025-11-11T20:14:50.310+0300][150.074s]    Subphase: Concurrent Mark                               0.000 / 0.000        45.949 / 79.358       45.949 / 79.358       45.949 / 79.358      ms
+[2025-11-11T20:14:50.310+0300][150.074s]    Subphase: Concurrent Mark Try Flush                     0.000 / 0.000         0.085 / 0.609         0.085 / 0.609         0.085 / 0.609       ms
+[2025-11-11T20:14:50.310+0300][150.074s]    Subphase: Concurrent Mark Try Terminate                 0.000 / 0.000         5.107 / 15.929        5.107 / 15.929        5.107 / 15.929      ms
+[2025-11-11T20:14:50.310+0300][150.074s]    Subphase: Concurrent References Enqueue                 0.000 / 0.000         0.003 / 0.007         0.003 / 0.007         0.003 / 0.007       ms
+[2025-11-11T20:14:50.310+0300][150.074s]    Subphase: Concurrent References Process                 0.000 / 0.000         0.285 / 0.447         0.285 / 0.447         0.285 / 0.447       ms
+[2025-11-11T20:14:50.310+0300][150.074s]    Subphase: Concurrent Roots ClassLoaderDataGraph         0.000 / 0.000         0.149 / 0.434         0.149 / 0.434         0.149 / 0.434       ms
+[2025-11-11T20:14:50.310+0300][150.074s]    Subphase: Concurrent Roots CodeCache                    0.000 / 0.000         0.000 / 0.000         0.000 / 0.000         0.000 / 0.000       ms
+[2025-11-11T20:14:50.310+0300][150.074s]    Subphase: Concurrent Roots JavaThreads                  0.000 / 0.000         1.388 / 2.869         1.388 / 2.869         1.388 / 2.869       ms
+[2025-11-11T20:14:50.310+0300][150.074s]    Subphase: Concurrent Roots OopStorageSet                0.000 / 0.000         0.039 / 0.087         0.039 / 0.087         0.039 / 0.087       ms
+[2025-11-11T20:14:50.310+0300][150.074s]    Subphase: Concurrent Weak Roots OopStorageSet           0.000 / 0.000         0.704 / 0.968         0.704 / 0.968         0.704 / 0.968       ms
+[2025-11-11T20:14:50.310+0300][150.074s]    Subphase: Pause Mark Try Complete                       0.000 / 0.000         0.002 / 0.005         0.002 / 0.005         0.002 / 0.005       ms
+[2025-11-11T20:14:50.310+0300][150.074s]      System: Java Threads                                      0 / 0                33 / 47               33 / 47               33 / 47          threads
+[2025-11-11T20:14:50.310+0300][150.074s] =========================================================================================================================================================
