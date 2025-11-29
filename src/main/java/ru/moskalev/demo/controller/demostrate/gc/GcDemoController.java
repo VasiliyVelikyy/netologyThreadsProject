@@ -1,5 +1,7 @@
 package ru.moskalev.demo.controller.demostrate.gc;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,14 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.IntStream;
 
+@Slf4j
 @RestController
 public class GcDemoController {
     private static final List<byte[]> MEMORY_LEAK = new ArrayList<>();
 
     ThreadPoolTaskExecutor workExecutor;
+    private final Semaphore semaphore = new Semaphore(100);
 
     public GcDemoController() {
         workExecutor = new ThreadPoolTaskExecutor();
@@ -24,7 +29,6 @@ public class GcDemoController {
         workExecutor.setQueueCapacity(1000);
         workExecutor.setThreadNamePrefix("work-pool-");
         workExecutor.initialize();
-
     }
 
     @GetMapping("/pressure")
@@ -65,16 +69,18 @@ public class GcDemoController {
     }
 
     @GetMapping("/work")
-    public String doWork() {
+    public String doWork() throws InterruptedException {
         long start = System.nanoTime();
         double sum = 0;
         for (int i = 0; i < 1_000_000; i++) {
             sum += Math.sqrt(i);
         }
+        Thread.sleep(2000);
         long durationMs = (System.nanoTime() - start) / 1_000_000;
         System.out.println("Work took: " + durationMs + " ms");
         return "Work done: " + sum;
     }
+
 //
 //    @GetMapping("/work")
 //    public String doWork() {
@@ -103,4 +109,22 @@ public class GcDemoController {
 //            return "Work done: " + sum;
 //        }, workExecutor);
 //    }
+
+    @GetMapping("/api/stress")
+    public ResponseEntity<String> stress() {
+        log.info("enter request");
+        boolean acquired = semaphore.tryAcquire();
+        if (!acquired) {
+            return ResponseEntity.status(503).body("Service overloaded");
+        }
+        try {
+            Thread.sleep(2000);
+            return ResponseEntity.ok("OK");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        finally {
+            semaphore.release();
+        }
+    }
 }
