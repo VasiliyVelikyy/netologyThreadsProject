@@ -16,7 +16,7 @@ import static ru.moskalev.demo.utils.TimeUtils.evaluateExecutionTime;
 public class DataInitializer {
 
     private final BankAccountRepository bankAccountRepository;
-
+    private List<BankAccount> accounts;
     public DataInitializer(BankAccountRepository bankAccountRepository) {
         this.bankAccountRepository = bankAccountRepository;
     }
@@ -25,7 +25,7 @@ public class DataInitializer {
     public void init() {
         long startTime = System.nanoTime();
 
-        List<BankAccount> accounts = IntStream.rangeClosed(9, ACCOUNT_COUNT)
+        accounts = IntStream.rangeClosed(9, ACCOUNT_COUNT)
                 .mapToObj(i -> new BankAccount(ACCOUNT_GENERATE_PREFIX + i, 90.0))
                 .collect(Collectors.toList());
 
@@ -40,5 +40,9 @@ public class DataInitializer {
 
         System.out.println(" Инициализировано " + (ACCOUNT_COUNT + ACCOUNT_COUNT_WITH_PROBLEM) + " счетов.");
         evaluateExecutionTime(startTime);
+    }
+
+    public List<BankAccount> getAccounts() {
+        return accounts;
     }
 }

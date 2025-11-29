@@ -10,8 +10,8 @@ import io.opentelemetry.sdk.trace.SdkTracerProvider;
 import io.opentelemetry.sdk.trace.SdkTracerProviderBuilder;
 import io.opentelemetry.sdk.trace.export.BatchSpanProcessor;
 import io.opentelemetry.semconv.resource.attributes.ResourceAttributes;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.tracing.SdkTracerProviderBuilderCustomizer;
 import org.springframework.boot.actuate.autoconfigure.tracing.otlp.OtlpHttpSpanExporterBuilderCustomizer;
 import io.opentelemetry.api.trace.propagation.W3CTraceContextPropagator;
@@ -20,20 +20,24 @@ import org.springframework.context.annotation.Configuration;
 
 import java.time.Duration;
 
-import static ru.moskalev.demo.Constants.SERVICE_NAME;
-import static ru.moskalev.demo.Constants.SERVICE_VERSION;
 
 @Configuration
 @Slf4j
 public class OpenTelemetryConfig {
+
+    @Value("${spring.application.name:netologyDefaultNameProject}")
+    private String serviceName;
+
+    @Value("${spring.application.version:1.0.0}")
+    private String serviceVersion;
 
     @Bean
     public OpenTelemetry openTelemetry() {
         log.info("Open telemetry sdk inizialize");
 
         Resource resource = Resource.builder()
-                .put(ResourceAttributes.SERVICE_NAME, SERVICE_NAME)
-                .put(ResourceAttributes.SERVICE_VERSION, SERVICE_VERSION)
+                .put(ResourceAttributes.SERVICE_NAME, serviceName)
+                .put(ResourceAttributes.SERVICE_VERSION, serviceVersion)
                 .build();
 
         OtlpHttpSpanExporter spanExporter = OtlpHttpSpanExporter.builder()
@@ -54,6 +58,6 @@ public class OpenTelemetryConfig {
 
     @Bean
     public Tracer tracer(OpenTelemetry openTelemetry) {
-        return openTelemetry.getTracer(SERVICE_NAME, SERVICE_VERSION);
+        return openTelemetry.getTracer(serviceName, serviceVersion);
     }
 }
