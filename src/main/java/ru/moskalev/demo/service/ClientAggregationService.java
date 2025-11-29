@@ -3,11 +3,16 @@ package ru.moskalev.demo.service;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.SpanKind;
+import io.opentelemetry.api.trace.StatusCode;
+import io.opentelemetry.api.trace.Tracer;
 import jakarta.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 import ru.moskalev.demo.domain.account.BankAccount;
 import ru.moskalev.demo.domain.clientinfo.ClientFullInfo;
 import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmail;
@@ -38,12 +43,14 @@ public class ClientAggregationService {
     private final Semaphore webClientSemaphore = new Semaphore(200);
     private final Counter clientInfoAsyncCounter;
     private final Timer clientInfoAsyncTimer;
+    private final Tracer tracer;
 
     public ClientAggregationService(WebClient webClient,
                                     BankAccountRepository accountRepository,
                                     EmailService emailService,
                                     VerificationEmailService verificationEmailService,
-                                    MeterRegistry meterRegistry) {
+                                    MeterRegistry meterRegistry,
+                                    Tracer tracer) {
         this.webClient = webClient;
         this.accountRepository = accountRepository;
         this.emailService = emailService;
@@ -54,6 +61,7 @@ public class ClientAggregationService {
         this.clientInfoAsyncTimer = Timer.builder("client.info.async.requests")
                 .description("Times of duration method info clients")
                 .register(meterRegistry);
+        this.tracer = tracer;
 
     }
 
@@ -513,14 +521,48 @@ public class ClientAggregationService {
         return new ClientFullInfo(accountNumber, balance, phone);
     }
 
+    //    public CompletableFuture<String> getPhoneNumberAsync(String accountNumber) {
+//        String url = LOCAL_HOST + URL_PHONE_BY_BAD_ACCOUNT;
+//
+//        return webClient.get()
+//                .uri(url, accountNumber)
+//                .retrieve()
+//                .bodyToMono(String.class)
+//                .toFuture();
+//    }
     public CompletableFuture<String> getPhoneNumberAsync(String accountNumber) {
         String url = LOCAL_HOST + URL_PHONE_BY_BAD_ACCOUNT;
 
-        return webClient.get()
-                .uri(url, accountNumber)
-                .retrieve()
-                .bodyToMono(String.class)
-                .toFuture();
+        Span clientSpan = tracer.spanBuilder("GET "+URL_PHONE_BY_BAD_ACCOUNT)
+                .setSpanKind(SpanKind.SERVER)
+                .setAttribute("account.number", accountNumber)
+                .startSpan();
+
+        try (var scope = clientSpan.makeCurrent()) {
+            return webClient.get()
+                    .uri(url, accountNumber)
+                    .retrieve()
+                    .onStatus(httpStatusCode -> !httpStatusCode.is2xxSuccessful(),
+                            response -> {
+                                clientSpan.setStatus(StatusCode.ERROR, "HTTP " + response.statusCode());
+                                return Mono.error(new RuntimeException("Non-2xx response " + response.statusCode()));
+                            }
+                    )
+                    .bodyToMono(String.class)
+                    .doOnSuccess(phone -> {
+                        clientSpan.setStatus(StatusCode.OK);
+                    })
+                    .doOnError(throwable -> {
+                        clientSpan.recordException(throwable);
+                        clientSpan.setStatus(StatusCode.ERROR, throwable.getMessage());
+                    })
+                    .doFinally(elem -> {
+                                clientSpan.end();
+                            }
+                    )
+                    .toFuture();
+        }
+
     }
 
     private String getPhoneNumberSync(String accountNumber) {

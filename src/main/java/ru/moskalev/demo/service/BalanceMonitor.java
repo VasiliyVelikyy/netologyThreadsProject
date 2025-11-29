@@ -1,5 +1,7 @@
 package ru.moskalev.demo.service;
 
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.Tracer;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,13 +25,17 @@ public class BalanceMonitor {
     private final BankAccountRepository accountRepository;
     private final SmsNotificatorService smsNotificatorService;
     private final ClientAggregationService aggregationService;
+    private final Tracer tracer;
 
     public BalanceMonitor(BankAccountRepository accountRepository,
                           SmsNotificatorService smsNotificatorService,
-                          ClientAggregationService aggregationService) {
+                          ClientAggregationService aggregationService,
+                          Tracer tracer) {
         this.accountRepository = accountRepository;
         this.smsNotificatorService = smsNotificatorService;
         this.aggregationService = aggregationService;
+        this.tracer = tracer;
+
 
 //        scheduler.scheduleAtFixedRate(
 //                this::checkForLowBalance,
@@ -46,23 +52,30 @@ public class BalanceMonitor {
 //        );
     }
 
-    private void checkForHighBalance() {
-        try {
-            log.info("Запуск проверки достаточных балансов......");
-            List<BankAccount> lowBalances = accountRepository.findByBalanceGreaterThan(BALANCE_THRESHOLD);
+    public void checkForHighBalance() {
 
-            for (BankAccount account : lowBalances) {
-                String message = "Внимание на счете " + account.getAccountNumber() +
-                        " достаточный баланс: " + account.getBalance() + " Руб";
-                log.warn(message);
+        Span span = tracer.spanBuilder("checkForHighBalance").startSpan();
+        try (var scope = span.makeCurrent()) {
+            try {
+                log.info("Запуск проверки достаточных балансов......");
+                List<BankAccount> lowBalances = accountRepository.findByBalanceGreaterThan(BALANCE_THRESHOLD);
 
-                // smsNotificatorService.trySendSms();
+                for (BankAccount account : lowBalances) {
+                    String message = "Внимание на счете " + account.getAccountNumber() +
+                            " достаточный баланс: " + account.getBalance() + " Руб";
+                    log.warn(message);
+
+                    // smsNotificatorService.trySendSms();
+                }
+                log.info("Проверка завершена. Найдено {} счетов с достаточным балансом", lowBalances.size());
+            } catch (Exception e) {
+                log.error("Ошибка в фоновой задаче проверки достаточного баланса", e);
             }
-            log.info("Проверка завершена. Найдено {} счетов с достаточным балансом", lowBalances.size());
-        } catch (Exception e) {
-            log.error("Ошибка в фоновой задаче проверки достаточного баланса", e);
+        } finally {
+            span.end();
         }
     }
+
 
     private void checkForLowBalance() {
         try {
