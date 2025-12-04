@@ -119,6 +119,13 @@
             <version>${otel.semconv.version}</version>
         </dependency>
 
+        <!-- websocket-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+        </dependency>
+
+
     </dependencies>
 
 

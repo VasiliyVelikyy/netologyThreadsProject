@@ -98,3 +98,9 @@ sum(rate(http_server_requests_seconds_count{status!~"5.."}[1m]))```
 
 
 sum(jvm_memory_used_bytes{application="$application", instance="$instance", area="heap"})*100/sum(jvm_memory_max_bytes{application="$application",instance="$instance", area="heap"})
+```
+
+
+### Фронт
+http://localhost:8080/ агрегация данных
+http://localhost:8080/live.html → новый live-мониторинг
