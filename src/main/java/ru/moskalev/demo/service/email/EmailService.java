@@ -1,4 +1,4 @@
-package ru.moskalev.demo.service;
+package ru.moskalev.demo.service.email;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

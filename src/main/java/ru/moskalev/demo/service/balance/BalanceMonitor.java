@@ -1,4 +1,4 @@
-package ru.moskalev.demo.service;
+package ru.moskalev.demo.service.balance;
 
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.Tracer;
@@ -6,7 +6,9 @@ import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.moskalev.demo.domain.account.BankAccount;
+import ru.moskalev.demo.integration.PhoneNumberClient;
 import ru.moskalev.demo.repository.BankAccountRepository;
+import ru.moskalev.demo.service.ClientAggregationService;
 import ru.moskalev.demo.service.notification.SmsNotificatorService;
 
 import java.util.List;
@@ -25,16 +27,19 @@ public class BalanceMonitor {
     private final BankAccountRepository accountRepository;
     private final SmsNotificatorService smsNotificatorService;
     private final ClientAggregationService aggregationService;
+    private final PhoneNumberClient phoneNumberClient;
     private final Tracer tracer;
 
     public BalanceMonitor(BankAccountRepository accountRepository,
                           SmsNotificatorService smsNotificatorService,
                           ClientAggregationService aggregationService,
-                          Tracer tracer) {
+                          Tracer tracer,
+                          PhoneNumberClient phoneNumberClient) {
         this.accountRepository = accountRepository;
         this.smsNotificatorService = smsNotificatorService;
         this.aggregationService = aggregationService;
         this.tracer = tracer;
+        this.phoneNumberClient = phoneNumberClient;
 
 
 //        scheduler.scheduleAtFixedRate(
@@ -95,7 +100,7 @@ public class BalanceMonitor {
     }
 
     private void fetchPhoneNumberAndSendSms(BankAccount account, String message) {
-        aggregationService.getPhoneNumberAsync(account.getAccountNumber())
+        phoneNumberClient.getPhoneNumberAsync(account.getAccountNumber())
                 .thenAcceptAsync(phoneNumber -> {
                     if (phoneNumber != null) {
                         smsNotificatorService.trySendSms(phoneNumber, message);

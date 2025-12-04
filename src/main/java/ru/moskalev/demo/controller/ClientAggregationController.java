@@ -15,8 +15,7 @@ import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmailVerify;
 import ru.moskalev.demo.service.ClientAggregationService;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -51,7 +50,7 @@ public class ClientAggregationController {
                 .startSpan();
 
         try(var scope = rootSpan.makeCurrent()){
-            List<ClientFullInfoWithEmail> result = aggregationService.getFullClientInfoWithEmailAsyncWithLogs();
+            List<ClientFullInfoWithEmail> result = aggregationService.getFullClientInfoWithEmailAsync();
             return ResponseEntity.ok(result);
         } catch (Exception e ){
             rootSpan.recordException(e);

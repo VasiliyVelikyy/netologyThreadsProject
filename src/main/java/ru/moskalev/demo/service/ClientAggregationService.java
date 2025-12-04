@@ -3,21 +3,19 @@ package ru.moskalev.demo.service;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
-import io.opentelemetry.api.trace.Span;
-import io.opentelemetry.api.trace.SpanKind;
-import io.opentelemetry.api.trace.StatusCode;
-import io.opentelemetry.api.trace.Tracer;
 import jakarta.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 import ru.moskalev.demo.domain.account.BankAccount;
 import ru.moskalev.demo.domain.clientinfo.ClientFullInfo;
 import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmail;
 import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmailVerify;
+import ru.moskalev.demo.integration.PhoneNumberClient;
 import ru.moskalev.demo.repository.BankAccountRepository;
+import ru.moskalev.demo.service.email.EmailService;
+import ru.moskalev.demo.service.email.VerificationEmailService;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -34,7 +32,9 @@ import static ru.moskalev.demo.utils.TimeUtils.evaluateExecutionTime;
 public class ClientAggregationService {
     private static final Logger log = LoggerFactory.getLogger(ClientAggregationService.class);
 
+    private final PhoneNumberClient phoneNumberClient;
     private final WebClient webClient;
+
     private final BankAccountRepository accountRepository;
     private final EmailService emailService;
     private final VerificationEmailService verificationEmailService;
@@ -43,14 +43,14 @@ public class ClientAggregationService {
     private final Semaphore webClientSemaphore = new Semaphore(200);
     private final Counter clientInfoAsyncCounter;
     private final Timer clientInfoAsyncTimer;
-    private final Tracer tracer;
+
 
     public ClientAggregationService(WebClient webClient,
                                     BankAccountRepository accountRepository,
                                     EmailService emailService,
                                     VerificationEmailService verificationEmailService,
                                     MeterRegistry meterRegistry,
-                                    Tracer tracer) {
+                                    PhoneNumberClient phoneNumberClient) {
         this.webClient = webClient;
         this.accountRepository = accountRepository;
         this.emailService = emailService;
@@ -61,8 +61,47 @@ public class ClientAggregationService {
         this.clientInfoAsyncTimer = Timer.builder("client.info.async.requests")
                 .description("Times of duration method info clients")
                 .register(meterRegistry);
-        this.tracer = tracer;
+        this.phoneNumberClient = phoneNumberClient;
 
+    }
+
+    public List<ClientFullInfoWithEmail> getFullClientInfoWithEmailAsync() {
+        long startTime = System.nanoTime();
+
+        log.info("Начинаю асинхронную агрегацию данных по всем счетам через CompletableFuture...");
+
+        List<BankAccount> accounts = accountRepository.findAll();
+
+        log.info("Найдено {} счетов для обработки", accounts.size());
+
+        List<CompletableFuture<ClientFullInfoWithEmail>> futures = accounts.stream()
+                .map(acc -> {
+                    String accountNumber = acc.getAccountNumber();
+                    double balance = acc.getBalance();
+
+                    CompletableFuture<String> phoneFuture = phoneNumberClient.getPhoneNumberAsync(accountNumber)
+                            .handle(this::handleFetchPhoneNumber)
+                            .thenApply(this::maskPhone);
+
+                    CompletableFuture<String> emailFuture = CompletableFuture.supplyAsync(
+                            () -> emailService.findEmail(accountNumber),
+                            emailFetchExecutor);
+
+                    return phoneFuture.thenCombine(emailFuture, (phone, email) -> {
+                                if (phone.contains(UKNOWN) || email.contains(UKNOWN)) {
+                                    return null;
+                                }
+                                return new ClientFullInfoWithEmail(accountNumber, balance, phone, email);
+                            }
+                    );
+                }).toList();
+
+        List<ClientFullInfoWithEmail> result = futures.stream()
+                .map(CompletableFuture::join)
+                .filter(Objects::nonNull)
+                .toList();
+        evaluateExecutionTime(startTime);
+        return result;
     }
 
     private ExecutorService createEmailExecutor() {
@@ -90,7 +129,7 @@ public class ClientAggregationService {
                     String accountNumber = acc.getAccountNumber();
                     double balance = acc.getBalance();
 
-                    CompletableFuture<String> phoneFuture = getPhoneNumberAsync(accountNumber)
+                    CompletableFuture<String> phoneFuture = phoneNumberClient.getPhoneNumberAsync(accountNumber)
                             .orTimeout(1, TimeUnit.SECONDS)
                             .handle(this::handleFetchPhoneNumberWithTimeout)
                             .thenApply(this::maskPhone)
@@ -252,7 +291,7 @@ public class ClientAggregationService {
                 }).thenCompose(ignored -> {
                     log.info(ignored);
                     log.info("Step 2 fetch phonenumber for account ={}", accountNumber);
-                    return getPhoneNumberAsync(accountNumber);
+                    return phoneNumberClient.getPhoneNumberAsync(accountNumber);
                 }).handle((phone, ex) -> {
                     if (ex != null) {
                         log.error("Step 3 failed to fetch phonenumber acc={} errormessage= {}", acc, ex.getMessage());
@@ -268,45 +307,6 @@ public class ClientAggregationService {
                 });
     }
 
-    public List<ClientFullInfoWithEmail> getFullClientInfoWithEmailAsync() {
-        long startTime = System.nanoTime();
-
-        log.info("Начинаю асинхронную агрегацию данных по всем счетам через CompletableFuture...");
-
-        List<BankAccount> accounts = accountRepository.findAll();
-
-        log.info("Найдено {} счетов для обработки", accounts.size());
-
-        List<CompletableFuture<ClientFullInfoWithEmail>> futures = accounts.stream()
-                .map(acc -> {
-                    String accountNumber = acc.getAccountNumber();
-                    double balance = acc.getBalance();
-
-                    CompletableFuture<String> phoneFuture = getPhoneNumberAsync(accountNumber)
-                            .handle(this::handleFetchPhoneNumber)
-                            .thenApply(this::maskPhone);
-                    //.whenComplete(this::checkCompleteFetchPhoneNum);
-
-                    CompletableFuture<String> emailFuture = CompletableFuture.supplyAsync(
-                            () -> emailService.findEmail(accountNumber),
-                            emailFetchExecutor);
-
-                    return phoneFuture.thenCombine(emailFuture, (phone, email) -> {
-                                if (phone.contains(UKNOWN) || email.contains(UKNOWN)) {
-                                    return null;
-                                }
-                                return new ClientFullInfoWithEmail(accountNumber, balance, phone, email);
-                            }
-                    );
-                }).toList();
-
-        List<ClientFullInfoWithEmail> result = futures.stream()
-                .map(CompletableFuture::join)
-                .filter(Objects::nonNull)
-                .toList();
-        evaluateExecutionTime(startTime);
-        return result;
-    }
 
     private void checkCompleteFetchPhoneNum(String s,
                                             Throwable throwable) {
@@ -340,7 +340,7 @@ public class ClientAggregationService {
 
                     return CompletableFuture.supplyAsync(() -> emailService.findEmail(accountNumber))
                             .thenCompose(email -> {
-                                CompletableFuture<String> phoneFuture = getPhoneNumberAsync(accountNumber)
+                                CompletableFuture<String> phoneFuture = phoneNumberClient.getPhoneNumberAsync(accountNumber)
                                         .thenApply(this::maskPhone);
                                 CompletableFuture<Boolean> verifyFuture =
                                         verificationEmailService.isEmailVeifiedAsync(email);
@@ -530,40 +530,7 @@ public class ClientAggregationService {
 //                .bodyToMono(String.class)
 //                .toFuture();
 //    }
-    public CompletableFuture<String> getPhoneNumberAsync(String accountNumber) {
-        String url = LOCAL_HOST + URL_PHONE_BY_BAD_ACCOUNT;
 
-        Span clientSpan = tracer.spanBuilder("GET "+URL_PHONE_BY_BAD_ACCOUNT)
-                .setSpanKind(SpanKind.SERVER)
-                .setAttribute("account.number", accountNumber)
-                .startSpan();
-
-        try (var scope = clientSpan.makeCurrent()) {
-            return webClient.get()
-                    .uri(url, accountNumber)
-                    .retrieve()
-                    .onStatus(httpStatusCode -> !httpStatusCode.is2xxSuccessful(),
-                            response -> {
-                                clientSpan.setStatus(StatusCode.ERROR, "HTTP " + response.statusCode());
-                                return Mono.error(new RuntimeException("Non-2xx response " + response.statusCode()));
-                            }
-                    )
-                    .bodyToMono(String.class)
-                    .doOnSuccess(phone -> {
-                        clientSpan.setStatus(StatusCode.OK);
-                    })
-                    .doOnError(throwable -> {
-                        clientSpan.recordException(throwable);
-                        clientSpan.setStatus(StatusCode.ERROR, throwable.getMessage());
-                    })
-                    .doFinally(elem -> {
-                                clientSpan.end();
-                            }
-                    )
-                    .toFuture();
-        }
-
-    }
 
     private String getPhoneNumberSync(String accountNumber) {
         String url = LOCAL_HOST + URL_PHONE_BY_GOOD_ACCOUNT;

@@ -5,7 +5,7 @@ import io.opentelemetry.api.trace.Tracer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.moskalev.demo.service.BalanceMonitor;
+import ru.moskalev.demo.service.balance.BalanceMonitor;
 
 @RestController
 @RequiredArgsConstructor

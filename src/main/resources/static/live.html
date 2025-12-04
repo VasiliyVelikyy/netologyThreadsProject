@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Live Balance Monitor</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 40px;
+        }
+
+        .panel {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            width: 400px;
+        }
+
+        h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .client {
+            padding: 6px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .updated {
+            background-color: #e8f5e9;
+            animation: flash 1.5s;
+        }
+
+        @keyframes flash {
+            0% {
+                background-color: #e8f5e9;
+            }
+            100% {
+                background-color: transparent;
+            }
+        }
+
+        .time {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+<h2>Сравнение: REST vs WebSocket (Live обновления)</h2>
+<div class="container">
+    <div class="panel">
+        <h3> REST (опрос каждые 2 сек)</h3>
+        <div id="restList"></div>
+        <div class="time" id="restTime"></div>
+    </div>
+    <div class="panel">
+        <h3> WebSocket (реальное время)</h3>
+        <div id="wsList"></div>
+        <div class="time" id="wsTime"></div>
+    </div>
+</div>
+
+<script>
+    const REST_URL = '/api/clients-balance';
+    const WS_URL = 'ws://localhost:8080/ws/clients-balance';
+
+    // --- REST ---
+    let restData = {};
+    const restList = document.getElementById('restList');
+    const restTime = document.getElementById('restTime');
+
+    function fetchRest() {
+        const start = Date.now();
+        fetch(REST_URL)
+            .then(res => res.json())
+            .then(clients => {
+                const latency = Date.now() - start;
+                restTime.textContent = `Последнее обновление: ${new Date().toLocaleTimeString()} (latency: ${latency} мс)`;
+                restData = {};
+                let html = '';
+                clients.forEach(c => {
+                    restData[c.accountNumber] = c.balance;
+                    html += `<div class="client">ID: ${c.accountNumber} | Баланс: ${c.balance.toFixed(2)}</div>`;
+                });
+                restList.innerHTML = html;
+            })
+            .catch(err => console.error('REST error:', err));
+    }
+
+    // Первый запрос + интервал
+    fetchRest();
+    setInterval(fetchRest, 2000);
+
+    // --- WebSocket ---
+    let wsData = {};
+    const wsList = document.getElementById('wsList');
+    const wsTime = document.getElementById('wsTime');
+
+    const socket = new WebSocket(WS_URL);
+
+    socket.onmessage = (event) => {
+        const now = new Date();
+        wsTime.textContent = `Последнее обновление: ${now.toLocaleTimeString()} (мгновенно)`;
+
+        const data = JSON.parse(event.data);
+
+        // Если пришёл массив — это полный список
+        if (Array.isArray(data)) {
+            wsData = {};
+            let html = '';
+            data.forEach(c => {
+                wsData[c.accountNumber] = c.balance;
+                html += `<div class="client">ID: ${c.accountNumber} | Баланс: ${c.balance.toFixed(2)}</div>`;
+            });
+            wsList.innerHTML = html;
+            return;
+        }
+
+        // Если пришёл объект — это обновление одного аккаунта
+        const updatedId = data.accountNumber;
+        wsData[updatedId] = data.balance;
+
+        // Обновляем только нужный элемент с анимацией
+        let html = '';
+        Object.entries(wsData).forEach(([id, balance]) => {
+            const isUpdated = id === updatedId;
+            html += `<div class="client ${isUpdated ? 'updated' : ''}">ID: ${id} | Баланс: ${balance.toFixed(2)}</div>`;
+        });
+        wsList.innerHTML = html;
+    };
+
+    socket.onerror = (err) => console.error('WebSocket error:', err);
+</script>
+</body>
+</html>

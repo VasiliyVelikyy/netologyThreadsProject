@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>REST vs WebSocket Benchmark</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { padding: 8px 16px; margin: 10px 10px 20px 0; font-size: 16px; }
+        pre { background: #f5f5f5; padding: 10px; border-radius: 4px; overflow: auto; }
+        .result { margin-top: 10px; }
+        .time { color: #d63384; font-weight: bold; }
+    </style>
+</head>
+<body>
+<h2>Сравнение REST и WebSocket</h2>
+
+<button onclick="fetchViaRest()"> Загрузить через REST</button>
+<button onclick="fetchViaWebSocket()"> Загрузить через WebSocket</button>
+
+<div class="result" id="restResult"></div>
+<div class="result" id="wsResult"></div>
+
+<script>
+    const API_URL = 'http://localhost:8080/api/clients-full-with-email';
+    const WS_URL = 'ws://localhost:8080/ws/clients-full-with-email';
+
+    async function fetchViaRest() {
+        const start = performance.now();
+        try {
+            const res = await fetch(API_URL);
+            const data = await res.json();
+            const end = performance.now();
+            displayResult('restResult', data, end - start);
+        } catch (err) {
+            document.getElementById('restResult').innerHTML = '<p> Ошибка REST: ' + err.message + '</p>';
+        }
+    }
+
+    function fetchViaWebSocket() {
+        const start = performance.now();
+        const resultDiv = document.getElementById('wsResult');
+        resultDiv.innerHTML = '<p> Подключение к WebSocket...</p>';
+
+        const socket = new WebSocket(WS_URL);
+
+        socket.onopen = () => {
+            console.log(' WebSocket connected');
+        };
+
+        socket.onmessage = (event) => {
+            const end = performance.now();
+            try {
+                const data = JSON.parse(event.data);
+                displayResult('wsResult', data, end - start);
+            } catch (e) {
+                resultDiv.innerHTML = '<p> Ошибка парсинга WebSocket: ' + e.message + '</p>';
+            }
+            socket.close();
+        };
+
+        socket.onerror = (err) => {
+            resultDiv.innerHTML = '<p> Ошибка WebSocket: ' + err.message + '</p>';
+            console.error('WebSocket error', err);
+        };
+
+        socket.onclose = () => {
+            console.log('WebSocket closed');
+        };
+    }
+
+    function displayResult(containerId, data, durationMs) {
+        const container = document.getElementById(containerId);
+        const timeStr = durationMs.toFixed(2) + ' мс';
+        container.innerHTML = `
+        <p> Загружено за <span class="time">${timeStr}</span></p>
+        <pre>${JSON.stringify(data, null, 2)}</pre>
+      `;
+    }
+</script>
+</body>
+</html>
