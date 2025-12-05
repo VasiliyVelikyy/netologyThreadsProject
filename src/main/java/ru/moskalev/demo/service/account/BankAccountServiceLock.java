@@ -1,4 +1,4 @@
-package ru.moskalev.demo.service;
+package ru.moskalev.demo.service.account;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @Service
-public class BankAccountService {
+public class BankAccountServiceLock {
 
     private final BankAccountRepository repository;
     private final BalanceNotificationWithVolatileService balanceNotificationWithVolatileService;
@@ -22,7 +22,7 @@ public class BankAccountService {
     private final Lock reentrantLock = new ReentrantLock();
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
-    public BankAccountService(BankAccountRepository repository, BalanceNotificationWithVolatileService balanceNotificationWithVolatileService) {
+    public BankAccountServiceLock(BankAccountRepository repository, BalanceNotificationWithVolatileService balanceNotificationWithVolatileService) {
         this.repository = repository;
         this.balanceNotificationWithVolatileService = balanceNotificationWithVolatileService;
     }

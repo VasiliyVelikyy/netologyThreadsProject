@@ -1,16 +1,16 @@
 package ru.moskalev.demo.service.exproblem;
 
 import org.springframework.stereotype.Service;
-import ru.moskalev.demo.service.BankAccountService;
+import ru.moskalev.demo.service.account.BankAccountServiceLock;
 import ru.moskalev.demo.service.notification.BalanceNotificationWithVolatileService;
 
 @Service
 public class ProcessVolatileService {
-    private final BankAccountService bankAccountService;
+    private final BankAccountServiceLock bankAccountServiceLock;
     private final BalanceNotificationWithVolatileService balanceNotificationWithVolatileService;
 
-    public ProcessVolatileService(BankAccountService bankAccountService, BalanceNotificationWithVolatileService balanceNotificationWithVolatileService) {
-        this.bankAccountService = bankAccountService;
+    public ProcessVolatileService(BankAccountServiceLock bankAccountServiceLock, BalanceNotificationWithVolatileService balanceNotificationWithVolatileService) {
+        this.bankAccountServiceLock = bankAccountServiceLock;
         this.balanceNotificationWithVolatileService = balanceNotificationWithVolatileService;
     }
 
@@ -19,7 +19,7 @@ public class ProcessVolatileService {
 
         Runnable write = () -> {
             for (int i = 0; i < steps; i++) {
-                bankAccountService.depositWithNotification("ACC001", 1);
+                bankAccountServiceLock.depositWithNotification("ACC001", 1);
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
@@ -66,7 +66,7 @@ public class ProcessVolatileService {
 
         Runnable writer1 = () -> {
             for (int i = 0; i < steps; i++) {
-                bankAccountService.depositWithNotification("ACC001", 1);
+                bankAccountServiceLock.depositWithNotification("ACC001", 1);
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
@@ -78,7 +78,7 @@ public class ProcessVolatileService {
 
         Runnable writer2 = () -> {
             for (int i = 0; i < steps; i++) {
-                bankAccountService.depositWithNotification("ACC001", 1);
+                bankAccountServiceLock.depositWithNotification("ACC001", 1);
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {

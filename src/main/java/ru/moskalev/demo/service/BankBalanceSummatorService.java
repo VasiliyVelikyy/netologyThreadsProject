@@ -3,6 +3,7 @@ package ru.moskalev.demo.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import ru.moskalev.demo.service.account.BankAccountServiceLock;
 import ru.moskalev.demo.task.BalanceSumTask;
 
 import java.util.concurrent.ForkJoinPool;
@@ -13,13 +14,13 @@ import static ru.moskalev.demo.utils.TimeUtils.evaluateExecutionTime;
 @Slf4j
 @RequiredArgsConstructor
 public class BankBalanceSummatorService {
-    private final BankAccountService bankAccountService;
+    private final BankAccountServiceLock bankAccountServiceLock;
 
     private final ForkJoinPool allSumPool = new ForkJoinPool(10);
 
     public Long getSumAllAccRecursive() {
         long startTime = System.nanoTime();
-        var accounts = bankAccountService.getAllAcc();
+        var accounts = bankAccountServiceLock.getAllAcc();
         BalanceSumTask task = new BalanceSumTask(accounts);
         long totalBalance = allSumPool.invoke(task);
 
@@ -36,7 +37,7 @@ public class BankBalanceSummatorService {
 
     public Long getSumAllAccFullIteration() {
         long startTime = System.nanoTime();
-        var account = bankAccountService.getAllAcc();
+        var account = bankAccountServiceLock.getAllAcc();
 
         long totalBalance = 0;
         for (int i = 0; i < account.size(); i++) {

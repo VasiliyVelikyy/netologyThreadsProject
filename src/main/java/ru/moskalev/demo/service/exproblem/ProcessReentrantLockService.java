@@ -1,7 +1,7 @@
 package ru.moskalev.demo.service.exproblem;
 
 import org.springframework.stereotype.Service;
-import ru.moskalev.demo.service.BankAccountService;
+import ru.moskalev.demo.service.account.BankAccountServiceLock;
 import ru.moskalev.demo.service.notification.SmsNotificatorService;
 
 @Service
@@ -9,13 +9,13 @@ public class ProcessReentrantLockService {
     private final CashWithdrawalService cashWithdrawalService;
     private final SmsNotificatorService smsNotificatorService;
     private final WithdrawalVerificationService withdrawalVerificationService;
-    private final BankAccountService bankAccountService;
+    private final BankAccountServiceLock bankAccountServiceLock;
 
-    public ProcessReentrantLockService(CashWithdrawalService cashWithdrawalService, SmsNotificatorService smsNotificatorService, WithdrawalVerificationService withdrawalVerificationService, BankAccountService bankAccountService) {
+    public ProcessReentrantLockService(CashWithdrawalService cashWithdrawalService, SmsNotificatorService smsNotificatorService, WithdrawalVerificationService withdrawalVerificationService, BankAccountServiceLock bankAccountServiceLock) {
         this.cashWithdrawalService = cashWithdrawalService;
         this.smsNotificatorService = smsNotificatorService;
         this.withdrawalVerificationService = withdrawalVerificationService;
-        this.bankAccountService = bankAccountService;
+        this.bankAccountServiceLock = bankAccountServiceLock;
     }
 
     public String processSemaphoreWithdrawal() throws InterruptedException {
@@ -141,14 +141,14 @@ public class ProcessReentrantLockService {
     }
 
     public String processWithdrawalDeposit() throws InterruptedException {
-        Thread writer1 = new Thread(() -> bankAccountService.deposit("ACC001", 500), "Popolnenie-1");
-        Thread writer2 = new Thread(() -> bankAccountService.withdraw("ACC001", 200), "Popolnenie-2");
-        Thread writer3 = new Thread(() -> bankAccountService.deposit("ACC001", 300), "Popolnenie-2");
+        Thread writer1 = new Thread(() -> bankAccountServiceLock.deposit("ACC001", 500), "Popolnenie-1");
+        Thread writer2 = new Thread(() -> bankAccountServiceLock.withdraw("ACC001", 200), "Popolnenie-2");
+        Thread writer3 = new Thread(() -> bankAccountServiceLock.deposit("ACC001", 300), "Popolnenie-2");
 
         Thread[] readers = new Thread[5];
 
         for (int i = 0; i < 5; i++) {
-            readers[i] = new Thread(() -> bankAccountService.printBalance("ACC001"), "Поток чтение-" + i);
+            readers[i] = new Thread(() -> bankAccountServiceLock.printBalance("ACC001"), "Поток чтение-" + i);
             readers[i].start();
         }
 
@@ -172,17 +172,17 @@ public class ProcessReentrantLockService {
     public String processDowngrade() throws InterruptedException {
 
         Thread writerWithDowngrade = new Thread(() -> {
-            bankAccountService.depositWithDowngrade("ACC001", 500);
+            bankAccountServiceLock.depositWithDowngrade("ACC001", 500);
         }, "Пополнение+Downgrade");
 
 
         Thread writerNormal = new Thread(() -> {
-            bankAccountService.withdraw("ACC001", 300);
+            bankAccountServiceLock.withdraw("ACC001", 300);
         }, "Списание-обычное");
 
 
         Thread writerDep = new Thread(() -> {
-            bankAccountService.deposit("ACC001", 300);
+            bankAccountServiceLock.deposit("ACC001", 300);
         }, "Списание-обычное");
 
         //  Читатели — должны запуститься параллельно во время read-фазы downgrade
@@ -190,7 +190,7 @@ public class ProcessReentrantLockService {
         for (int i = 0; i < 3; i++) {
             final int id = i + 1;
             readers[i] = new Thread(() -> {
-                bankAccountService.printBalance("ACC001");
+                bankAccountServiceLock.printBalance("ACC001");
             }, "Чтение-" + id);
         }
 
