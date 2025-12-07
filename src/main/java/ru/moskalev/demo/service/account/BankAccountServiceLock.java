@@ -17,14 +17,18 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class BankAccountServiceLock {
 
     private final BankAccountRepository repository;
+    private final BankAccountService bankAccountService;
     private final BalanceNotificationWithVolatileService balanceNotificationWithVolatileService;
 
     private final Lock reentrantLock = new ReentrantLock();
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
-    public BankAccountServiceLock(BankAccountRepository repository, BalanceNotificationWithVolatileService balanceNotificationWithVolatileService) {
+    public BankAccountServiceLock(BankAccountRepository repository,
+                                  BalanceNotificationWithVolatileService balanceNotificationWithVolatileService,
+                                  BankAccountService bankAccountService) {
         this.repository = repository;
         this.balanceNotificationWithVolatileService = balanceNotificationWithVolatileService;
+        this.bankAccountService = bankAccountService;
     }
 
     // Получить счёт по номеру
@@ -113,8 +117,8 @@ public class BankAccountServiceLock {
                                  String to,
                                  double amount) throws InterruptedException {
 
-        BankAccount fromAcc = repository.getAccount(from);
-        BankAccount toAcc = repository.getAccount(to);
+        BankAccount fromAcc = bankAccountService.getAccount(from);
+        BankAccount toAcc = bankAccountService.getAccount(to);
         Thread.sleep(10);
         synchronized (from.intern()) {
 
@@ -145,7 +149,7 @@ public class BankAccountServiceLock {
     }
 
     public void depositWithNotification(String accNum, int amount) {
-        BankAccount acc = repository.getAccount(accNum);
+        BankAccount acc = bankAccountService.getAccount(accNum);
         var newBalance = acc.getBalance() + amount;
         acc.setBalance(newBalance);
         System.out.println(Thread.currentThread().getName() + " Баланс обновлен " + newBalance);
@@ -155,7 +159,7 @@ public class BankAccountServiceLock {
 
     public void deposit(String accNum, int amount) {
         readWriteLock.writeLock().lock();
-        BankAccount acc = repository.getAccount(accNum);
+        BankAccount acc = bankAccountService.getAccount(accNum);
         try {
             System.out.println(Thread.currentThread().getName() + " захватил writeLock для пополнения" + amount);
             acc.setBalance(acc.getBalance() + amount);
@@ -172,7 +176,7 @@ public class BankAccountServiceLock {
 
     public void withdraw(String accNum, int amount) {
         readWriteLock.writeLock().lock();
-        BankAccount acc = repository.getAccount(accNum);
+        BankAccount acc = bankAccountService.getAccount(accNum);
         try {
             System.out.println(Thread.currentThread().getName() + " захватил writeLock для снятия" + amount);
             acc.setBalance(acc.getBalance() - amount);
@@ -190,7 +194,7 @@ public class BankAccountServiceLock {
 
     public void printBalance(String accNum) {
         readWriteLock.readLock().lock();
-        BankAccount acc = repository.getAccount(accNum);
+        BankAccount acc = bankAccountService.getAccount(accNum);
         try {
             System.out.println(Thread.currentThread().getName() + " захватил readLock баланс" + acc.getBalance());
             Thread.sleep(10000);
@@ -208,7 +212,7 @@ public class BankAccountServiceLock {
         try {
             System.out.println(Thread.currentThread().getName() + " ➤ Захватил WRITE-LOCK для пополнения на " + amount);
 
-            BankAccount acc = repository.getAccount(accNum);
+            BankAccount acc = bankAccountService.getAccount(accNum);
             acc.setBalance(acc.getBalance() + amount);
             repository.save(acc);
 
@@ -238,12 +242,12 @@ public class BankAccountServiceLock {
         }
     }
 
-    public List<BankAccount> getAllAcc(){
+    public List<BankAccount> getAllAcc() {
         return repository.findAll();
     }
 
-    public BankAccount save(BankAccount account){
-       return repository.save(account);
+    public BankAccount save(BankAccount account) {
+        return repository.save(account);
     }
 }
 

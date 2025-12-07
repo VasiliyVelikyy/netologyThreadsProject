@@ -1,28 +1,29 @@
 package ru.moskalev.demo.service.exproblem;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.moskalev.demo.domain.account.BankAccount;
 import ru.moskalev.demo.repository.BankAccountRepository;
+import ru.moskalev.demo.service.account.BankAccountService;
 
 import java.util.concurrent.locks.Lock;
 
 import static ru.moskalev.demo.utils.TaskSimulateWork.simulateCpuWork;
 
 @Service
+@RequiredArgsConstructor
 public class ProfilingExampleService {
+    private final BankAccountService bankAccountService;
     private final BankAccountRepository bankAccountRepository;
 
-    public ProfilingExampleService(BankAccountRepository bankAccountRepository) {
-        this.bankAccountRepository = bankAccountRepository;
-    }
 
     @Transactional
     public void transferWithWait(String fromNum, String toNum, Object monitor, double amount, boolean shouldWait) {
 
         synchronized (monitor) {
-            BankAccount fromAcc = bankAccountRepository.getAccount(fromNum);
-            BankAccount toAcc = bankAccountRepository.getAccount(toNum);
+            BankAccount fromAcc = bankAccountService.getAccount(fromNum);
+            BankAccount toAcc = bankAccountService.getAccount(toNum);
 
             if (fromAcc.getBalance() < amount) {
                 throw new RuntimeException("Недостаточно средств: " + fromNum);
@@ -61,8 +62,8 @@ public class ProfilingExampleService {
         synchronized (monitor) {
             System.out.println(Thread.currentThread().getName() + ":  захватил монитор...");
 
-            BankAccount fromAcc = bankAccountRepository.getAccount(fromNum);
-            BankAccount toAcc = bankAccountRepository.getAccount(toNum);
+            BankAccount fromAcc = bankAccountService.getAccount(fromNum);
+            BankAccount toAcc = bankAccountService.getAccount(toNum);
 
             if (fromAcc.getBalance() < amount) {
                 throw new RuntimeException("Недостаточно средств: " + fromNum);
@@ -87,8 +88,8 @@ public class ProfilingExampleService {
         try {
             System.out.println(Thread.currentThread().getName() + ":  захватил монитор...");
 
-            BankAccount fromAcc = bankAccountRepository.getAccount(fromNum);
-            BankAccount toAcc = bankAccountRepository.getAccount(toNum);
+            BankAccount fromAcc = bankAccountService.getAccount(fromNum);
+            BankAccount toAcc = bankAccountService.getAccount(toNum);
 
             if (fromAcc.getBalance() < amount) {
                 throw new RuntimeException("Недостаточно средств: " + fromNum);

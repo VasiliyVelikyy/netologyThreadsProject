@@ -9,7 +9,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 import ru.moskalev.demo.domain.ClientBalanceDto;
-import ru.moskalev.demo.service.balance.ClientBalanceService;
+import ru.moskalev.demo.service.account.BankAccountService;
 
 import java.io.IOException;
 import java.util.Set;
@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequiredArgsConstructor
 public class LiveBalanceWebSocketHandler extends TextWebSocketHandler {
 
-    private final ClientBalanceService clientBalanceServe;
+    private final BankAccountService clientBalanceService;
     private final ObjectMapper objectMapper;
 
     private Set<WebSocketSession> sessions = ConcurrentHashMap.newKeySet();
@@ -34,7 +34,7 @@ public class LiveBalanceWebSocketHandler extends TextWebSocketHandler {
     private void sendFullClientsBalances(WebSocketSession session) {
         log.info("request to websocket");
         try {
-            var fullList = clientBalanceServe.getClientBalances();
+            var fullList = clientBalanceService.getClientBalances();
             if (sessions.isEmpty()) return;
             String json = objectMapper.writeValueAsString(fullList);
             session.sendMessage(new TextMessage(json));

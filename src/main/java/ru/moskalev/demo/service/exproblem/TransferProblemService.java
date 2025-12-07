@@ -1,24 +1,25 @@
 package ru.moskalev.demo.service.exproblem;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.moskalev.demo.repository.BankAccountRepository;
+import ru.moskalev.demo.service.account.BankAccountService;
 import ru.moskalev.demo.service.account.BankAccountServiceLock;
 
 
 @Service
+@RequiredArgsConstructor
 public class TransferProblemService {
     private final BankAccountServiceLock bankAccountServiceLock;
     private final BankAccountRepository bankAccountRepository;
+    private final BankAccountService bankAccountService;
 
     private static volatile boolean isAvailableTransfer = true;
     private static final Object transferMonitor = new Object();
     private static final int MAX_ATTEMPTS = 10;
 
 
-    public TransferProblemService(BankAccountServiceLock bankAccountServiceLock, BankAccountRepository bankAccountRepository) {
-        this.bankAccountServiceLock = bankAccountServiceLock;
-        this.bankAccountRepository = bankAccountRepository;
-    }
+
 
     public String transferRaceCondition() {
         Thread t1 = new Thread(() -> {
@@ -49,7 +50,7 @@ public class TransferProblemService {
             System.out.println("Ошибка в потоке" + Thread.currentThread().getName());
         }
 
-        double finalBalance = bankAccountRepository.getAccount("ACC001").getBalance();
+        double finalBalance = bankAccountService.getAccount("ACC001").getBalance();
         String message = "Итоговый баланс ACC001  сумма=" + finalBalance;
         System.out.println(message);
 
@@ -85,7 +86,7 @@ public class TransferProblemService {
             System.out.println("Ошибка в потоке" + Thread.currentThread().getName());
         }
 
-        double finalBalance = bankAccountRepository.getAccount("ACC001").getBalance();
+        double finalBalance = bankAccountService.getAccount("ACC001").getBalance();
         String message = "Итоговый баланс ACC001  сумма=" + finalBalance;
         System.out.println(message);
 
