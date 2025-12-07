@@ -1,29 +1,30 @@
 package ru.moskalev.demo.service.exproblem;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.moskalev.demo.repository.BankAccountRepository;
-import ru.moskalev.demo.service.BankAccountService;
+import ru.moskalev.demo.service.account.BankAccountService;
+import ru.moskalev.demo.service.account.BankAccountServiceLock;
 
 
 @Service
+@RequiredArgsConstructor
 public class TransferProblemService {
-    private final BankAccountService bankAccountService;
+    private final BankAccountServiceLock bankAccountServiceLock;
     private final BankAccountRepository bankAccountRepository;
+    private final BankAccountService bankAccountService;
 
     private static volatile boolean isAvailableTransfer = true;
     private static final Object transferMonitor = new Object();
     private static final int MAX_ATTEMPTS = 10;
 
 
-    public TransferProblemService(BankAccountService bankAccountService, BankAccountRepository bankAccountRepository) {
-        this.bankAccountService = bankAccountService;
-        this.bankAccountRepository = bankAccountRepository;
-    }
+
 
     public String transferRaceCondition() {
         Thread t1 = new Thread(() -> {
             try {
-                bankAccountService.transfer("ACC001", "ACC002", 50);
+                bankAccountServiceLock.transfer("ACC001", "ACC002", 50);
             } catch (Exception e) {
                 System.out.println("Ошибка в потоке" + Thread.currentThread().getName());
             }
@@ -32,7 +33,7 @@ public class TransferProblemService {
 
         Thread t2 = new Thread(() -> {
             try {
-                bankAccountService.transfer("ACC001", "ACC002", 50);
+                bankAccountServiceLock.transfer("ACC001", "ACC002", 50);
             } catch (Exception e) {
                 System.out.println("Ошибка в потоке" + Thread.currentThread().getName());
             }
@@ -49,7 +50,7 @@ public class TransferProblemService {
             System.out.println("Ошибка в потоке" + Thread.currentThread().getName());
         }
 
-        double finalBalance = bankAccountRepository.getAccount("ACC001").getBalance();
+        double finalBalance = bankAccountService.getAccount("ACC001").getBalance();
         String message = "Итоговый баланс ACC001  сумма=" + finalBalance;
         System.out.println(message);
 
@@ -59,7 +60,7 @@ public class TransferProblemService {
     public String transferRaceConditionSync() {
         Thread t1 = new Thread(() -> {
             try {
-                bankAccountService.transferBlockOneMonitor("ACC001", "ACC002", 50);
+                bankAccountServiceLock.transferBlockOneMonitor("ACC001", "ACC002", 50);
             } catch (Exception e) {
                 System.out.println("Ошибка в потоке" + Thread.currentThread().getName());
             }
@@ -68,7 +69,7 @@ public class TransferProblemService {
 
         Thread t2 = new Thread(() -> {
             try {
-                bankAccountService.transferBlockOneMonitor("ACC001", "ACC002", 50);
+                bankAccountServiceLock.transferBlockOneMonitor("ACC001", "ACC002", 50);
             } catch (Exception e) {
                 System.out.println("Ошибка в потоке" + Thread.currentThread().getName());
             }
@@ -85,7 +86,7 @@ public class TransferProblemService {
             System.out.println("Ошибка в потоке" + Thread.currentThread().getName());
         }
 
-        double finalBalance = bankAccountRepository.getAccount("ACC001").getBalance();
+        double finalBalance = bankAccountService.getAccount("ACC001").getBalance();
         String message = "Итоговый баланс ACC001  сумма=" + finalBalance;
         System.out.println(message);
 
@@ -98,7 +99,7 @@ public class TransferProblemService {
             try {
                 Thread.sleep(100);
                 //bankAccountService.transferDeadLock("ACC001", "ACC002", 50);
-                bankAccountService.transferWithDoubleSync("ACC001", "ACC002", 50);
+                bankAccountServiceLock.transferWithDoubleSync("ACC001", "ACC002", 50);
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
@@ -108,7 +109,7 @@ public class TransferProblemService {
             try {
                 Thread.sleep(100);
                 // bankAccountService.transferDeadLock("ACC002", "ACC001", 50);
-                bankAccountService.transferWithDoubleSync("ACC001", "ACC002", 50);
+                bankAccountServiceLock.transferWithDoubleSync("ACC001", "ACC002", 50);
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
@@ -151,7 +152,7 @@ public class TransferProblemService {
                         System.out.println("Клиент1: Клиент 2 не выполнил перевод уступаю снова");
                     } else {
                         System.out.println("Клиент1: Клиент 2  выполнил перевод. Могу сделать перевод");
-                        bankAccountService.transfer("ACC001", "ACC002", 50);
+                        bankAccountServiceLock.transfer("ACC001", "ACC002", 50);
                         break;
                     }
                 }
@@ -175,7 +176,7 @@ public class TransferProblemService {
                         System.out.println("Клиент2: Клиент 1 не выполнил перевод уступаю снова");
                     } else {
                         System.out.println("Клиент2: Клиент 1  выполнил перевод. Могу сделать перевод");
-                        bankAccountService.transfer("ACC001", "ACC002", 50);
+                        bankAccountServiceLock.transfer("ACC001", "ACC002", 50);
                         break;
                     }
                 }
@@ -212,7 +213,7 @@ public class TransferProblemService {
                     System.out.println("client1: Я приоритет, совершаю перевод!");
                     synchronized (transferMonitor) {
                         if (isAvailableTransfer) {
-                            bankAccountService.transfer("ACC002", "ACC001", 50);
+                            bankAccountServiceLock.transfer("ACC002", "ACC001", 50);
 
                             isAvailableTransfer = false;
                             System.out.println("client1: совершил перевод! ");
@@ -240,7 +241,7 @@ public class TransferProblemService {
                 if (!isAvailableTransfer) {
                     synchronized (transferMonitor) {
                         System.out.println("Client2: Теперь моя очередь делать перевод ");
-                        bankAccountService.transfer("ACC002", "ACC001", 50);
+                        bankAccountServiceLock.transfer("ACC002", "ACC001", 50);
 
                     }
                     return;
@@ -283,7 +284,7 @@ public class TransferProblemService {
             while (true) {
                 synchronized (accountLock) {
                     System.out.println("Client2 пытаюсь сделать перевод");
-                    bankAccountService.transfer("ACC001", "ACC002", 1);
+                    bankAccountServiceLock.transfer("ACC001", "ACC002", 1);
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException e) {

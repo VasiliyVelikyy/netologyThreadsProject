@@ -3,7 +3,7 @@ package ru.moskalev.demo.service.exproblem;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
-import ru.moskalev.demo.service.BankAccountService;
+import ru.moskalev.demo.service.account.BankAccountServiceLock;
 import ru.moskalev.demo.data.TransferGeneratorService;
 
 import java.util.List;
@@ -15,14 +15,14 @@ import static ru.moskalev.demo.utils.TimeUtils.evaluateExecutionTime;
 @Service
 public class StreamTransferService implements ApplicationRunner {
     private final TransferGeneratorService transferGeneratorService;
-    private final BankAccountService bankAccountService;
+    private final BankAccountServiceLock bankAccountServiceLock;
 
     private List<TransferGeneratorService.TransferOperation> operations;
 
     public StreamTransferService(TransferGeneratorService transferGeneratorService,
-                                 BankAccountService bankAccountService) {
+                                 BankAccountServiceLock bankAccountServiceLock) {
         this.transferGeneratorService = transferGeneratorService;
-        this.bankAccountService = bankAccountService;
+        this.bankAccountServiceLock = bankAccountServiceLock;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class StreamTransferService implements ApplicationRunner {
         long start = System.nanoTime();
 
         operations.stream()
-                .forEach(op -> bankAccountService.transferWithDoubleSync(op.from(), op.to(), op.amount()));
+                .forEach(op -> bankAccountServiceLock.transferWithDoubleSync(op.from(), op.to(), op.amount()));
 
         return evaluateExecutionTime(start);
     }
@@ -42,7 +42,7 @@ public class StreamTransferService implements ApplicationRunner {
     public String startParallelStream() {
         long start = System.nanoTime();
         operations.parallelStream()
-                .forEach(op -> bankAccountService.transferWithDoubleSync(op.from(), op.to(), op.amount()));
+                .forEach(op -> bankAccountServiceLock.transferWithDoubleSync(op.from(), op.to(), op.amount()));
 
         return evaluateExecutionTime(start);
     }
@@ -52,7 +52,7 @@ public class StreamTransferService implements ApplicationRunner {
         long start = System.nanoTime();
 
         operations.parallelStream()
-                .forEach(op -> bankAccountService.transferBlockOneMonitor(op.from(), op.to(), op.amount()));
+                .forEach(op -> bankAccountServiceLock.transferBlockOneMonitor(op.from(), op.to(), op.amount()));
 
         return evaluateExecutionTime(start);
     }
@@ -64,7 +64,7 @@ public class StreamTransferService implements ApplicationRunner {
 
         customPool.submit(() ->
                 operations.parallelStream()
-                        .forEach(op -> bankAccountService.transferWithDoubleSync(op.from(), op.to(), op.amount()))
+                        .forEach(op -> bankAccountServiceLock.transferWithDoubleSync(op.from(), op.to(), op.amount()))
         ).join();
 
         customPool.shutdown();

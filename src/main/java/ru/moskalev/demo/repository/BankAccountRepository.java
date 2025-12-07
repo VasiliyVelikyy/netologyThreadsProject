@@ -11,13 +11,6 @@ import java.util.Optional;
 @Repository
 public interface BankAccountRepository extends JpaRepository<BankAccount, String> {
 
-    default BankAccount getAccount(String accountNumber) {
-        Optional<BankAccount> account = findById(accountNumber);
-        return account
-                .orElseThrow(() -> new RuntimeException("Счет не найден " + accountNumber));
-
-    }
-
     List<BankAccount> findByBalanceLessThan(double threshold);
     List<BankAccount> findByBalanceGreaterThan(double threshold);
 }

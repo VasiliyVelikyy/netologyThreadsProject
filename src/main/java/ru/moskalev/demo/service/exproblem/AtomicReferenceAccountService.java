@@ -1,21 +1,21 @@
 package ru.moskalev.demo.service.exproblem;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.moskalev.demo.domain.account.BankAccount;
 import ru.moskalev.demo.repository.BankAccountRepository;
+import ru.moskalev.demo.service.account.BankAccountService;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Service
+@RequiredArgsConstructor
 public class AtomicReferenceAccountService {
     private final BankAccountRepository bankAccountRepository;
+    private final BankAccountService bankAccountService;
 
     private final ConcurrentHashMap<String, AtomicReference<BankAccount>> accountCache = new ConcurrentHashMap<>();
-
-    public AtomicReferenceAccountService(BankAccountRepository bankAccountRepository) {
-        this.bankAccountRepository = bankAccountRepository;
-    }
 
 
     public void deposite(String accountNum, int amount) {
@@ -34,7 +34,7 @@ public class AtomicReferenceAccountService {
 
     private AtomicReference<BankAccount> getAccount(String accountNum) {
         return accountCache.computeIfAbsent(accountNum, key -> {
-            BankAccount fromDb = bankAccountRepository.getAccount(key);
+            BankAccount fromDb = bankAccountService.getAccount(key);
             if (fromDb == null) {
                 throw new IllegalArgumentException("Аккаунт не найден");
             }

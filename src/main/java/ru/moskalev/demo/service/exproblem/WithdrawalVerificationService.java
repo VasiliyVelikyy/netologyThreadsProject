@@ -1,8 +1,10 @@
 package ru.moskalev.demo.service.exproblem;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.moskalev.demo.domain.account.BankAccount;
 import ru.moskalev.demo.repository.BankAccountRepository;
+import ru.moskalev.demo.service.account.BankAccountService;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -10,8 +12,10 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 @Service
+@RequiredArgsConstructor
 public class WithdrawalVerificationService {
     private final BankAccountRepository repository;
+    private final BankAccountService bankAccountService;
 
     private final ReentrantLock lock = new ReentrantLock();
 
@@ -24,9 +28,6 @@ public class WithdrawalVerificationService {
     // Очередь ожидающих снятий (можно хранить объект WithdrawalRequest)
     private final Queue<WithdrawalRequest> pendingRequests = new ConcurrentLinkedQueue<>();
 
-    public WithdrawalVerificationService(BankAccountRepository repository) {
-        this.repository = repository;
-    }
 
 
     // КЛИЕНТ: запрашивает снятие крупной суммы ===
@@ -94,7 +95,7 @@ public class WithdrawalVerificationService {
 
     // Вспомогательный метод — выполняет снятие (уже после подтверждения)
     private void executeWithdrawal(String accountNum, double amount) {
-        BankAccount account = repository.getAccount(accountNum);
+        BankAccount account = bankAccountService.getAccount(accountNum);
         if (account.getBalance() < amount) {
             throw new RuntimeException("Недостаточно средств на счёте " + accountNum);
         }
