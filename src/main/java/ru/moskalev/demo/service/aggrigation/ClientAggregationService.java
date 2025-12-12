@@ -1,4 +1,4 @@
-package ru.moskalev.demo.service;
+package ru.moskalev.demo.service.aggrigation;
 
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
@@ -12,10 +12,11 @@ import ru.moskalev.demo.domain.account.BankAccount;
 import ru.moskalev.demo.domain.clientinfo.ClientFullInfo;
 import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmail;
 import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmailVerify;
-import ru.moskalev.demo.integration.PhoneNumberClient;
+import ru.moskalev.demo.integration.client.PhoneNumberClient;
 import ru.moskalev.demo.repository.BankAccountRepository;
 import ru.moskalev.demo.service.email.EmailService;
 import ru.moskalev.demo.service.email.VerificationEmailService;
+import ru.moskalev.demo.utils.MaskUtils;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -79,9 +80,9 @@ public class ClientAggregationService {
                     String accountNumber = acc.getAccountNumber();
                     double balance = acc.getBalance();
 
-                    CompletableFuture<String> phoneFuture = phoneNumberClient.getPhoneNumberAsync(accountNumber)
+                    CompletableFuture<String> phoneFuture = phoneNumberClient.getPhoneNumberAsyncWithTelemetry(accountNumber)
                             .handle(this::handleFetchPhoneNumber)
-                            .thenApply(this::maskPhone);
+                            .thenApply(MaskUtils::maskPhone);
 
                     CompletableFuture<String> emailFuture = CompletableFuture.supplyAsync(
                             () -> emailService.findEmail(accountNumber),
@@ -129,10 +130,10 @@ public class ClientAggregationService {
                     String accountNumber = acc.getAccountNumber();
                     double balance = acc.getBalance();
 
-                    CompletableFuture<String> phoneFuture = phoneNumberClient.getPhoneNumberAsync(accountNumber)
+                    CompletableFuture<String> phoneFuture = phoneNumberClient.getPhoneNumberAsyncWithTelemetry(accountNumber)
                             .orTimeout(1, TimeUnit.SECONDS)
                             .handle(this::handleFetchPhoneNumberWithTimeout)
-                            .thenApply(this::maskPhone)
+                            .thenApply(MaskUtils::maskPhone)
                             .whenComplete(this::checkCompleteFetchPhoneNum);
 
                     CompletableFuture<String> emailFuture = getEmailFuture(accountNumber);
@@ -269,7 +270,7 @@ public class ClientAggregationService {
             String phone = getPhoneNumberForVTWithSemaphore(accountNumber);
             String email = emailService.findEmail(accountNumber);
 
-            String maskedPhone = maskPhone(phone);
+            String maskedPhone = MaskUtils.maskPhone(phone);
             checkCompleteFetchPhoneNum(maskedPhone, null);
             return new ClientFullInfoWithEmail(accountNumber, balance, maskedPhone, email);
         } catch (Exception e) {
@@ -291,7 +292,7 @@ public class ClientAggregationService {
                 }).thenCompose(ignored -> {
                     log.info(ignored);
                     log.info("Step 2 fetch phonenumber for account ={}", accountNumber);
-                    return phoneNumberClient.getPhoneNumberAsync(accountNumber);
+                    return phoneNumberClient.getPhoneNumberAsyncWithTelemetry(accountNumber);
                 }).handle((phone, ex) -> {
                     if (ex != null) {
                         log.error("Step 3 failed to fetch phonenumber acc={} errormessage= {}", acc, ex.getMessage());
@@ -301,7 +302,7 @@ public class ClientAggregationService {
                         return phone;
                     }
                 }).thenApply(phone -> {
-                    String maskPhone = maskPhone(phone);
+                    String maskPhone = MaskUtils.maskPhone(phone);
                     log.info("Step 4:masking phone number {} , accNum={}", maskPhone, accountNumber);
                     return maskPhone;
                 });
@@ -340,8 +341,8 @@ public class ClientAggregationService {
 
                     return CompletableFuture.supplyAsync(() -> emailService.findEmail(accountNumber))
                             .thenCompose(email -> {
-                                CompletableFuture<String> phoneFuture = phoneNumberClient.getPhoneNumberAsync(accountNumber)
-                                        .thenApply(this::maskPhone);
+                                CompletableFuture<String> phoneFuture = phoneNumberClient.getPhoneNumberAsyncWithTelemetry(accountNumber)
+                                        .thenApply(MaskUtils::maskPhone);
                                 CompletableFuture<Boolean> verifyFuture =
                                         verificationEmailService.isEmailVeifiedAsync(email);
 
@@ -362,15 +363,6 @@ public class ClientAggregationService {
         return result;
     }
 
-
-    private String maskPhone(String phone) {
-        if (phone.contains(UKNOWN)) {
-            return phone;
-        }
-
-        int len = phone.length();
-        return phone.substring(0, 3) + "****" + phone.substring(len - 2);
-    }
 
     public List<ClientFullInfo> getFullClientInfoWithFuture() {
         long startTime = System.nanoTime();

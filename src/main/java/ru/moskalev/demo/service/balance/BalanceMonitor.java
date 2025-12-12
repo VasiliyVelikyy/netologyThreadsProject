@@ -6,9 +6,9 @@ import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.moskalev.demo.domain.account.BankAccount;
-import ru.moskalev.demo.integration.PhoneNumberClient;
+import ru.moskalev.demo.integration.client.PhoneNumberClient;
 import ru.moskalev.demo.repository.BankAccountRepository;
-import ru.moskalev.demo.service.ClientAggregationService;
+import ru.moskalev.demo.service.aggrigation.ClientAggregationService;
 import ru.moskalev.demo.service.notification.SmsNotificatorService;
 
 import java.util.List;
@@ -100,7 +100,7 @@ public class BalanceMonitor {
     }
 
     private void fetchPhoneNumberAndSendSms(BankAccount account, String message) {
-        phoneNumberClient.getPhoneNumberAsync(account.getAccountNumber())
+        phoneNumberClient.getPhoneNumberAsyncWithTelemetry(account.getAccountNumber())
                 .thenAcceptAsync(phoneNumber -> {
                     if (phoneNumber != null) {
                         smsNotificatorService.trySendSms(phoneNumber, message);
