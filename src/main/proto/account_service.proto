@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "ru.moskalev.demo";        // Java-пакет для сгенерированных классов
+option java_multiple_files = true;           // Каждый класс — отдельный файл
+
+package banking;
+
+service AccountService {
+  rpc GetContactInfo(GetContactInfoRequest) returns (GetContactInfoResponse);
+}
+
+message GetContactInfoRequest {
+  string account_number = 1;
+}
+
+message GetContactInfoResponse {
+  string phone = 1;
+  string account_number = 2;
+}

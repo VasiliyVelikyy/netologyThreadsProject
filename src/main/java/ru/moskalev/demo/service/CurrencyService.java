@@ -23,7 +23,7 @@ public class CurrencyService {
         }
     }
 
-    @Scheduled(fixedRate = 10_000)
+    //@Scheduled(fixedRate = 10_000)
     public void refreshCurrencies() {
         var fresh = simulateExternalFetch();
         currencyCache.clear();
