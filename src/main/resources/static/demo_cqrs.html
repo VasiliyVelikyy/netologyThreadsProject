@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Bank CQRS Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .card { border: 1px solid #ccc; padding: 16px; margin: 16px 0; border-radius: 8px; }
+        .loading { color: #888; }
+        .error { color: red; }
+        button { padding: 8px 16px; margin: 4px; cursor: pointer; }
+        input { padding: 6px; margin: 4px; width: 120px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1> Bank CQRS Demo</h1>
+
+    <div class="card">
+        <h2>Клиент</h2>
+        <p><strong>Счёт:</strong> <span id="account">ACC001</span></p>
+        <p><strong>Баланс:</strong> <span id="balance">—</span> ₽</p>
+        <p><strong>Телефон:</strong> <span id="phone">—</span></p>
+        <p id="status" class="loading">Загрузка...</p>
+    </div>
+
+    <div class="card">
+        <h2>Пополнить счёт</h2>
+        <input type="text" id="accountInput" value="ACC001" placeholder="Номер счёта" />
+        <input type="number" id="amountInput" value="5000" placeholder="Сумма" />
+        <br/>
+        <button onclick="deposit()">Пополнить</button>
+        <button onclick="fetchClient()">Обновить сейчас</button>
+    </div>
+
+    <div class="card">
+        <p> Автообновление каждые <strong>10 секунд</strong>.</p>
+    </div>
+</div>
+
+<script>
+    const API_BASE = 'http://localhost:8080/cqrs';
+    const account = document.getElementById('accountInput').value;
+
+    // Загружаем данные клиента
+    async function fetchClient() {
+        const accountNum = document.getElementById('accountInput').value;
+        const statusEl = document.getElementById('status');
+        try {
+            statusEl.textContent = 'Загрузка...';
+            statusEl.className = 'loading';
+
+            const res = await fetch(`${API_BASE}/client/${accountNum}`);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+            const data = await res.json();
+            document.getElementById('account').textContent = data.accountNumber || data.account;
+            document.getElementById('balance').textContent = data.balance?.toFixed(2) || '0.00';
+            document.getElementById('phone').textContent = data.phoneNumber || '—';
+
+            statusEl.textContent = 'Актуально';
+            statusEl.className = '';
+        } catch (err) {
+            statusEl.textContent = `Ошибка: ${err.message}`;
+            statusEl.className = 'error';
+            console.error('Fetch error:', err);
+        }
+    }
+
+    // Отправляем пополнение
+    async function deposit() {
+        const accountNum = document.getElementById('accountInput').value;
+        const amount = parseFloat(document.getElementById('amountInput').value);
+        if (!accountNum || isNaN(amount) || amount <= 0) {
+            alert('Введите корректный счёт и сумму > 0');
+            return;
+        }
+
+        try {
+            const res = await fetch(`${API_BASE}/deposit`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ accountNumber: accountNum, amount: amount })
+            });
+            if (res.ok) {
+                alert('Пополнение отправлено! Баланс обновится через 0.1–1 сек.');
+                fetchClient(); // попробуем обновить сразу (может быть старый, но потом автообновление подхватит)
+            } else {
+                alert(`Ошибка пополнения: ${res.status}`);
+            }
+        } catch (err) {
+            alert(`Ошибка сети: ${err.message}`);
+            console.error('Deposit error:', err);
+        }
+    }
+
+    // Первый запрос при загрузке
+    fetchClient();
+
+    // Автообновление каждые 10 секунд
+    setInterval(fetchClient, 10_000);
+</script>
+</body>
+</html>

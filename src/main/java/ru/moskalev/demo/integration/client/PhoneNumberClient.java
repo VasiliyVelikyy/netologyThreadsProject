@@ -103,8 +103,10 @@ public class PhoneNumberClient {
     }
 
     public String getPhoneNumBlockedRest(String accNum) {
+        String url = LOCAL_HOST + URL_PHONE_BY_GOOD_ACCOUNT.replace("{accountNumber}", accNum);
+
         try {
-            ResponseEntity<String> response = restTemplate.getForEntity(PHONE_NUMBER_URL, String.class);
+            ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
             if (!response.getStatusCode().is2xxSuccessful()) {
                 throw new RuntimeException("NON200");
             }
