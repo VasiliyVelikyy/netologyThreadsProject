@@ -4,16 +4,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.moskalev.demo.domain.ClientBalanceDto;
+import ru.moskalev.demo.integration.kafka.KafkaProducerService;
 import ru.moskalev.demo.service.account.BankAccountService;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class BankAccountController {
     private final BankAccountService bankAccountService;
+    private final KafkaProducerService kafkaProducerService;
 
     @GetMapping("/client/{accNum}")
     public ResponseEntity<ClientBalanceDto> getAccByNum(@PathVariable String accNum) {
@@ -48,5 +51,11 @@ public class BankAccountController {
         bankAccountService.saveClientBalanceToRedis(accNum, balance.doubleValue());
         return ResponseEntity.ok("ok");
     }
+
+    @PostMapping("/client/sendkafka")
+    public ResponseEntity<String> createAccount(@RequestBody Map<String,String> payload){
+        String accountNumber = payload.get("accountNumber");
+        kafkaProducerService.sendAccountCreated(accountNumber);
+        return ResponseEntity.ok("ok");    }
 
 }

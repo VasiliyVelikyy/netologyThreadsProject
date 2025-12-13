@@ -36,5 +36,22 @@ services:
     ports:
       - "6379:6379"
     restart: unless-stopped
+
+  kafka:
+    image: redpandadata/redpanda:v24.2.10
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    command:
+      - redpanda
+      - start
+      - --overprovisioned
+      - --smp=1
+      - --memory=1G
+      - --reserve-memory=0M
+      - --node-id=0
+      - --check=false
+      - --kafka-addr=0.0.0.0:9092
+      - --advertise-kafka-addr=localhost:9092
 volumes:
   grafana_data:

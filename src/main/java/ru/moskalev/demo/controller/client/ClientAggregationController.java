@@ -1,4 +1,4 @@
-package ru.moskalev.demo.controller;
+package ru.moskalev.demo.controller.client;
 
 import io.opentelemetry.api.trace.Tracer;
 import lombok.RequiredArgsConstructor;
