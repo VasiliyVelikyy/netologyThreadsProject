@@ -1,6 +1,6 @@
 package ru.moskalev.demo.integration;
 
-import ru.moskalev.demo.domain.account.BankAccount;
+import ru.moskalev.demo.domain.entity.BankAccount;
 
 import java.util.List;
 

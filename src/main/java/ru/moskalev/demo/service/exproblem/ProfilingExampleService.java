@@ -3,7 +3,7 @@ package ru.moskalev.demo.service.exproblem;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.moskalev.demo.domain.account.BankAccount;
+import ru.moskalev.demo.domain.entity.BankAccount;
 import ru.moskalev.demo.repository.BankAccountRepository;
 import ru.moskalev.demo.service.account.BankAccountService;
 

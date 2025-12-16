@@ -3,7 +3,6 @@ package ru.moskalev.demo.service.account;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
@@ -11,12 +10,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.caffeine.CaffeineCache;
 import org.springframework.stereotype.Service;
 import ru.moskalev.demo.domain.ClientBalanceDto;
-import ru.moskalev.demo.domain.account.BankAccount;
+import ru.moskalev.demo.domain.entity.BankAccount;
 import ru.moskalev.demo.repository.BankAccountRepository;
 import ru.moskalev.demo.repository.ClientBalanceRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service

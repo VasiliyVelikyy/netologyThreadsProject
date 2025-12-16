@@ -104,3 +104,22 @@ sum(jvm_memory_used_bytes{application="$application", instance="$instance", area
 ### Фронт
 http://localhost:8080/ агрегация данных
 http://localhost:8080/live.html → новый live-мониторинг
+
+
+
+
+### Демонстрация проблем jpa
+http://localhost:8080/jpa/problems/accounts-bad
+http://localhost:8080/jpa/problems/accounts-good
+
+POST  http://localhost:8080/jpa/problems/create-acc
+
+Batch examples GET http://localhost:8080/import/batch?count=1000
+Замер через wrk когда batch25 и 1
+wrk -t1 -c1 -d10s "http://host.docker.internal:8080/import/batch?count=1000"
+
+
+http://localhost:8080/mongo/init
+
+wrk -t4 -c10 -d30s --latency "http://host.docker.internal:8080/comparison/sql/account/ACC001"
+wrk -t4 -c10 -d30s --latency "http://host.docker.internal:8080/comparison/mongo/account/ACC001"

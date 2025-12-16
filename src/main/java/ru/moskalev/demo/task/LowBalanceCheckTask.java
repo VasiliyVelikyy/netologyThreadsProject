@@ -2,7 +2,7 @@ package ru.moskalev.demo.task;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
-import ru.moskalev.demo.domain.account.BankAccount;
+import ru.moskalev.demo.domain.entity.BankAccount;
 import ru.moskalev.demo.service.notification.NotificationManagerService;
 
 @RequiredArgsConstructor

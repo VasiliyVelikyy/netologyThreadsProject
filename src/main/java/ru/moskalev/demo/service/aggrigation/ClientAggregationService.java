@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import ru.moskalev.demo.domain.account.BankAccount;
+import ru.moskalev.demo.domain.entity.BankAccount;
 import ru.moskalev.demo.domain.clientinfo.ClientFullInfo;
 import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmail;
 import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmailVerify;

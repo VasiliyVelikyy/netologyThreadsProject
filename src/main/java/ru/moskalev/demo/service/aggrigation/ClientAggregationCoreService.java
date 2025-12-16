@@ -2,7 +2,7 @@ package ru.moskalev.demo.service.aggrigation;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import ru.moskalev.demo.domain.account.BankAccount;
+import ru.moskalev.demo.domain.entity.BankAccount;
 import ru.moskalev.demo.domain.clientinfo.ClientFullInfoWithEmail;
 import ru.moskalev.demo.integration.AccountRepositoryPort;
 import ru.moskalev.demo.integration.EmailPort;
@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
-import static ru.moskalev.demo.Constants.UKNOWN;
 import static ru.moskalev.demo.utils.TimeUtils.evaluateExecutionTime;
 
 @RequiredArgsConstructor
