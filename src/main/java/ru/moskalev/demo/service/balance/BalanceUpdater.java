@@ -2,9 +2,8 @@ package ru.moskalev.demo.service.balance;
 
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import ru.moskalev.demo.domain.ClientBalanceDto;
-import ru.moskalev.demo.domain.account.BankAccount;
+import ru.moskalev.demo.domain.entity.BankAccount;
 import ru.moskalev.demo.repository.BankAccountRepository;
 import ru.moskalev.demo.websockets.LiveBalanceWebSocketHandler;
 

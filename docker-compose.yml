@@ -53,5 +53,16 @@ services:
       - --check=false
       - --kafka-addr=0.0.0.0:9092
       - --advertise-kafka-addr=localhost:9092
+  mongodb:
+    image: mongo:7-jammy
+    container_name: demo-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
 volumes:
   grafana_data:
+  mongodb_data:
