@@ -1,7 +1,7 @@
 package ru.moskalev.demo.cache;
 
 import org.springframework.stereotype.Component;
-import ru.moskalev.demo.data.TransferGeneratorService;
+import ru.moskalev.demo.generators.TransferGeneratorService;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

@@ -4,7 +4,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
 import ru.moskalev.demo.service.account.BankAccountServiceLock;
-import ru.moskalev.demo.data.TransferGeneratorService;
+import ru.moskalev.demo.generators.TransferGeneratorService;
 
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;

@@ -1,4 +1,4 @@
-package ru.moskalev.demo.data;
+package ru.moskalev.demo.generators;
 
 
 import lombok.RequiredArgsConstructor;

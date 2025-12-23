@@ -1,6 +1,6 @@
 package ru.moskalev.demo.cache;
 
-import ru.moskalev.demo.data.TransferGeneratorService;
+import ru.moskalev.demo.generators.TransferGeneratorService;
 
 import java.util.Collection;
 

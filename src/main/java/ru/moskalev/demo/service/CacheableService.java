@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.moskalev.demo.cache.TransactionCache;
-import ru.moskalev.demo.data.TransferGeneratorService;
+import ru.moskalev.demo.generators.TransferGeneratorService;
 
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;

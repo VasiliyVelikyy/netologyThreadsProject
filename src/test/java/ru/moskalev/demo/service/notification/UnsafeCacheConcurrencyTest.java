@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.annotation.DirtiesContext;
 import ru.moskalev.demo.BaseIntegrationTest;
 import ru.moskalev.demo.cache.TransactionCache;
-import ru.moskalev.demo.data.TransferGeneratorService;
+import ru.moskalev.demo.generators.TransferGeneratorService;
 import ru.moskalev.demo.service.CacheableService;
 import ru.moskalev.demo.service.exproblem.StreamTransferService;
 

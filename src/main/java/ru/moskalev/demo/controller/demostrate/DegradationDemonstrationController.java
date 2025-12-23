@@ -7,7 +7,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.moskalev.demo.data.DataInitializer;
+import ru.moskalev.demo.generators.DataInitializer;
 import ru.moskalev.demo.domain.entity.BankAccount;
 
 import java.io.BufferedWriter;
