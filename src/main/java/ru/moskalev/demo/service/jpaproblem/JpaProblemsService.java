@@ -60,4 +60,15 @@ public class JpaProblemsService {
 
         return dto;
     }
+
+    public BankAccountDto getAccountWithNPlusOneByAcNum(String id) {
+        var acc = bankAccountRepository.findById(id);
+        if (acc.isPresent()) {
+            return mapEntityToDto(acc.get());
+        } else {
+            throw new RuntimeException("acc not found " + id);
+        }
+
+
+    }
 }
